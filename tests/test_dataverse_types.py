@@ -19,8 +19,5 @@ class TestDataverseTypes(unittest.TestCase):
 
         self.assertIsNotNone(json)
 
-
-
-
 if __name__ == '__main__':
     unittest.main()

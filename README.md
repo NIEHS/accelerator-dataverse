@@ -9,4 +9,5 @@ This library will hold general accession and dissemination tools for Accelerator
 ## Links
 
 * Dataverse API - https://guides.dataverse.org/en/latest/api/index.html
-* Dataverse Python Client - https://github.com/IQSS/dataverse-client-python
+* PyDataverse Dataverse Python Client - https://pydataverse.readthedocs.io/en/latest/index.html
+  * Git: https://github.com/gdcc/pyDataverse
