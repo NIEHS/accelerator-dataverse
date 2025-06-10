@@ -3,9 +3,9 @@
   "alias": "{{ collection.collection_alias }}",
   "dataverseContacts": [
    {% for entry in collection.dataverse_contacts%}
-
-    "{{ entry }}"
-
+    {
+        "contactEmail":"{{ entry }}"
+    }
     {{ "," if not loop.last }}
     {% endfor %}
     ],

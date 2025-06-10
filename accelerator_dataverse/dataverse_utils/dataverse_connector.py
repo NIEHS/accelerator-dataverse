@@ -1,4 +1,6 @@
 from accelerator_core.utils.logger import setup_logger
+from pyDataverse.api import NativeApi
+from pyDataverse.models import Dataverse
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection
@@ -14,8 +16,46 @@ class AbstractDataverseConnector:
     def __init__(self, dataverse_config:DataverseConfig):
         self.dataverse_config = dataverse_config
 
-    def add_collection(self, dataverse_collection:DataverseCollection):
+    def add_dataverse(self, dataverse_collection:DataverseCollection):
+       pass
+
+
+class DataverseConnector(AbstractDataverseConnector):
+    """
+    Connector to dataverse using Dataverse API
+    """
+    def __init__(self, dataverse_config:DataverseConfig):
+        super().__init__(dataverse_config)
+        self.api = NativeApi(dataverse_config.dataverse_host, dataverse_config.api_key)
+
+    def get_version(self):
+        resp = self.api.get_info_version()
+        return resp
+
+    def add_dataverse(self, dataverse_collection:DataverseCollection):
         logger.info("adding collection: {}".format(dataverse_collection))
         payload = dataverse_collection.render()
+        dv = Dataverse()
+        dv.from_json(payload)
+
+        resp = self.api.create_dataverse(dataverse_collection.collection_parent, dv.json())
+        logger.info("response: {}".format(resp))
+        if resp.is_error:
+            logger.error("ERROR - Could not create dataverse collection: {}".format(resp))
+            raise Exception("ERROR - Could not create dataverse collection: {}".format(resp))
+
+        self.api.delete_dataverse(dataverse_collection.collection_alias)
 
 
+    def delete_dataverse(self, dataverse_id:str):
+        """
+        Idempotent delete of dataverse by alias or id.
+        :param dataverse_id: str with dataverse alias or id
+        :return: None
+        """
+
+        logger.info(f"delete dataverse with alias: {{dataverse_id}}")
+        try:
+            self.api.delete_dataverse(dataverse_id)
+        except Exception as e:
+            logger.info("ignoring delete exception: {}".format(e))
