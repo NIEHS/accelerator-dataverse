@@ -59,3 +59,22 @@ class DataverseConnector(AbstractDataverseConnector):
             self.api.delete_dataverse(dataverse_id)
         except Exception as e:
             logger.info("ignoring delete exception: {}".format(e))
+
+    def verify_target_dataverse(self, dataverse_id:str) -> bool:
+        """
+        Verify that the target dataverse exists.
+        :param dataverse_id: id or alias for target dataverse
+        :return: bool of True if target dataverse exists
+        """
+        logger.info(f"verify target dataverse with alias: {{dataverse_id}}")
+
+        resp = self.api.get_dataverse(dataverse_id)
+        logger.info("response: {}".format(resp))
+        return resp.is_success
+
+    def create_dataset(self, dataverse_dataset):
+        """
+        Create a dataverse dataset.
+        :param dataverse_dataset:
+        :return:
+        """

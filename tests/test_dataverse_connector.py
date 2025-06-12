@@ -21,6 +21,12 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
         dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
 
+    def test_verify_dataverse(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_present = dataverse_connector.verify_target_dataverse("Root")
+        self.assertTrue(dataverse_present)
+
     def test_get_version(self):
         dataverse_config = DataverseConfig.from_env()
         dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
