@@ -115,8 +115,8 @@
           "originalFormatLabel": "{{ file.original_format_label }}",
           "rootDataFileId": {{ file.root_data_file_id }},
           "checksum": {
-            "type": "{{ file.checksum_type }}",
-            "value": "{{ file.checksum_value }}"
+            "type": "{{ file.checksum.type }}",
+            "value": "{{ file.checksum.value }}"
           }
         }
       }{% if not loop.last %},{% endif %}

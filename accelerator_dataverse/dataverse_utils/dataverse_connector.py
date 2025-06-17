@@ -3,7 +3,7 @@ from pyDataverse.api import NativeApi
 from pyDataverse.models import Dataverse
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
-from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection
+from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection, DataverseDataset
 
 logger = setup_logger("accelerator-dataverse")
 
@@ -72,9 +72,16 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info("response: {}".format(resp))
         return resp.is_success
 
-    def create_dataset(self, dataverse_dataset):
+    def create_dataset(self, dataverse:str, dataverse_dataset:DataverseDataset):
         """
         Create a dataverse dataset.
+        :param dataverse: dataverse to create collection within
         :param dataverse_dataset:
-        :return:
+        :return: TODO: determine return type
         """
+
+        logger.info(f"create dataset: {dataverse_dataset}")
+        payload = dataverse_dataset.render()
+        resp = self.api.create_dataset(dataverse, payload, publish=False)
+        logger.info("response: {}".format(resp))
+        return resp.is_success
