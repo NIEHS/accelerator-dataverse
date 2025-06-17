@@ -34,6 +34,7 @@ class DataverseDataset:
         self.authority = ""
         self.identifier = ""
         self.citation = CitationMetadataBlock()
+        self.license = License()
         self.file = [] # see DatasetFile
 
     def render(self):
@@ -42,7 +43,7 @@ class DataverseDataset:
         :return: dict with json version of dataset
         """
         template_processor = TemplateProcessor()
-        template = template_processor.retrieve_template("dataverse-extended")
+        template = template_processor.retrieve_template("dataset-extended")
         return template.render(dataset=self)
 
 class DataverseDatasetLicense:
@@ -232,6 +233,15 @@ class Software:
     def __init__(self):
         self.name = ""
         self.version = ""
+
+class License:
+    """
+    License of a dataset
+    """
+
+    def __init__(self):
+        self.name = ""
+        self.uri = ""
 
 class DatasetFile:
     """

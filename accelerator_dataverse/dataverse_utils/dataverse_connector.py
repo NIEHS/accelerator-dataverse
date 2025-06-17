@@ -44,9 +44,6 @@ class DataverseConnector(AbstractDataverseConnector):
             logger.error("ERROR - Could not create dataverse collection: {}".format(resp))
             raise Exception("ERROR - Could not create dataverse collection: {}".format(resp))
 
-        self.api.delete_dataverse(dataverse_collection.collection_alias)
-
-
     def delete_dataverse(self, dataverse_id:str):
         """
         Idempotent delete of dataverse by alias or id.
