@@ -516,18 +516,204 @@
             "value": "{{ dataset.citation.date_of_deposit }}"
           },
 
+          {
+            "typeName": "timePeriodCovered",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for period in dataset.citation.time_period %}
+
+              {
+                "timePeriodCoveredStart": {
+                  "typeName": "timePeriodCoveredStart",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ period.start }}"
+                },
+                "timePeriodCoveredEnd": {
+                  "typeName": "timePeriodCoveredEnd",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ period.end }}"
+                }
+              }
+
+                {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+ {
+            "typeName": "dateOfCollection",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+            {% for period in dataset.citation.date_of_collection %}
 
 
+              {
+                "dateOfCollectionStart": {
+                  "typeName": "dateOfCollectionStart",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ period.start }}"
+                },
+                "dateOfCollectionEnd": {
+                  "typeName": "dateOfCollectionEnd",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                   "value": "{{ period.end }}"
+                }
+              }
+
+                {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+          {
+            "typeName": "kindOfData",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+                {% for kind in dataset.citation.kind_of_data %}
+                    "{{ kind }}"
+                {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+          {
+            "typeName": "series",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for series in dataset.citation.series %}
 
 
+                 {
+                  "seriesName": {
+                    "typeName": "seriesName",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ series.name }}"
+                  },
+                  "seriesInformation": {
+                    "typeName": "seriesInformation",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ series.information }}"
+                  }
+                }
+
+                {% if not loop.last %},{% endif %}
+            ]
+          },
+
+           {
+            "typeName": "software",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for software in dataset.citation.software %}
 
 
+              {
+                "softwareName": {
+                  "typeName": "softwareName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ software.name }}"
+                },
+                "softwareVersion": {
+                  "typeName": "softwareVersion",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ software.version }}"
+                }
+              }
+
+                {% if not loop.last %},{% endif %}
 
 
+            ]
+          },
 
+          {
+            "typeName": "relatedMaterial",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
 
+                {% for related in dataset.citation.related_material %}
 
+                    "{{ related }}"
 
+                {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+          {
+            "typeName": "relatedDatasets",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+               {% for related in dataset.citation.related_datasets %}
+
+                    "{{ related }}"
+
+                {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+          {
+            "typeName": "otherReferences",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+
+                  {% for ref in dataset.citation.other_references %}
+
+                    "{{ ref }}"
+
+                    {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+          {
+            "typeName": "dataSources",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+             {% for source in dataset.citation.data_sources %}
+
+                    "{{ source }}"
+
+             {% if not loop.last %},{% endif %}
+
+            ]
+          },
+
+          {
+            "typeName": "originOfSources",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.origin_of_sources }}"
+          },
+
+           {
+            "typeName": "characteristicOfSources",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.characteristics_of_sources_noted }}"
+          }
 
     {% if dataset.files %}
     ,
