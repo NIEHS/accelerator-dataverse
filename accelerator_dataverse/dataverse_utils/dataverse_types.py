@@ -64,11 +64,10 @@ class CitationMetadataBlock:
         self.display_name = "Citation Metadata"
         self.title = ""
         self.subtitle = ""
-        self.alternative_title = ""
+        self.alternative_title = []
         self.alternative_url = ""
-        self.other_id = ""
-        self.other_id_agency = ""
-        self.other_id_value = ""
+        self.depositor = ""
+        self.other_id = [] # see OtherId
         self.author = [] # see CitationAuthor
         self.dataset_contact = [] # see DatasetContact
         self.dataset_description = [] # see DatasetDescription
@@ -80,7 +79,7 @@ class CitationMetadataBlock:
         self.language = []
         self.producer = [] # see DatasetProducer
         self.production_date = ""
-        self.production_place = ""
+        self.production_place = []
         self.contributor = []  # see Contributor
         self.grant = [] # see Grant
         self.distributor = [] # see Distributor
@@ -119,6 +118,15 @@ class DatasetContact:
         self.contact_name = ""
         self.contact_affiliation = ""
         self.contact_email = ""
+
+class OtherId:
+    """
+    Other identifier in a dataset
+    """
+
+    def __init__(self):
+        self.agency = ""
+        self.value = ""
 
 class DatasetDescription:
     """

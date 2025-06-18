@@ -82,3 +82,8 @@ class DataverseConnector(AbstractDataverseConnector):
         resp = self.api.create_dataset(dataverse, payload, publish=False)
         logger.info("response: {}".format(resp))
         return resp.is_success
+
+    def delete_dataset(self, dataset_id:str) -> bool:
+        logger.info(f"delete dataset: {dataset_id}")
+        resp = self.api.delete_dataset(dataset_id)
+        logger.info("response: {}".format(resp))
