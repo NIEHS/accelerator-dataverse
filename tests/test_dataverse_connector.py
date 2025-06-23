@@ -46,9 +46,8 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"
 
-        #dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
-        #dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
-
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
+        dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
 
         # create a new dataset underneath this collection
 
@@ -71,10 +70,6 @@ class TestDataverseConnector(unittest.TestCase):
         other_id.value = "value"
 
         citation_block.other_id.append(other_id)
-
-        citation_block.other_id = "other_id"
-        citation_block.other_id_agency = "other_id_agency"
-        citation_block.other_id_value = "other_id_value"
 
         author = CitationAuthor()
         author.author_name = "author_name"
@@ -143,8 +138,8 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"
 
-        # dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
-        #   dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
+        dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
 
         # create a new dataset underneath this collection
 
@@ -160,9 +155,6 @@ class TestDataverseConnector(unittest.TestCase):
         citation_block.title = "title"
         citation_block.subtitle = "subtitle"
         citation_block.alternative_url = "alternative_url"
-        citation_block.other_id = "other_id"
-        citation_block.other_id_agency = "other_id_agency"
-        citation_block.other_id_value = "other_id_value"
 
         author = CitationAuthor()
         author.author_name = "author_name"
@@ -215,13 +207,43 @@ class TestDataverseConnector(unittest.TestCase):
 
         dataset.citation = citation_block
 
-        #created = dataverse_connector.create_dataset(dataverse_collection.collection_alias, dataverse_dataset=dataset)
+        created = dataverse_connector.create_dataset(dataverse_collection.collection_alias, dataverse_dataset=dataset)
+
+        listed = dataverse_connector.list_dataverse_contents(dataverse_collection.collection_name)
 
         #self.assertTrue(created)
         # now delete
         dataset.identifier = "https://doi.org/10.5072/FK2/HO2RH6"
         deleted = dataverse_connector.delete_dataset(dataset.identifier)
         self.assertTrue(deleted)
+
+
+    def test_list_dataverse_contents(self):
+        """
+        list the contents of a dataverse
+        :return: TBD
+        """
+
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_collection = DataverseCollection()
+        dataverse_collection.collection_name = "test_create_dataset"
+        dataverse_collection.dataverse_contacts.append("testid@nih.gov")
+        dataverse_collection.collection_alias = "test_create_dataset_alias"
+        dataverse_collection.affiliation = "NIEHS"
+        dataverse_collection.description = "Test Dataverse"
+        dataverse_collection.collection_parent = "Root"
+
+        # add a dataverse
+
+        # add a dataset
+
+        # list it
+
+        listing = dataverse_connector.list_dataverse_contents(dataverse_collection.collection_alias)
+
+        self.assertIsNotNone(listing)
+
 
 
 

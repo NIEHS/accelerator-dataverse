@@ -1,3 +1,5 @@
+import json
+
 from accelerator_core.utils.logger import setup_logger
 from pyDataverse.api import NativeApi
 from pyDataverse.models import Dataverse
@@ -6,6 +8,47 @@ from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConf
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection, DataverseDataset
 
 logger = setup_logger("accelerator-dataverse")
+
+
+class DataverseListing:
+    """
+    Data structure holding result of a 'list datasets in a dataverse collection'
+    """
+
+    def __init__(self):
+        self.id = 0
+        self.identifier = ""
+        self.persistent_url = ""
+        self.protocol = ""
+        self.authority = ""
+        self.separator = "/"
+        self.publisher = ""
+        self.storage_identifier = ""
+        self.dataset_type = ""
+        self.type = ""
+
+
+    @staticmethod
+    def from_json(json_data:dict):
+        """
+        From a dict representation from the API, return a DataverseListing object.
+        :param json_data: dict with entry
+        :return: DataverseListing for that entry
+        """
+
+        listing = DataverseListing()
+        listing.id = json_data["id"]
+        listing.identifier = json_data["identifier"]
+        listing.persistent_url = json_data["persistentUrl"]
+        listing.protocol = json_data["protocol"]
+        listing.authority = json_data["authority"]
+        listing.separator = json_data["separator"]
+        listing.publisher = json_data["publisher"]
+        listing.storage_identifier = json_data["storageIdentifier"]
+        listing.dataset_type = json_data["datasetType"]
+        listing.type = json_data["type"]
+        return listing
+
 
 class AbstractDataverseConnector:
     """
@@ -69,6 +112,41 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info("response: {}".format(resp))
         return resp.is_success
 
+    def list_dataverse_contents(self, dataverse_id:str) -> [DataverseListing]:
+        """
+        Given the id of a dataverse, list the contents of the dataverse.
+        :param dataverse_id: str with dataverse alias or id
+        :return: [DataverseListing]
+        """
+
+        logger.info(f"listing dataverse contents for {dataverse_id}")
+        resp = self.api.get_dataverse_contents(dataverse_id)
+        logger.debug("response: {}".format(resp))
+
+        if resp.is_error:
+            logger.error("ERROR - Could not list dataverse contents: {}".format(resp))
+            raise Exception("ERROR - Could not list dataverse contents: {}".format(resp))
+
+        respdata = json.loads(resp.content)
+        listing = []
+        for entry in respdata["data"]:
+            listing.append(DataverseListing.from_json(entry))
+
+        return listing
+
+    def delete_dataverse_collection(self, collection_id):
+        """
+        Delete a collection.
+        :param collection_id: collection id to delete
+        :return: None
+        """
+
+        logger.info(f"deleting collection {collection_id}")
+        self.api.delete_dataset(collection_id)
+
+
+
+
     def create_dataset(self, dataverse:str, dataverse_dataset:DataverseDataset):
         """
         Create a dataverse dataset.
@@ -87,3 +165,6 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info(f"delete dataset: {dataset_id}")
         resp = self.api.delete_dataset(dataset_id)
         logger.info("response: {}".format(resp))
+
+
+

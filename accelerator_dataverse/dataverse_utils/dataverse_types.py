@@ -35,7 +35,7 @@ class DataverseDataset:
         self.identifier = ""
         self.citation = CitationMetadataBlock()
         self.license = License()
-        self.file = [] # see DatasetFile
+        self.files = [] # see DatasetFile
 
     def render(self):
         """
