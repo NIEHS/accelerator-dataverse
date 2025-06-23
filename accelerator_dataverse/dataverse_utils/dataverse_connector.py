@@ -87,14 +87,25 @@ class DataverseConnector(AbstractDataverseConnector):
             logger.error("ERROR - Could not create dataverse collection: {}".format(resp))
             raise Exception("ERROR - Could not create dataverse collection: {}".format(resp))
 
-    def delete_dataverse(self, dataverse_id:str):
+    def delete_dataverse(self, dataverse_id:str, clear_datasets:bool=False):
         """
         Idempotent delete of dataverse by alias or id.
         :param dataverse_id: str with dataverse alias or id
+        :param clear_datasets: clear datasets before deletion
         :return: None
         """
 
         logger.info(f"delete dataverse with alias: {{dataverse_id}}")
+
+        if clear_datasets:
+            logger.info(f"clear datasets before deletion: {{dataverse_id}}")
+            datasets = self.list_dataverse_contents(dataverse_id)
+            if datasets:
+                logger.info("have datasets to delete")
+                for dataset in datasets:
+                    logger.info(f"delete dataset: {dataset}")
+                    self.delete_dataverse_collection(dataset.identifier)
+
         try:
             self.api.delete_dataverse(dataverse_id)
         except Exception as e:
@@ -134,18 +145,15 @@ class DataverseConnector(AbstractDataverseConnector):
 
         return listing
 
-    def delete_dataverse_collection(self, collection_id):
+    def delete_dataverse_collection(self, collection_pid):
         """
         Delete a collection.
-        :param collection_id: collection id to delete
-        :return: None
+        :param collection_pid: collection pid to delete
+        :return: bool of True if collection was deleted
         """
 
-        logger.info(f"deleting collection {collection_id}")
-        self.api.delete_dataset(collection_id)
-
-
-
+        logger.info(f"deleting collection {collection_pid}")
+        self.api.delete_dataset(collection_pid, is_pid=True)
 
     def create_dataset(self, dataverse:str, dataverse_dataset:DataverseDataset):
         """
@@ -159,6 +167,8 @@ class DataverseConnector(AbstractDataverseConnector):
         payload = dataverse_dataset.render()
         resp = self.api.create_dataset(dataverse, payload, publish=False)
         logger.info("response: {}".format(resp))
+        if not resp.is_success:
+            logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
         return resp.is_success
 
     def delete_dataset(self, dataset_id:str) -> bool:

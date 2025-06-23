@@ -63,7 +63,7 @@ class TestDataverseConnector(unittest.TestCase):
         citation_block.title = "title"
         citation_block.subtitle = "subtitle"
         citation_block.alternative_title.append("alternative_title")
-        citation_block.alternative_url = "alternative_url"
+        citation_block.alternative_url = "https://x.com"
 
         other_id = OtherId()
         other_id.agency = "agency"
@@ -138,7 +138,7 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"
 
-        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias, clear_datasets=True)
         dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
 
         # create a new dataset underneath this collection
@@ -154,12 +154,12 @@ class TestDataverseConnector(unittest.TestCase):
         citation_block = CitationMetadataBlock()
         citation_block.title = "title"
         citation_block.subtitle = "subtitle"
-        citation_block.alternative_url = "alternative_url"
+        citation_block.alternative_url = "https://xxx.com"
 
         author = CitationAuthor()
         author.author_name = "author_name"
         author.author_affiliation = "author_affiliation"
-        author.author_identifier_scheme = "author_identifier_scheme"
+        author.author_identifier_scheme = "ORCID"
         author.author_identifier = "author_identifier"
 
         citation_block.author.append(author)
@@ -181,25 +181,25 @@ class TestDataverseConnector(unittest.TestCase):
 
         keyword = DatasetKeyword()
         keyword.keyword = "keyword"
-        keyword.keyword_uri = "keyword_uri"
+        keyword.keyword_uri = "https://xxx.com"
         keyword.vocabulary = "vocabulary"
-        keyword.vocabulary_uri = "vocabulary_uri"
+        keyword.vocabulary_uri = "https://xxx.com"
 
         citation_block.keyword.append(keyword)
 
         topic = TopicClassification()
         topic.topic_name = "topic_name"
-        topic.vocabulary_uri = "vocabulary_uri"
+        topic.vocabulary_uri = "https://xxx.com"
         topic.vocabulary = "vocabulary"
 
         citation_block.topic_classification.append(topic)
 
         publication = Publication()
-        publication.publication_name = "publication_relation_type"
+        publication.publication_relation_type = "Cites"
         publication.citation = "publication_citation"
-        publication.id_type = "publication_id_type"
+        publication.id_type = "doi"
         publication.id_number = "publication_id_number"
-        publication.url = "publication_url"
+        publication.url = "https://xxx.com"
 
         citation_block.publication.append(publication)
 
@@ -208,10 +208,11 @@ class TestDataverseConnector(unittest.TestCase):
         dataset.citation = citation_block
 
         created = dataverse_connector.create_dataset(dataverse_collection.collection_alias, dataverse_dataset=dataset)
+        self.assertTrue(created)
 
         listed = dataverse_connector.list_dataverse_contents(dataverse_collection.collection_name)
 
-        #self.assertTrue(created)
+        self.assertTrue(created)
         # now delete
         dataset.identifier = "https://doi.org/10.5072/FK2/HO2RH6"
         deleted = dataverse_connector.delete_dataset(dataset.identifier)
