@@ -2,6 +2,7 @@ import json
 
 from accelerator_core.utils.logger import setup_logger
 from pyDataverse.api import NativeApi
+from pyDataverse.exceptions import DataverseNotFoundError
 from pyDataverse.models import Dataverse
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
@@ -49,6 +50,10 @@ class DataverseListing:
         listing.type = json_data["type"]
         return listing
 
+    def format_pid(self) -> str:
+        """Format a persistent identifier for API calls"""
+        return "{0}:{1}/{2}".format(self.protocol, self.authority, self.identifier)
+
 
 class AbstractDataverseConnector:
     """
@@ -87,12 +92,12 @@ class DataverseConnector(AbstractDataverseConnector):
             logger.error("ERROR - Could not create dataverse collection: {}".format(resp))
             raise Exception("ERROR - Could not create dataverse collection: {}".format(resp))
 
-    def delete_dataverse(self, dataverse_id:str, clear_datasets:bool=False):
+    def delete_dataverse(self, dataverse_id:str, clear_datasets:bool=False) -> bool:
         """
         Idempotent delete of dataverse by alias or id.
         :param dataverse_id: str with dataverse alias or id
         :param clear_datasets: clear datasets before deletion
-        :return: None
+        :return: bool with True if success
         """
 
         logger.info(f"delete dataverse with alias: {{dataverse_id}}")
@@ -104,12 +109,15 @@ class DataverseConnector(AbstractDataverseConnector):
                 logger.info("have datasets to delete")
                 for dataset in datasets:
                     logger.info(f"delete dataset: {dataset}")
-                    self.delete_dataverse_collection(dataset.identifier)
+                    self.delete_dataverse_collection(dataset.format_pid())
 
         try:
-            self.api.delete_dataverse(dataverse_id)
-        except Exception as e:
-            logger.info("ignoring delete exception: {}".format(e))
+            resp = self.api.delete_dataverse(dataverse_id)
+            return True
+        except DataverseNotFoundError:
+            logger.warning("dataverse not found with alias: {}".format(dataverse_id))
+            return False
+
 
     def verify_target_dataverse(self, dataverse_id:str) -> bool:
         """
@@ -125,7 +133,7 @@ class DataverseConnector(AbstractDataverseConnector):
 
     def list_dataverse_contents(self, dataverse_id:str) -> [DataverseListing]:
         """
-        Given the id of a dataverse, list the contents of the dataverse.
+        Given the id of a dataverse, list the contents of the dataverse. A not found will return an empty list
         :param dataverse_id: str with dataverse alias or id
         :return: [DataverseListing]
         """
@@ -135,8 +143,12 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.debug("response: {}".format(resp))
 
         if resp.is_error:
-            logger.error("ERROR - Could not list dataverse contents: {}".format(resp))
-            raise Exception("ERROR - Could not list dataverse contents: {}".format(resp))
+            if resp.status_code == 404:
+                logger.warning("not found for dataverse {}".format(dataverse_id))
+                return []
+            else:
+                logger.error("ERROR - Could not list dataverse contents: {}".format(resp))
+                raise Exception("ERROR - Could not list dataverse contents: {}".format(resp))
 
         respdata = json.loads(resp.content)
         listing = []
@@ -175,6 +187,7 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info(f"delete dataset: {dataset_id}")
         resp = self.api.delete_dataset(dataset_id)
         logger.info("response: {}".format(resp))
+        return resp.is_success
 
 
 
