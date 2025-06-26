@@ -1,0 +1,134 @@
+{
+  "data": {
+    "data_resource": {
+      "data_formats": [
+        ".gif"
+      ],
+      "data_location": [
+        {
+          "data_location_link": "http://location.link.com",
+          "data_location_text": "text"
+        }
+      ],
+      "exposure_media": [
+        "media1"
+      ],
+      "measurement_method": "",
+      "measurement_method_other": "",
+      "measures": [
+        "measure1"
+      ],
+      "measures_other": [
+        "measure2"
+      ],
+      "time_available_comment": "",
+      "time_extent_end": "2015",
+      "time_extent_start": "2014"
+    },
+    "geospatial_data": {
+      "geographic_feature": [],
+      "geographic_feature_other": [],
+      "geometry_source": [],
+      "geometry_source_other": [],
+      "geometry_type": [],
+      "model_methods": [],
+      "model_methods_other": [],
+      "spatial_bounding_box": [],
+      "spatial_coverage": [],
+      "spatial_coverage_other": [],
+      "spatial_resolution": [
+        "1 km"
+      ],
+      "spatial_resolution_all_available": [],
+      "spatial_resolution_comment": "",
+      "spatial_resolution_other": []
+    },
+    "population_data": {
+      "biospecimens_from_humans": false,
+      "biospecimens_type": [],
+      "individual_level": false,
+      "linkable_encounters": false,
+      "population_studies": [
+        "study1"
+      ],
+      "population_studies_other": []
+    },
+    "program": {
+      "preferred_label": "preferred_label",
+      "program_name": "name"
+    },
+    "project": {
+      "project_code": "code",
+      "project_name": "name",
+      "project_short_name": "",
+      "project_sponsor": [
+        "sponsor1"
+      ],
+      "project_sponsor_other": [
+        "sponsor2"
+      ],
+      "project_sponsor_type": [
+        "sponsor_type1"
+      ],
+      "project_sponsor_type_other": [
+        "sponsor_type2"
+      ],
+      "project_url": ""
+    },
+    "resource": {
+      "comments": "",
+      "is_static": false,
+      "publication": [
+        {
+          "citation": "cite",
+          "citation_link": ""
+        }
+      ],
+      "resource_access_type": "",
+      "resource_description": "description",
+      "resource_domain": [],
+      "resource_domain_other": [],
+      "resource_keywords": [
+        "keyword1",
+        "keyword2"
+      ],
+      "resource_name": "rescname",
+      "resource_reference": [
+        {
+          "resource_reference_link": "http://reference.url.com",
+          "resource_reference_text": "text"
+        }
+      ],
+      "resource_short_name": "",
+      "resource_type": "boo",
+      "resource_url": "http://resc.url.com",
+      "resource_use_agreement": [
+        {
+          "resource_use_agreement_link": "",
+          "resource_use_agreement_text": ""
+        }
+      ],
+      "resource_version": ""
+    },
+    "temporal_data": {
+      "temporal_resolution": [
+        "res1"
+      ],
+      "temporal_resolution_all_available": [],
+      "temporal_resolution_comment": "",
+      "temporal_resolution_other": []
+    }
+  },
+  "submission": {
+    "submitter_comment": "submitter@email.com",
+    "submitter_email": "submitter@email.com",
+    "submitter_name": "submitter_name"
+  },
+  "technical_metadata": {
+    "created": "",
+    "history": [],
+    "modified": "",
+    "original_source": "a test",
+    "original_source_link": ""
+  }
+}

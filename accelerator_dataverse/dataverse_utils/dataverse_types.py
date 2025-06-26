@@ -1,11 +1,10 @@
+import json
+
+from accelerator_core.utils.data_utils import Serializable
+
 from accelerator_dataverse.dataverse_utils.template_processor import TemplateProcessor
 
-
-class DataverseCollection:
-    """
-    Represents data model for a Dataverse collection
-    see: https://guides.dataverse.org/en/latest/api/native-api.html#dataverse-collections
-    """
+class DataverseCollection(Serializable):
     def __init__(self):
         self.collection_name = ""
         self.collection_alias = ""
@@ -16,50 +15,33 @@ class DataverseCollection:
         self.collection_parent = ""
 
     def render(self):
-        """
-        Turn the collection into a json dict structure for transmission to dataverse
-        :return:
-        """
         template_processor = TemplateProcessor()
         template = template_processor.retrieve_template("dataverse-collection")
         return template.render(collection=self)
 
-class DataverseDataset:
-    """
-    Represents a dataset
-    """
 
+class DataverseDataset(Serializable):
     def __init__(self):
         self.protocol = ""
         self.authority = ""
         self.identifier = ""
         self.citation = CitationMetadataBlock()
         self.license = License()
-        self.files = [] # see DatasetFile
+        self.files = []
 
     def render(self):
-        """
-        Turn the collection into a json string for transmission to dataverse
-        :return: dict with json version of dataset
-        """
         template_processor = TemplateProcessor()
         template = template_processor.retrieve_template("dataset-extended")
         return template.render(dataset=self)
 
-class DataverseDatasetLicense:
-    """
-    License in a dataset
-    """
 
+class DataverseDatasetLicense(Serializable):
     def __init__(self, name, uri):
         self.name = name
         self.uri = uri
 
-class CitationMetadataBlock:
-    """
-    Metadata block in a dataset
-    """
 
+class CitationMetadataBlock(Serializable):
     def __init__(self):
         self.display_name = "Citation Metadata"
         self.title = ""
@@ -67,29 +49,29 @@ class CitationMetadataBlock:
         self.alternative_title = []
         self.alternative_url = ""
         self.depositor = ""
-        self.other_id = [] # see OtherId
-        self.author = [] # see CitationAuthor
-        self.dataset_contact = [] # see DatasetContact
-        self.dataset_description = [] # see DatasetDescription
+        self.other_id = []
+        self.author = []
+        self.dataset_contact = []
+        self.dataset_description = []
         self.subject = []
-        self.keyword = [] # see DatasetKeyword
-        self.topic_classification = [] # see TopicClassification
-        self.publication = [] # see DatasetPublication
+        self.keyword = []
+        self.topic_classification = []
+        self.publication = []
         self.notes_text = ""
         self.language = []
-        self.producer = [] # see DatasetProducer
+        self.producer = []
         self.production_date = ""
         self.production_place = []
-        self.contributor = []  # see Contributor
-        self.grant = [] # see Grant
-        self.distributor = [] # see Distributor
+        self.contributor = []
+        self.grant = []
+        self.distributor = []
         self.distribution_date = ""
         self.date_of_deposit = ""
-        self.time_period = [] # see TimePeriod
-        self.date_of_collection = [] # see TimePeriod
+        self.time_period = []
+        self.date_of_collection = []
         self.kind_of_data = []
-        self.series = [] # Series
-        self.software = [] # see Software
+        self.series = []
+        self.software = []
         self.related_material = []
         self.related_datasets = []
         self.other_references = []
@@ -98,74 +80,49 @@ class CitationMetadataBlock:
         self.characteristics_of_sources_noted = ""
 
 
-class CitationAuthor:
-    """
-    Citation in a metadata block
-    """
-
+class CitationAuthor(Serializable):
     def __init__(self):
         self.author_name = ""
         self.author_affiliation = ""
         self.author_identifier_scheme = ""
         self.author_identifier = ""
 
-class DatasetContact:
-    """
-    Dataset contact in metadata block
-    """
 
+class DatasetContact(Serializable):
     def __init__(self):
         self.contact_name = ""
         self.contact_affiliation = ""
         self.contact_email = ""
 
-class OtherId:
-    """
-    Other identifier in a dataset
-    """
 
+class OtherId(Serializable):
     def __init__(self):
         self.agency = ""
         self.value = ""
 
-class DatasetDescription:
-    """
-    Dataset description
-    """
 
+class DatasetDescription(Serializable):
     def __init__(self):
         self.description = ""
         self.description_date = ""
 
-class DatasetKeyword:
-    """
-    Keyword in dataset
-    """
 
+class DatasetKeyword(Serializable):
     def __init__(self):
         self.keyword = ""
         self.keyword_uri = ""
         self.vocabulary = ""
         self.vocabulary_uri = ""
 
-class TopicClassification:
 
-    """
-    Topic classification in a dataset
-    """
-
+class TopicClassification(Serializable):
     def __init__(self):
         self.topic_name = ""
         self.vocabulary = ""
         self.vocabulary_uri = ""
 
 
-class Publication:
-
-    """
-    Publication in a dataset
-    """
-
+class Publication(Serializable):
     def __init__(self):
         self.publication_relation_type = ""
         self.citation = ""
@@ -173,12 +130,8 @@ class Publication:
         self.id_number = ""
         self.url = ""
 
-class Producer:
 
-    """
-    Producer of a dataset
-    """
-
+class Producer(Serializable):
     def __init__(self):
         self.name = ""
         self.affiliation = ""
@@ -187,28 +140,19 @@ class Producer:
         self.logo_url = ""
 
 
-class Contributor:
-    """
-    Contributor of a dataset
-    """
+class Contributor(Serializable):
     def __init__(self):
         self.type = ""
         self.name = ""
 
-class Grant:
-    """
-    Grant of a dataset
-    """
 
+class Grant(Serializable):
     def __init__(self):
         self.agency = ""
         self.number = ""
 
-class Distributor:
-    """
-    Distributor of a dataset
-    """
 
+class Distributor(Serializable):
     def __init__(self):
         self.name = ""
         self.affiliation = ""
@@ -216,46 +160,32 @@ class Distributor:
         self.url = ""
         self.logo_url = ""
 
-class TimePeriod:
-    """
-    Time period of a dataset
-    """
+
+class TimePeriod(Serializable):
     def __init__(self):
         self.start = ""
         self.end = ""
 
-class Series:
-    """
-    Series of a dataset
-    """
 
+class Series(Serializable):
     def __init__(self):
         self.name = ""
         self.information = ""
 
-class Software:
-    """
-    Software block of a dataset
-    """
 
+class Software(Serializable):
     def __init__(self):
         self.name = ""
         self.version = ""
 
-class License:
-    """
-    License of a dataset
-    """
 
+class License(Serializable):
     def __init__(self):
         self.name = ""
         self.uri = ""
 
-class DatasetFile:
-    """
-    File of a dataset
-    """
 
+class DatasetFile(Serializable):
     def __init__(self):
         self.description = ""
         self.label = ""
@@ -272,6 +202,3 @@ class DatasetFile:
         self.root_data_file_id = ""
         self.checksum_type = ""
         self.checksum_value = ""
-
-
-

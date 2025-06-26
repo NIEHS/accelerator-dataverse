@@ -56,6 +56,7 @@ class TestDataverseConnector(unittest.TestCase):
         dataset.authority = "authority"
         dataset.identifier = "test_create_dataset"
 
+        #dataset.license.name = "Custom Dataset Terms"
         dataset.license.name = "CC0 1.0"
         dataset.license.url = "http://creativecommons.org/licenses/by/2.0/"
 
