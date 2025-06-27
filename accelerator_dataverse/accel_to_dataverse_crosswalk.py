@@ -8,7 +8,8 @@ from accelerator_core.workflow.crosswalk import Crosswalk
 from accelerator_core.utils.data_utils import from_dict, to_dict
 from accelerator_core.workflow.dissemination_crosswalk import DisseminationCrosswalk
 
-from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset
+from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset, DatasetKeyword, Publication, \
+    Producer, TimePeriod
 
 logger = setup_logger("accelerator-dataverse")
 
@@ -53,7 +54,44 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         logger.info(f"payload entry: {payload_entry}")
 
         citation = dataset.citation
-        citation.display_name = data["resource"]["resource_name"]
+        citation.title = data["resource"]["resource_name"]
+        citation.alternative_url = data["resource"]["resource_url"]
+        citation.depositor = payload_entry["submission"]["submitter_name"]
+
+        citation.dataset_description = data["resource"]["resource_description"]
+
+        for keyword in data["resource"]["resource_keywords"]:
+            ds_key = DatasetKeyword()
+            ds_key.keyword = keyword
+            citation.keyword.append(ds_key)
+
+        for publication in data["resource"]["publication"]:
+            ds_publication = Publication()
+            ds_publication.pid = "Cites"
+            ds_publication.citation = publication["citation"]
+            ds_publication.url = publication["citation_link"]
+            ds_publication.id_type = "url"
+            citation.publication.append(ds_publication)
+
+            citation.notes_text = data["resource"]["resource_description"]
+
+        producer = Producer()
+        producer.name = data["project"]["project_name"]
+        producer.abbreviation = data["project"]["project_short_name"]
+        producer.url = data["project"]["project_url"]
+
+        citation.producer.append(producer)
+
+        #contributor?
+
+        time_start = data["data_resource"]["time_extent_start"]
+        time_end = data["data_resource"]["time_extent_end"]
+
+        if time_start or time_end:
+            time_period = TimePeriod()
+            time_period.start = time_start
+            time_period.end = time_end
+            citation.time_period.append(time_period)
 
         # <data
 
