@@ -35,14 +35,13 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         logger.info(f"transforming: {payload}")
 
-
-
         payload_length = self.get_payload_length(payload)
 
         if payload_length > 1:
             raise NotImplementedError("multiple payload entries not supported")
 
         payload_entry = self.payload_resolve(payload,0)
+        logger.debug(f"payload_entry: {payload_entry}")
 
         dataset = DataverseDataset()
         # TODO: add license data, shim out for now

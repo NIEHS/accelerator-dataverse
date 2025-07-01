@@ -1,0 +1,96 @@
+{
+    "_id": {
+        "$oid": "6863f9c7e5176a1cad5292ae"
+    },
+    "submission": {
+        "submitter_name": "Mike Conway",
+        "submitter_email": "",
+        "submitter_comment": ""
+    },
+    "data": {
+        "program": {
+            "program_name": "CHORDS",
+            "preferred_label": ""
+        },
+        "project": {
+            "project_code": "Landslide-090624",
+            "project_name": "Landslides Data Pathfinder",
+            "project_short_name": "",
+            "project_url": "",
+            "project_sponsor": [
+                "National Aeronautics and Space Administration (NASA)"
+            ],
+            "project_sponsor_other": [],
+            "project_sponsor_type": [
+                "Federal Agency"
+            ],
+            "project_sponsor_type_other": []
+        },
+        "resource": {
+            "resource_name": "Landslides Data Pathfinder",
+            "resource_version": "",
+            "resource_short_name": "",
+            "resource_type": "",
+            "resource_url": "https://www.earthdata.nasa.gov/topics/human-dimensions/landslides",
+            "resource_description": "The Landslides Data Pathfinde is one of several Data Pathfinders NASA designed to help guide users through the process of selecting and using application-specific datasets from NASA\u2019s Earth science data collections. It is designed for researchers, decision-makers, and the public to help better understand the interaction of complex events that cause landslides. The data, available from the datasets and tools provided, include information about past landslides, erosion, and fluvial processes in sloped areas. It includes data from various agency members of the Committee on Earth Observation Satellites. The information is used to help monitor and mitigate landslide hazards.",
+            "resource_domain": [],
+            "resource_domain_other": [],
+            "resource_keywords": [],
+            "resource_access_type": "",
+            "resource_reference": [],
+            "resource_use_agreement": [],
+            "publication": [],
+            "is_static": false,
+            "comments": ""
+        },
+        "data_resource": {
+            "exposure_media": [],
+            "measures": [],
+            "measures_other": [],
+            "measurement_method": "",
+            "measurement_method_other": "",
+            "time_extent_start": "",
+            "time_extent_end": "",
+            "time_available_comment": "",
+            "data_formats": [],
+            "data_location": []
+        },
+        "temporal_data": {
+            "temporal_resolution": [],
+            "temporal_resolution_other": [],
+            "temporal_resolution_all_available": [],
+            "temporal_resolution_comment": ""
+        },
+        "population_data": {
+            "individual_level": false,
+            "population_studies": [],
+            "population_studies_other": [],
+            "linkable_encounters": false,
+            "biospecimens_from_humans": false,
+            "biospecimens_type": []
+        },
+        "geospatial_data": {
+            "spatial_resolution": [],
+            "spatial_resolution_other": [],
+            "spatial_resolution_all_available": [],
+            "spatial_resolution_comment": "",
+            "spatial_coverage": [],
+            "spatial_coverage_other": [],
+            "spatial_bounding_box": [],
+            "geometry_type": [],
+            "geometry_source": [],
+            "geometry_source_other": [],
+            "model_methods": [],
+            "model_methods_other": [],
+            "geographic_feature": [],
+            "geographic_feature_other": []
+        }
+    },
+    "technical_metadata": {
+        "created": "2025-07-01T15:07:10.458516",
+        "modified": "",
+        "original_source": "accelerator",
+        "original_source_link": "",
+        "history": []
+    }
+}
