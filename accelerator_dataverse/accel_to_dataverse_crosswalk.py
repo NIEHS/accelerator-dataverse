@@ -48,9 +48,9 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         dataset.license.name = "CC0 1.0"
         dataset.license.url = "http://creativecommons.org/licenses/by/2.0/"
 
-        data = payload_entry['data']
-
         logger.info(f"payload entry: {payload_entry}")
+
+        data = payload_entry['data']
 
         citation = dataset.citation
         citation.title = data["resource"]["resource_name"]
