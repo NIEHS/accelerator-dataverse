@@ -9,7 +9,7 @@ from accelerator_core.utils.data_utils import from_dict, to_dict
 from accelerator_core.workflow.dissemination_crosswalk import DisseminationCrosswalk
 
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset, DatasetKeyword, Publication, \
-    Producer, TimePeriod
+    Producer, TimePeriod, DatasetDescription
 
 logger = setup_logger("accelerator-dataverse")
 
@@ -57,7 +57,11 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         citation.alternative_url = data["resource"]["resource_url"]
         citation.depositor = payload_entry["submission"]["submitter_name"]
 
-        citation.dataset_description = data["resource"]["resource_description"]
+        dataset_description = DatasetDescription()
+        dataset_description.description = data["resource"]["resource_description"]
+
+        citation.dataset_description.append(dataset_description)
+        citation.subject.append("Medicine, Health and Life Sciences")
 
         for keyword in data["resource"]["resource_keywords"]:
             ds_key = DatasetKeyword()
@@ -66,7 +70,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         for publication in data["resource"]["publication"]:
             ds_publication = Publication()
-            ds_publication.pid = "Cites"
+            ds_publication.publication_relation_type = "Cites"
             ds_publication.citation = publication["citation"]
             ds_publication.url = publication["citation_link"]
             ds_publication.id_type = "url"

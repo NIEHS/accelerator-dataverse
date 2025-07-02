@@ -13,14 +13,14 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_config = DataverseConfig.from_env()
         dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
         dataverse_collection = DataverseCollection()
-        dataverse_collection.collection_name = "test_dataverse_connector"
+        dataverse_collection.collection_name = "test_add_dataverse"
         dataverse_collection.dataverse_contacts.append("test@test.com")
-        dataverse_collection.collection_alias = "test_dataverse_collection_alias"
+        dataverse_collection.collection_alias = "test_add_dataverse"
         dataverse_collection.affiliation = "NIEHS"
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"
 
-        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias)
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias, clear_datasets=True)
         dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
 
     def test_verify_dataverse(self):
@@ -41,7 +41,7 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_collection = DataverseCollection()
         dataverse_collection.collection_name = "test_create_dataset"
         dataverse_collection.dataverse_contacts.append("testid@nih.gov")
-        dataverse_collection.collection_alias = "test_create_dataset_alias"
+        dataverse_collection.collection_alias = "test_create_dataset"
         dataverse_collection.affiliation = "NIEHS"
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"
@@ -126,7 +126,7 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_collection = DataverseCollection()
         dataverse_collection.collection_name = "test_delete_dataset"
         dataverse_collection.dataverse_contacts.append("testid@nih.gov")
-        dataverse_collection.collection_alias = "test_delete_dataset_alias"
+        dataverse_collection.collection_alias = "test_delete_dataset"
         dataverse_collection.affiliation = "NIEHS"
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"
@@ -223,9 +223,9 @@ class TestDataverseConnector(unittest.TestCase):
         dataverse_config = DataverseConfig.from_env()
         dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
         dataverse_collection = DataverseCollection()
-        dataverse_collection.collection_name = "test_create_dataset"
+        dataverse_collection.collection_name = "test_list_dataverse_contents"
         dataverse_collection.dataverse_contacts.append("testid@nih.gov")
-        dataverse_collection.collection_alias = "test_create_dataset_alias"
+        dataverse_collection.collection_alias = "test_list_dataverse_contents"
         dataverse_collection.affiliation = "NIEHS"
         dataverse_collection.description = "Test Dataverse"
         dataverse_collection.collection_parent = "Root"

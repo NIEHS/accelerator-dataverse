@@ -12,3 +12,10 @@ This library will hold general accession and dissemination tools for Accelerator
 * PyDataverse Dataverse Python Client - https://pydataverse.readthedocs.io/en/latest/index.html
   * Git: https://github.com/gdcc/pyDataverse
 * Dataverse OpenAPI - https://app.swaggerhub.com/apis/angrygoat/dataverse-api/6.6
+
+## Setup
+
+An airflow connection should be configured
+
+conn_name: dataverse_test
+host: 

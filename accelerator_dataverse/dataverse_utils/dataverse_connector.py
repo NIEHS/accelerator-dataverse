@@ -2,7 +2,7 @@ import json
 
 from accelerator_core.utils.logger import setup_logger
 from pyDataverse.api import NativeApi
-from pyDataverse.exceptions import DataverseNotFoundError
+from pyDataverse.exceptions import DataverseNotFoundError, DataverseNotEmptyError
 from pyDataverse.models import Dataverse
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
@@ -117,6 +117,9 @@ class DataverseConnector(AbstractDataverseConnector):
         except DataverseNotFoundError:
             logger.warning("dataverse not found with alias: {}".format(dataverse_id))
             return False
+        except DataverseNotEmptyError:
+            logger.warning("dataverse not empty of not exists: {}".format(dataverse_id))
+            return False
 
 
     def verify_target_dataverse(self, dataverse_id:str) -> bool:
@@ -178,6 +181,21 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info(f"create dataset: {dataverse_dataset}")
         payload = dataverse_dataset.render()
         resp = self.api.create_dataset(dataverse, payload, publish=False)
+        logger.info("response: {}".format(resp))
+        if not resp.is_success:
+            logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
+        return resp.is_success
+
+    def create_dataset_from_dict(self, dataverse: str, dataverse_dataset_as_dict: dict):
+        """
+        Create a dataverse dataset.
+        :param dataverse: dataverse to create collection within
+        :param dataverse_dataset_from_dict: dict with representation of the dataset
+        :return: TODO: determine return type
+        """
+
+        logger.info(f"create dataset: {dataverse_dataset_as_dict}")
+        resp = self.api.create_dataset(dataverse, dataverse_dataset_as_dict, publish=False)
         logger.info("response: {}".format(resp))
         if not resp.is_success:
             logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))

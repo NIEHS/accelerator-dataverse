@@ -39,8 +39,5 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
             self.assertIsNotNone(actual)
 
 
-
-
-
 if __name__ == '__main__':
     unittest.main()
