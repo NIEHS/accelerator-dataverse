@@ -60,6 +60,9 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         result = dataverse_connector.create_dataset_from_dict(dataverse_config.dataverse, payload_doc)
         logger.info(f"result:{result}")
         dissemination_payload.dissemination_successful = result
+        if not result:
+            raise Exception("dissemination failed, see log for errors")
+
         return dissemination_payload
 
 
