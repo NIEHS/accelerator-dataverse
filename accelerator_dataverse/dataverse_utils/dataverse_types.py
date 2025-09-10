@@ -26,6 +26,9 @@ class DataverseDataset(Serializable):
         self.authority = ""
         self.identifier = ""
         self.citation = CitationMetadataBlock()
+        self.geospatial = GeospatialMetadataBlock()
+        self.computational_workflow = ComputationalWorkflow()
+        self.cafe_custom = CafeCustomMetadata()
         self.license = License()
         self.files = []
 
@@ -40,6 +43,26 @@ class DataverseDatasetLicense(Serializable):
         self.name = name
         self.uri = uri
 
+class CafeCustomMetadata(Serializable):
+
+    def __init__(self):
+        self.source_data_author = []
+        self.source_data_title =
+
+class GeospatialMetadataBlock(Serializable):
+
+    def __init__(self):
+        self.geographic_unit = []
+        self.geographic_bounding_box = [] # GeographicBoundingBox() if present
+
+
+class GeographicBoundingBox(Serializable):
+
+    def __init__(self):
+        self.west = ""
+        self.east = ""
+        self.north = ""
+        self.south = ""
 
 class CitationMetadataBlock(Serializable):
     def __init__(self):
@@ -184,6 +207,9 @@ class License(Serializable):
         self.name = ""
         self.uri = ""
 
+class ComputationalWorkflow(Serializable):
+    def __init__(self):
+        self.tool_type = []
 
 class DatasetFile(Serializable):
     def __init__(self):

@@ -9,7 +9,12 @@
     "identifier": "{{ dataset.identifier }}",
     "metadataBlocks": {
       "citation": {
-        "fields": [
+
+        "displayName": "{{ dataset.citation.display_name }}",
+
+        "fields":
+        [
+
           {
             "typeName": "title",
             "multiple": false,
@@ -17,34 +22,58 @@
             "typeClass": "primitive"
           },
           {
-            "typeName": "productionDate",
+            "typeName": "subtitle",
             "multiple": false,
-            "value": "{{ dataset.citation.production_date }}",
-            "typeClass": "primitive"
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.subtitle }}"
           },
           {
-            "typeName": "dsDescription",
+            "typeName": "alternativeTitle",
             "multiple": true,
+            "typeClass": "primitive",
+            "value": [{% for title in dataset.citation.alternative_title %}
+                {{ title }}
+              {% if not loop.last %},{% endif %}
+              {% endfor %}]
+          },
+            {
+            "typeName": "alternativeURL",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{  dataset.citation.alternative_url }}"
+          },
+
+          {
+            "typeName": "otherId",
+            "multiple": true,
+            "typeClass": "compound",
             "value": [
-              {% for desc in dataset.citation.dataset_description %}
-              {
-                "dsDescriptionValue": {
-                  "typeName": "dsDescriptionValue",
-                  "multiple": false,
-                  "value": "{{ desc.description }}",
-                  "typeClass": "primitive"
-                }
-              }{% if not loop.last %},{% endif %}
+
+              {% for id in dataset.citation.other_id %}
+
+                  {
+                    "otherIdAgency": {
+                      "typeName": "otherIdAgency",
+                      "multiple": false,
+                      "typeClass": "primitive",
+                      "value": "{{ id.agency }}"
+                    },
+                    "otherIdValue": {
+                      "typeName": "otherIdValue",
+                      "multiple": false,
+                      "typeClass": "primitive",
+                      "value": "{{ id.value }}"
+                    }
+              }
+
+
+                  {% if not loop.last %},{% endif %}
               {% endfor %}
-            ],
-            "typeClass": "compound"
+
+            ]
           },
-          {
-            "typeName": "subject",
-            "multiple": true,
-            "value": [{% for subject in dataset.citation.subject %}"{{ subject }}"{% if not loop.last %}, {% endif %}{% endfor %}],
-            "typeClass": "controlledVocabulary"
-          },
+
+
           {
             "typeName": "author",
             "multiple": true,
@@ -62,66 +91,752 @@
                   "multiple": false,
                   "value": "{{ author.author_affiliation }}",
                   "typeClass": "primitive"
+                },
+                "authorIdentifierScheme": {
+                  "typeName": "authorIdentifierScheme",
+                  "multiple": false,
+                  "typeClass": "controlledVocabulary",
+                  "value": "{{ author.author_identifier_scheme }}"
+                },
+                "authorIdentifier": {
+                  "typeName": "authorIdentifier",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ author.author_identifier }}"
                 }
               }{% if not loop.last %},{% endif %}
               {% endfor %}
             ],
             "typeClass": "compound"
-          },
-          {
-            "typeName": "depositor",
-            "multiple": false,
-            "value": "{{ dataset.citation.author[0].author_name if dataset.citation.author }}",
-            "typeClass": "primitive"
-          },
-          {
+            },
+
+
+            {
             "typeName": "datasetContact",
             "multiple": true,
             "value": [
               {% for contact in dataset.citation.dataset_contact %}
-              {
-                "datasetContactEmail": {
+                  "datasetContactEmail": {
                   "typeName": "datasetContactEmail",
                   "multiple": false,
                   "value": "{{ contact.contact_email }}",
+                  "typeClass": "primitive"
+                }
+
+              }{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ],
+            "typeClass": "compound"
+          },
+
+          {
+            "typeName": "dsDescription",
+            "multiple": true,
+            "value": [
+              {% for desc in dataset.citation.dataset_description %}
+              {
+                "dsDescriptionValue": {
+                  "typeName": "dsDescriptionValue",
+                  "multiple": false,
+                  "value": "{{ desc.description }}",
                   "typeClass": "primitive"
                 }
               }{% if not loop.last %},{% endif %}
               {% endfor %}
             ],
             "typeClass": "compound"
-          }
-        ],
-        "displayName": "{{ dataset.citation.display_name }}"
-      }
+          },
+
+          {
+            "typeName": "subject",
+            "multiple": true,
+            "value": [
+                {% for subject in dataset.citation.subject %}
+                    "{{ subject }}"
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}],
+            "typeClass": "controlledVocabulary"
+          },
+
+          {
+            "typeName": "keyword",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+             {% for keyword in dataset.citation.keyword %}
+
+              {
+                "keywordValue": {
+                  "typeName": "keywordValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ keyword.keyword }}"
+                },
+                "keywordVocabulary": {
+                  "typeName": "keywordVocabulary",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ keyword.vocabulary }}"
+                }
+              }
+
+                 {% if not loop.last %},{% endif %}
+              {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "topicClassification",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for topic in dataset.citation.topic_classification %}
+
+              {
+                "topicClassValue": {
+                  "typeName": "topicClassValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ topic.name }}"
+                },
+                "topicClassVocab": {
+                  "typeName": "topicClassVocab",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ topic.vocabulary }}"
+                }
+              }
+
+                 {% if not loop.last %},{% endif %}
+              {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "publication",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for publication in dataset.citation.publication %}
+                        {
+                        "publicationRelationType" : {
+                          "typeName" : "publicationRelationType",
+                          "multiple" : false,
+                          "typeClass" : "controlledVocabulary",
+                          "value" : "{{ publication.publication_relation_type }}"
+                        },
+                        "publicationCitation": {
+                          "typeName": "publicationCitation",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ publication.citation }}"
+                        },
+                        "publicationIDType": {
+                          "typeName": "publicationIDType",
+                          "multiple": false,
+                          "typeClass": "controlledVocabulary",
+                          "value": "{{ publication.id_type }}"
+                        },
+                        "publicationIDNumber": {
+                          "typeName": "publicationIDNumber",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ publication.id_number }}"
+                        },
+                        "publicationURL": {
+                          "typeName": "publicationURL",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ publication.url }}"
+                        }
+                    }
+
+                {% if not loop.last %},{% endif %}
+              {% endfor %}
+
+            ]
+          },
+
+         {
+            "typeName": "notesText",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.notes_text }}"
+          },
+
+          {
+            "typeName": "language",
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": [
+
+                 {% for language in dataset.citation.language %}
+                     "{{ language }}"
+                     {% if not loop.last %},{% endif %}
+              {% endfor %}
+
+            ]
+          },
+
+
+          {
+            "typeName": "producer",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+              {% for producer in dataset.citation.producer %}
+
+              {
+                "producerName": {
+                  "typeName": "producerName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ producer.name }}"
+                },
+                "producerAffiliation": {
+                  "typeName": "producerAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ producer.affiliation }}"
+                },
+                "producerAbbreviation": {
+                  "typeName": "producerAbbreviation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ producer.abbreviation }}"
+                },
+                "producerURL": {
+                  "typeName": "producerURL",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ producer.url }}"
+                },
+                "producerLogoURL": {
+                  "typeName": "producerLogoURL",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ producer.logo_url }}"
+                }
+              }
+
+              {% if not loop.last %},{% endif %}
+              {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "productionDate",
+            "multiple": false,
+            "value": "{{ dataset.citation.production_date }}",
+            "typeClass": "primitive"
+          },
+
+          {
+            "typeName": "productionPlace",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+                  {% for place in dataset.citation.production_place %}
+                     "{{ place }}"
+                      {% if not loop.last %},{% endif %}
+                  {% endfor %}
+            ]
+          },
+
+
+          {
+            "typeName": "contributor",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for contributor in dataset.citation.contributor %}
+
+                      {
+                        "contributorType": {
+                          "typeName": "contributorType",
+                          "multiple": false,
+                          "typeClass": "controlledVocabulary",
+                          "value": "{{ contributor.type }}"
+                        },
+                        "contributorName": {
+                          "typeName": "contributorName",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ contributor.name }}"
+                        }
+                      }
+                   {% if not loop.last %},{% endif %}
+                  {% endfor %}
+
+            ]
+          },
+
+
+           {
+            "typeName": "grantNumber",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+              {% for grant in dataset.citation.grant %}
+
+
+              {
+                "grantNumberAgency": {
+                  "typeName": "grantNumberAgency",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ grant.agency }}"
+                },
+                "grantNumberValue": {
+                  "typeName": "grantNumberValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ grant.number }}"
+                }
+              }
+
+                 {% if not loop.last %},{% endif %}
+                 {% endfor %}
+
+
+            ]
+          },
+
+
+          {
+            "typeName": "distributor",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for distributor in dataset.citation.distributor %}
+
+
+                      {
+                        "distributorName": {
+                          "typeName": "distributorName",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ distributor.name }}"
+                        },
+                        "distributorAffiliation": {
+                          "typeName": "distributorAffiliation",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ distributor.affiliation }}"
+                        },
+                        "distributorAbbreviation": {
+                          "typeName": "distributorAbbreviation",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ distributor.abbreviation }}"
+                        },
+                        "distributorURL": {
+                          "typeName": "distributorURL",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ distributor.url }}"
+                        },
+                        "distributorLogoURL": {
+                          "typeName": "distributorLogoURL",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ distributor.logo_url }}"
+                        }
+                      }
+
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+          },
+           {
+            "typeName": "distributionDate",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.distibution_date }}"
+          },
+
+          {
+            "typeName": "depositor",
+            "multiple": false,
+            "value": "{{ dataset.citation.depositor }}",
+            "typeClass": "primitive"
+          },
+
+          {
+            "typeName": "dateOfDeposit",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.date_of_deposit }}"
+          },
+
+          {
+            "typeName": "timePeriodCovered",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for period in dataset.citation.time_period %}
+
+                      {
+                        "timePeriodCoveredStart": {
+                          "typeName": "timePeriodCoveredStart",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ period.start }}"
+                        },
+                        "timePeriodCoveredEnd": {
+                          "typeName": "timePeriodCoveredEnd",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ period.end }}"
+                        }
+                      }
+
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+            },
+
+            {
+            "typeName": "dateOfCollection",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+            {% for period in dataset.citation.date_of_collection %}
+
+
+              {
+                "dateOfCollectionStart": {
+                  "typeName": "dateOfCollectionStart",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ period.start }}"
+                },
+                "dateOfCollectionEnd": {
+                  "typeName": "dateOfCollectionEnd",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                   "value": "{{ period.end }}"
+                }
+              }
+
+            {% if not loop.last %},{% endif %}
+            {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "kindOfData",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+                {% for kind in dataset.citation.kind_of_data %}
+                    "{{ kind }}"
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "series",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for series in dataset.citation.series %}
+
+
+                 {
+                  "seriesName": {
+                    "typeName": "seriesName",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ series.name }}"
+                  },
+                  "seriesInformation": {
+                    "typeName": "seriesInformation",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ series.information }}"
+                  }
+                }
+
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+          },
+
+           {
+            "typeName": "software",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+
+                {% for software in dataset.citation.software %}
+
+
+                  {
+                    "softwareName": {
+                      "typeName": "softwareName",
+                      "multiple": false,
+                      "typeClass": "primitive",
+                      "value": "{{ software.name }}"
+                    },
+                    "softwareVersion": {
+                      "typeName": "softwareVersion",
+                      "multiple": false,
+                      "typeClass": "primitive",
+                      "value": "{{ software.version }}"
+                    }
+                  }
+
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "relatedMaterial",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+
+                {% for related in dataset.citation.related_material %}
+
+                    "{{ related }}"
+
+                {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "relatedDatasets",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+               {% for related in dataset.citation.related_datasets %}
+
+                    "{{ related }}"
+
+               {% if not loop.last %},{% endif %}
+              {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "otherReferences",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+
+              {% for ref in dataset.citation.other_references %}
+
+                    "{{ ref }}"
+
+                    {% if not loop.last %},{% endif %}
+                {% endfor %}
+
+            ]
+          },
+
+          {
+            "typeName": "dataSources",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+             {% for source in dataset.citation.data_sources %}
+
+                    "{{ source }}"
+
+             {% if not loop.last %},{% endif %}
+             {% endfor %}
+
+            ]
+          },
+
+              "computationalworkflow": {
+                "displayName": "Computational Workflow Metadata",
+                "name": "computationalworkflow",
+                "fields": [
+                    {
+                        "typeName": "workflowType",
+                        "multiple": true,
+                        "typeClass": "controlledVocabulary",
+                        "value": [
+                            "Jupyter Notebook"
+                        ]
+                    },
+                    {
+                        "typeName": "workflowDocumentation",
+                        "multiple": true,
+                        "typeClass": "primitive",
+                        "value": [
+                            "Data is organized in subfolders, following the same groupings used by CDC in the \"Continuous Data\" section of the NHANES website. Each subfolder contains a Jupyter notebook that was used to populate it by downloading data files and codebooks."
+                        ]
+                    }
+                ]
+            },
+            "geospatial": {
+                "displayName": "Geospatial Metadata",
+                "name": "geospatial",
+                "fields": []
+            },
+            "customCAFEDataSources": {
+                "displayName": "Metadata About Data Sources",
+                "name": "customCAFEDataSources",
+                "fields": [
+                    {
+                        "typeName": "cafeDerivedFromExistingDataset",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "No"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTitle",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "NHANES"
+                    },
+                    {
+                        "typeName": "cafeSourceDataAuthor",
+                        "multiple": true,
+                        "typeClass": "primitive",
+                        "value": [
+                            "CDC"
+                        ]
+                    },
+                    {
+                        "typeName": "cafeSourceDataInstitution",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "CDC"
+                    },
+                    {
+                        "typeName": "cafeSourceDataVersionNumber",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "NA"
+                    },
+                    {
+                        "typeName": "cafeSourceDataDOIOrURL",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx"
+                    },
+                    {
+                        "typeName": "cafeSourceDataLastModifiedDate",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "2023-12-31"
+                    },
+                    {
+                        "typeName": "cafeSourceDataDateObtained",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "2025-03-23"
+                    },
+                    {
+                        "typeName": "cafeSourceDataType",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "Survey data"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTypeOther",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "continuous data including questionnaires, lab results, and physical examinations"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTimestep",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "Other (specify)"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTimestepOther",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "multiple temporal resolutions, reported in separate data files"
+                    },
+                    {
+                        "typeName": "cafeSourceDataAttribution",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "Centers for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention, [appropriate year][web URL]."
+                    },
+                    {
+                        "typeName": "cafeSourceDataDisclaimer",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "Data use restrictions\nPlease read carefully before using publicly released NCHS data files\n\nThe National Center for Health Statistics (NCHS), Centers for Disease Control and Prevention (CDC), conducts statistical and epidemiological activities under the authority granted by the Public Health Service Act (42 U.S.C. \u00a7 242k). NCHS survey data are protected by federal confidentiality laws including Section 308(d) Public Health Service Act [42 U.S.C. 242m(d)] and the Confidential Information Protection and Statistical Efficiency Act or CIPSEA [44 U.S.C. 3561-3583]. These confidentiality laws state the data collected by NCHS may be used only for statistical reporting and analysis. Any effort to determine the identity of individuals and establishments violates the assurances of confidentiality provided by federal law.\nTerms and conditions\n\nNCHS does all it can to ensure that the identity of individuals and establishments cannot be disclosed. All direct identifiers, as well as any characteristics that might lead to identification, are omitted from the dataset. Any intentional identification or disclosure of an individual or establishment violates the assurances of confidentiality given to the providers of the information.\n\nTherefore, users will\u2014\n\n    Use the data in this dataset for statistical reporting and analysis only.\n    Make no attempt to learn the identity of any person or establishment included in these data.\n    Not link this dataset with individually identifiable data from other NCHS or non-NCHS datasets.\n    Not engage in any efforts to assess disclosure methodologies applied to protect individuals and establishments or any research on methods of re-identification of individuals and establishments.\n\nBy using these data you signify your agreement to comply with the above-stated statutorily based requirements.\nSanctions for violating NCHS Data Use Agreement\n\nWillfully disclosing any information that could identify a person or establishment in any manner to a person or agency not entitled to receive it, shall be guilty of a class E felony and imprisoned for not more than 5 years, or fined not more than $250,000, or both."
+                    }
+                ]
+            },
+            "customCAFEDataLocation": {
+                "displayName": "Metadata About Geospatial Files",
+                "name": "customCAFEDataLocation",
+                "fields": [
+                    {
+                        "typeName": "cafeIncludesGeospatialFile",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "No"
+                    }
+                ]
+            }
+        ]
     }
-    {% if dataset.files %}
-    ,
-    "files": [
-      {% for file in dataset.files %}
-      {
-        "description": "{{ file.description }}",
-        "label": "{{ file.label }}",
-        "restricted": {{ file.restricted | lower }},
-        "version": {{ file.version }},
-        "datasetVersionId": {{ file.dataset_version_id }},
-        "dataFile": {
-          "id": {{ file.id }},
-          "filename": "{{ file.filename }}",
-          "contentType": "{{ file.content_type }}",
-          "filesize": {{ file.filesize }},
-          "description": "{{ file.description }}",
-          "storageIdentifier": "{{ file.storage_identifier }}",
-          "originalFormatLabel": "{{ file.original_format_label }}",
-          "rootDataFileId": {{ file.root_data_file_id }},
-          "checksum": {
-            "type": "{{ file.checksum.type }}",
-            "value": "{{ file.checksum.value }}"
-          }
-        }
-      }{% if not loop.last %},{% endif %}
-      {% endfor %}
-    ]
+
+    {% if dataset.files|length > 0 %}
+        ,
+        "files": [
+          {% for file in dataset.files %}
+              {
+                "description": "{{ file.description }}",
+                "label": "{{ file.label }}",
+                "restricted": {{ file.restricted | lower }},
+                "version": {{ file.version }},
+                "datasetVersionId": {{ file.dataset_version_id }},
+                "dataFile": {
+                  "id": {{ file.id }},
+                  "filename": "{{ file.filename }}",
+                  "contentType": "{{ file.content_type }}",
+                  "filesize": {{ file.filesize }},
+                  "description": "{{ file.description }}",
+                  "storageIdentifier": "{{ file.storage_identifier }}",
+                  "originalFormatLabel": "{{ file.original_format_label }}",
+                  "rootDataFileId": {{ file.root_data_file_id }},
+                  "checksum": {
+                    "type": "{{ file.checksum_type }}",
+                    "value": "{{ file.checksum_value }}"
+                  }
+                }
+          {% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
     {% endif %}
   }
+
+}
 }

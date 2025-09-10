@@ -712,19 +712,198 @@
             ]
           },
 
-          {
-            "typeName": "originOfSources",
-            "multiple": false,
-            "typeClass": "primitive",
-            "value": "{{ dataset.citation.origin_of_sources }}"
-          },
+         "computationalworkflow": {
+                "displayName": "Computational Workflow Metadata",
+                "name": "computationalworkflow",
+                "fields": [
+                    {
+                        "typeName": "workflowType",
+                        "multiple": true,
+                        "typeClass": "controlledVocabulary",
+                        "value": [
 
-           {
-            "typeName": "characteristicOfSources",
-            "multiple": false,
-            "typeClass": "primitive",
-            "value": "{{ dataset.citation.characteristics_of_sources_noted }}"
-          }
+                              {% for item in dataset.computational_workflow.tool_type %}
+
+                                    "{{ item }}"
+
+                                    {% if not loop.last %},{% endif %}
+                              {% endfor %}
+                        ]
+                    },
+                    {
+                        "typeName": "workflowDocumentation",
+                        "multiple": true,
+                        "typeClass": "primitive",
+                        "value": [
+                        ]
+                    }
+                ]
+            },
+
+            "geospatial": {
+                "displayName": "Geospatial Metadata",
+                "name": "geospatial",
+                "fields": [
+
+
+                     "geographicUnit": {
+                        "name": "geographicUnit",
+
+                        "type": "TEXT",
+                        "typeClass": "primitive",
+                        "multiple": true,
+                        "value": [
+
+                            {% for item in dataset.geospatial.geographic_unit %}
+
+                                    "{{ item }}"
+
+                                    {% if not loop.last %},{% endif %}
+
+                            {% endfor %}
+
+                        ]
+
+                     }
+
+                    {%  if dataset.geospatial.geographic_bounding_box %}
+
+                        ,
+
+                      {
+                        "typeName": "westLongitude",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
+                      },
+                      {
+                        "typeName": "eastLongitude",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "{{ dataset.geospatial.geographic_bounding_box.easst }}"
+                      },
+                      {
+                        "typeName": "northLatitude",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
+                      },
+                      {
+                        "typeName": "southLatitude",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
+                      }
+
+                    {% endif %}
+
+                ]
+            },
+
+            "customCAFEDataSources": {
+                "displayName": "Metadata About Data Sources",
+                "name": "customCAFEDataSources",
+                "fields": [
+                    {
+                        "typeName": "cafeDerivedFromExistingDataset",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "No"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTitle",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "NHANES"
+                    },
+                    {
+                        "typeName": "cafeSourceDataAuthor",
+                        "multiple": true,
+                        "typeClass": "primitive",
+                        "value": [
+                            "CDC"
+                        ]
+                    },
+                    {
+                        "typeName": "cafeSourceDataInstitution",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "CDC"
+                    },
+                    {
+                        "typeName": "cafeSourceDataVersionNumber",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "NA"
+                    },
+                    {
+                        "typeName": "cafeSourceDataDOIOrURL",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx"
+                    },
+                    {
+                        "typeName": "cafeSourceDataLastModifiedDate",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "2023-12-31"
+                    },
+                    {
+                        "typeName": "cafeSourceDataDateObtained",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "2025-03-23"
+                    },
+                    {
+                        "typeName": "cafeSourceDataType",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "Survey data"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTypeOther",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "continuous data including questionnaires, lab results, and physical examinations"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTimestep",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "Other (specify)"
+                    },
+                    {
+                        "typeName": "cafeSourceDataTimestepOther",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "multiple temporal resolutions, reported in separate data files"
+                    },
+                    {
+                        "typeName": "cafeSourceDataAttribution",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "Centers for Disease Control and Prevention (CDC). National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention, [appropriate year][web URL]."
+                    },
+                    {
+                        "typeName": "cafeSourceDataDisclaimer",
+                        "multiple": false,
+                        "typeClass": "primitive",
+                        "value": "Data use restrictions\nPlease read carefully before using publicly released NCHS data files\n\nThe National Center for Health Statistics (NCHS), Centers for Disease Control and Prevention (CDC), conducts statistical and epidemiological activities under the authority granted by the Public Health Service Act (42 U.S.C. \u00a7 242k). NCHS survey data are protected by federal confidentiality laws including Section 308(d) Public Health Service Act [42 U.S.C. 242m(d)] and the Confidential Information Protection and Statistical Efficiency Act or CIPSEA [44 U.S.C. 3561-3583]. These confidentiality laws state the data collected by NCHS may be used only for statistical reporting and analysis. Any effort to determine the identity of individuals and establishments violates the assurances of confidentiality provided by federal law.\nTerms and conditions\n\nNCHS does all it can to ensure that the identity of individuals and establishments cannot be disclosed. All direct identifiers, as well as any characteristics that might lead to identification, are omitted from the dataset. Any intentional identification or disclosure of an individual or establishment violates the assurances of confidentiality given to the providers of the information.\n\nTherefore, users will\u2014\n\n    Use the data in this dataset for statistical reporting and analysis only.\n    Make no attempt to learn the identity of any person or establishment included in these data.\n    Not link this dataset with individually identifiable data from other NCHS or non-NCHS datasets.\n    Not engage in any efforts to assess disclosure methodologies applied to protect individuals and establishments or any research on methods of re-identification of individuals and establishments.\n\nBy using these data you signify your agreement to comply with the above-stated statutorily based requirements.\nSanctions for violating NCHS Data Use Agreement\n\nWillfully disclosing any information that could identify a person or establishment in any manner to a person or agency not entitled to receive it, shall be guilty of a class E felony and imprisoned for not more than 5 years, or fined not more than $250,000, or both."
+                    }
+                ]
+            },
+            "customCAFEDataLocation": {
+                "displayName": "Metadata About Geospatial Files",
+                "name": "customCAFEDataLocation",
+                "fields": [
+                    {
+                        "typeName": "cafeIncludesGeospatialFile",
+                        "multiple": false,
+                        "typeClass": "controlledVocabulary",
+                        "value": "No"
+                    }
+                ]
+            }
         ]
     }
 
