@@ -46,8 +46,20 @@ class DataverseDatasetLicense(Serializable):
 class CafeCustomMetadata(Serializable):
 
     def __init__(self):
+        self.derived_from_existing_dataset = False
+        self.source_data_title = ""
         self.source_data_author = []
-        self.source_data_title =
+        self.source_data_institution = ""
+        self.source_version_number = ""
+        self.source_data_doi_or_url = ""
+        self.source_data_last_modified_date = ""
+        self.source_data_date_obtained = ""
+        self.source_data_type = "" # cv
+        self.source_data_type_other = ""
+        self.source_data_timestep = ""
+        # spatial resolution not in jinja rn
+        self.source_data_attribution = ""
+        self.source_data_disclaimer = ""
 
 class GeospatialMetadataBlock(Serializable):
 
