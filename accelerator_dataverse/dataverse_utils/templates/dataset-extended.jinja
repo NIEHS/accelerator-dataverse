@@ -710,7 +710,9 @@
              {% endfor %}
 
             ]
-          },
+          }
+        ]
+        },
 
          "computationalworkflow": {
                 "displayName": "Computational Workflow Metadata",
@@ -811,7 +813,7 @@
                 "displayName": "Metadata About Data Sources",
                 "name": "customCAFEDataSources",
                 "fields": [
-                    {@ if dataset.cafe_custom.derived_from_existing_dataset @}
+                    {%  if dataset.cafe_custom.derived_from_existing_dataset %}
                     {
                         "typeName": "cafeDerivedFromExistingDataset",
                         "multiple": false,
