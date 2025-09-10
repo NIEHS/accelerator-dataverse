@@ -768,46 +768,42 @@
 
                      },
 
-                    "geographicBoundingBox": {
-                        "name": "geographicBoundingBox",
-                        "typeClass": "compound",
-                        "multiple": true,
-                        "value": [
+                   {
+                      "typeName": "geographicBoundingBox",
+                      "multiple": true,
+                      "typeClass": "compound",
+                      "value": [
+                        {% if dataset.geospatial.geographic_bounding_box %}
+                        {
+                          "westLongitude": {
+                            "typeName": "westLongitude",
+                            "multiple": false,
+                            "typeClass": "primitive",
+                            "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
+                          },
+                          "eastLongitude": {
+                            "typeName": "eastLongitude",
+                            "multiple": false,
+                            "typeClass": "primitive",
+                            "value": "{{ dataset.geospatial.geographic_bounding_box.east }}"
+                          },
+                          "northLatitude": {
+                            "typeName": "northLatitude",
+                            "multiple": false,
+                            "typeClass": "primitive",
+                            "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
+                          },
+                          "southLatitude": {
+                            "typeName": "southLatitude",
+                            "multiple": false,
+                            "typeClass": "primitive",
+                            "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
+                          }
+                        }
+                        {% endif %}
+                      ]
+                    },
 
-
-                            {%  if dataset.geospatial.geographic_bounding_box %}
-
-
-                              {
-                                "typeName": "westLongitude",
-                                "multiple": false,
-                                "typeClass": "primitive",
-                                "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
-                              },
-                              {
-                                "typeName": "eastLongitude",
-                                "multiple": false,
-                                "typeClass": "primitive",
-                                "value": "{{ dataset.geospatial.geographic_bounding_box.easst }}"
-                              },
-                              {
-                                "typeName": "northLatitude",
-                                "multiple": false,
-                                "typeClass": "primitive",
-                                "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
-                              },
-                              {
-                                "typeName": "southLatitude",
-                                "multiple": false,
-                                "typeClass": "primitive",
-                                "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
-                              }
-
-                            {% endif %}
-                    ]
-
-                ]
-            },
 
             "customCAFEDataSources": {
                 "displayName": "Metadata About Data Sources",
