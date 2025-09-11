@@ -9,7 +9,8 @@ from accelerator_core.utils.data_utils import from_dict, to_dict
 from accelerator_core.workflow.dissemination_crosswalk import DisseminationCrosswalk
 
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset, DatasetKeyword, Publication, \
-    Producer, TimePeriod, DatasetDescription
+    Producer, TimePeriod, DatasetDescription, GeospatialMetadataBlock, GeographicBoundingBox, CitationAuthor, \
+    TopicClassification
 
 logger = setup_logger("accelerator-dataverse")
 
@@ -51,24 +52,36 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         logger.info(f"payload entry: {payload_entry}")
 
         data = payload_entry['data']
+        accel_geospatial_data = data['geospatial_data']
+        accel_project_data = data["project"]
+        accel_data_resource = data["data_resource"]
+        accel_resource = data["resource"]
 
         citation = dataset.citation
-        citation.title = data["resource"]["resource_name"]
-        citation.alternative_url = data["resource"]["resource_url"]
+        citation.title = accel_resource["resource_name"]
+        citation.alternative_url = accel_resource["resource_url"]
         citation.depositor = payload_entry["submission"]["submitter_name"]
 
+        for author in accel_project_data.project_sponsor:
+            citation_author = CitationAuthor()
+            citation_author.author_name = author["sponsor"]
+            citation.author.append(citation_author)
+            citation.dataset_contact.append(citation_author)
+
         dataset_description = DatasetDescription()
-        dataset_description.description = data["resource"]["resource_description"]
+        dataset_description.description = accel_resource["resource_description"]
 
         citation.dataset_description.append(dataset_description)
-        citation.subject.append("Medicine, Health and Life Sciences")
 
-        for keyword in data["resource"]["resource_keywords"]:
+        citation.subject.append("Medicine, Health and Life Sciences")
+        citation.subject.append("Earth and Environmental Sciences")
+
+        for keyword in accel_resource["resource_keywords"]:
             ds_key = DatasetKeyword()
             ds_key.keyword = keyword
             citation.keyword.append(ds_key)
 
-        for publication in data["resource"]["publication"]:
+        for publication in accel_resource["publication"]:
             ds_publication = Publication()
             ds_publication.publication_relation_type = "Cites"
             ds_publication.citation = publication["citation"]
@@ -76,19 +89,17 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             ds_publication.id_type = "url"
             citation.publication.append(ds_publication)
 
-            citation.notes_text = data["resource"]["resource_description"]
+            citation.notes_text = accel_resource["resource_description"]
 
         producer = Producer()
-        producer.name = data["project"]["project_name"]
-        producer.abbreviation = data["project"]["project_short_name"]
-        producer.url = data["project"]["project_url"]
+        producer.name = accel_project_data["project_name"]
+        producer.abbreviation = accel_project_data["project_short_name"]
+        producer.url = accel_project_data["project_url"]
 
         citation.producer.append(producer)
 
-        #contributor?
-
-        time_start = data["data_resource"]["time_extent_start"]
-        time_end = data["data_resource"]["time_extent_end"]
+        time_start = accel_data_resource["time_extent_start"]
+        time_end = accel_data_resource["time_extent_end"]
 
         if time_start or time_end:
             time_period = TimePeriod()
@@ -96,14 +107,45 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             time_period.end = time_end
             citation.time_period.append(time_period)
 
-        # <data
-
         # data_resource
+
+        for measure in accel_data_resource["measures"]:
+            topic = TopicClassification()
+            topic.topic_name = measure
+            citation.topic_classification.append(topic)
+
+        time_start = accel_data_resource["time_extent_start"]
+        time_end = accel_data_resource["time_extent_end"]
+
+        logger.info(f"time_start: {time_start}, time_end: {time_end}")
+
+        if time_start or time_end:
+            time_period = TimePeriod()
+            time_period.start = time_start
+            time_period.end = time_end
+            citation.time_period.append(time_period)
+
+
 
         #license = dataset.license
         #license.name = ""
 
         # geospatial_data
+
+        dataverse_geospatial_data = GeospatialMetadataBlock()
+
+        if accel_geospatial_data.spatial_bounding_box:
+            if len(accel_geospatial_data.spatial_bounding_box) != 4:
+                raise Exception("spatial_bounding_box must be a list of 4 floats")
+            else:
+                bounding_box = GeographicBoundingBox()
+                bounding_box.south = accel_geospatial_data.spatial_bounding_box[0]
+                bounding_box.west = accel_geospatial_data.spatial_bounding_box[1]
+                bounding_box.north = accel_geospatial_data.spatial_bounding_box[2]
+                bounding_box.east = accel_geospatial_data.spatial_bounding_box[3]
+                dataverse_geospatial_data.geographic_bounding_box = bounding_box
+
+
 
         # population_data
 
@@ -112,6 +154,20 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         # project
 
         # resource
+
+        for publication in accel_resource["publication"]:
+            ds_publication = Publication()
+            ds_publication.publication_relation_type = "Cites"
+            ds_publication.citation = publication["citation"]
+            ds_publication.url = publication["citation_link"]
+            ds_publication.id_type = "url"
+            citation.publication.append(ds_publication)
+
+        citation.notes_text = accel_resource["resource_description"]
+
+        citation.kind_of_data.append(accel_data_resource["resource_type"])
+
+
 
         # temporal_data
 

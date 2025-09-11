@@ -766,14 +766,16 @@
 
                         ]
 
-                     },
+                     }
+
+                    {% if dataset.geospatial.geographic_bounding_box %}
+                        ,
 
                    {
                       "typeName": "geographicBoundingBox",
                       "multiple": true,
                       "typeClass": "compound",
                       "value": [
-                        {% if dataset.geospatial.geographic_bounding_box %}
                         {
                           "westLongitude": {
                             "typeName": "westLongitude",
@@ -801,8 +803,10 @@
                           }
                         }
                         {% endif %}
+
                       ]
                     },
+
 
 
             "customCAFEDataSources": {

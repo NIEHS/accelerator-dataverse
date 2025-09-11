@@ -65,7 +65,7 @@ class GeospatialMetadataBlock(Serializable):
 
     def __init__(self):
         self.geographic_unit = []
-        self.geographic_bounding_box = [] # GeographicBoundingBox() if present
+        self.geographic_bounding_box = None # GeographicBoundingBox() if present
 
 
 class GeographicBoundingBox(Serializable):
@@ -79,33 +79,33 @@ class GeographicBoundingBox(Serializable):
 class CitationMetadataBlock(Serializable):
     def __init__(self):
         self.display_name = "Citation Metadata"
-        self.title = ""
-        self.subtitle = ""
-        self.alternative_title = []
-        self.alternative_url = ""
-        self.depositor = ""
-        self.other_id = []
-        self.author = []
-        self.dataset_contact = []
-        self.dataset_description = []
-        self.subject = []
-        self.keyword = []
-        self.topic_classification = []
-        self.publication = []
-        self.notes_text = ""
-        self.language = []
-        self.producer = []
-        self.production_date = ""
-        self.production_place = []
-        self.contributor = []
-        self.grant = []
-        self.distributor = []
-        self.distribution_date = ""
+        self.title = "" # resource.name
+        self.subtitle = "" # not used
+        self.alternative_title = [] # unused
+        self.alternative_url = "" # resource.url
+        self.depositor = "" # submission.submitter_name
+        self.other_id = [] # unused
+        self.author = [] # array of AccelPersonnelModelEntry derived from project sponsor
+        self.dataset_contact = [] # duplicate author for now
+        self.dataset_description = [] #
+        self.subject = [] # hard coded
+        self.keyword = [] # resource.resource_keywords
+        self.topic_classification = [] # measure
+        self.publication = [] # AccelPublicationModel from AccelIntermediateResourceModel.publication
+        self.notes_text = "" # resource.description (should I add other textual fields?)
+        self.language = [] # skipped for now
+        self.producer = [] # skipped for now (redundant with author?)
+        self.production_date = "" # skipped for now
+        self.production_place = [] # skipped for now
+        self.contributor = [] # skipped for now
+        self.grant = [] # skipped for now
+        self.distributor = [] # skipped for now
+        self.distribution_date = "" # skipped for now
         self.date_of_deposit = ""
-        self.time_period = []
-        self.date_of_collection = []
-        self.kind_of_data = []
-        self.series = []
+        self.time_period = [] # data resource time_extent_start and time_extent_end needs to be YYYY-MM-DD
+        self.date_of_collection = [] # skipped for now
+        self.kind_of_data = [] # use resource type for now
+        self.series = [] # skipped for now
         self.software = []
         self.related_material = []
         self.related_datasets = []
