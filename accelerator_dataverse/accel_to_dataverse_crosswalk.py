@@ -125,6 +125,17 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             time_period.end = time_end
             citation.time_period.append(time_period)
 
+        for item in accel_data_resource["data_sources"]:
+
+            text = item["data_location_text"]
+            link = item["data_location_link"]
+
+            if text:
+                citation.data.append(text)
+
+            if link:
+                citation.related_material.append(link)
+
 
 
         #license = dataset.license
@@ -164,8 +175,18 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             citation.publication.append(ds_publication)
 
         citation.notes_text = accel_resource["resource_description"]
-
         citation.kind_of_data.append(accel_data_resource["resource_type"])
+
+        for item in accel_resource["resource_reference"]:
+            text = item["resource_reference_text"]
+            link = item["resource_reference_link"]
+
+            if text:
+                citation.related_material.append(text)
+
+            if link:
+                citation.related_material.append(link)
+
 
 
 

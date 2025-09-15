@@ -106,13 +106,13 @@ class CitationMetadataBlock(Serializable):
         self.date_of_collection = [] # skipped for now
         self.kind_of_data = [] # use resource type for now
         self.series = [] # skipped for now
-        self.software = []
-        self.related_material = []
-        self.related_datasets = []
-        self.other_references = []
-        self.data_sources = []
+        self.software = [] # skipped for now
+        self.related_material = [] # resource reference and resource reference link
+        self.related_datasets = [] # our data links
+        self.other_references = [] # skipped for now
+        self.data_sources = [] # skipped may actually be what we are using related_datasets for ???
         self.origin_of_sources = ""
-        self.characteristics_of_sources_noted = ""
+        self.characteristics_of_sources_noted = "" # uses, strengths, limitations are concatenated strings
 
 
 class CitationAuthor(Serializable):

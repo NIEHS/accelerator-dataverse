@@ -8,18 +8,16 @@
     "authority": "{{ dataset.authority }}",
     "identifier": "{{ dataset.identifier }}",
     "metadataBlocks": {
+
       "citation": {
-
         "displayName": "{{ dataset.citation.display_name }}",
-
-        "fields":
-        [
+        "fields": [
 
           {
             "typeName": "title",
             "multiple": false,
-            "value": "{{ dataset.citation.title }}",
-            "typeClass": "primitive"
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.title }}"
           },
           {
             "typeName": "subtitle",
@@ -31,16 +29,17 @@
             "typeName": "alternativeTitle",
             "multiple": true,
             "typeClass": "primitive",
-            "value": [{% for title in dataset.citation.alternative_title %}
-                {{ title }}
-              {% if not loop.last %},{% endif %}
-              {% endfor %}]
+            "value": [
+              {% for title in dataset.citation.alternative_title %}
+              "{{ title }}"{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
           },
-            {
+          {
             "typeName": "alternativeURL",
             "multiple": false,
             "typeClass": "primitive",
-            "value": "{{  dataset.citation.alternative_url }}"
+            "value": "{{ dataset.citation.alternative_url }}"
           },
 
           {
@@ -48,49 +47,43 @@
             "multiple": true,
             "typeClass": "compound",
             "value": [
-
               {% for id in dataset.citation.other_id %}
-
-                  {
-                    "otherIdAgency": {
-                      "typeName": "otherIdAgency",
-                      "multiple": false,
-                      "typeClass": "primitive",
-                      "value": "{{ id.agency }}"
-                    },
-                    "otherIdValue": {
-                      "typeName": "otherIdValue",
-                      "multiple": false,
-                      "typeClass": "primitive",
-                      "value": "{{ id.value }}"
-                    }
-              }
-
-
-                  {% if not loop.last %},{% endif %}
+              {
+                "otherIdAgency": {
+                  "typeName": "otherIdAgency",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ id.agency }}"
+                },
+                "otherIdValue": {
+                  "typeName": "otherIdValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ id.value }}"
+                }
+              }{% if not loop.last %},{% endif %}
               {% endfor %}
-
             ]
           },
-
 
           {
             "typeName": "author",
             "multiple": true,
+            "typeClass": "compound",
             "value": [
               {% for author in dataset.citation.author %}
               {
                 "authorName": {
                   "typeName": "authorName",
                   "multiple": false,
-                  "value": "{{ author.author_name }}",
-                  "typeClass": "primitive"
+                  "typeClass": "primitive",
+                  "value": "{{ author.author_name }}"
                 },
                 "authorAffiliation": {
                   "typeName": "authorAffiliation",
                   "multiple": false,
-                  "value": "{{ author.author_affiliation }}",
-                  "typeClass": "primitive"
+                  "typeClass": "primitive",
+                  "value": "{{ author.author_affiliation }}"
                 },
                 "authorIdentifierScheme": {
                   "typeName": "authorIdentifierScheme",
@@ -106,14 +99,13 @@
                 }
               }{% if not loop.last %},{% endif %}
               {% endfor %}
-            ],
-            "typeClass": "compound"
-            },
+            ]
+          },
 
-
-            {
+          {
             "typeName": "datasetContact",
             "multiple": true,
+            "typeClass": "compound",
             "value": [
               {% for contact in dataset.citation.dataset_contact %}
               {
@@ -123,39 +115,37 @@
                   "typeClass": "primitive",
                   "value": "{{ contact.contact_name }}"
                 },
-
-                  "datasetContactAffiliation": {
+                "datasetContactAffiliation": {
                   "typeName": "datasetContactAffiliation",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{  contact.contact_affiliation }}"
+                  "value": "{{ contact.contact_affiliation }}"
                 },
                 "datasetContactEmail": {
                   "typeName": "datasetContactEmail",
                   "multiple": false,
-                  "value": "{{ contact.contact_email }}",
-                  "typeClass": "primitive"
+                  "typeClass": "primitive",
+                  "value": "{{ contact.contact_email }}"
                 }
-
               }{% if not loop.last %},{% endif %}
               {% endfor %}
-            ],
-            "typeClass": "compound"
+            ]
           },
 
           {
             "typeName": "dsDescription",
             "multiple": true,
+            "typeClass": "compound",
             "value": [
               {% for desc in dataset.citation.dataset_description %}
               {
                 "dsDescriptionValue": {
                   "typeName": "dsDescriptionValue",
                   "multiple": false,
-                  "value": "{{ desc.description }}",
-                  "typeClass": "primitive"
+                  "typeClass": "primitive",
+                  "value": "{{ desc.description }}"
                 },
-                  "dsDescriptionDate": {
+                "dsDescriptionDate": {
                   "typeName": "dsDescriptionDate",
                   "multiple": false,
                   "typeClass": "primitive",
@@ -163,148 +153,18 @@
                 }
               }{% if not loop.last %},{% endif %}
               {% endfor %}
-            ],
-            "typeClass": "compound"
+            ]
           },
 
           {
             "typeName": "subject",
             "multiple": true,
+            "typeClass": "controlledVocabulary",
             "value": [
-                {% for subject in dataset.citation.subject %}
-                    "{{ subject }}"
-                    {% if not loop.last %}, {% endif %}
-                {% endfor %}],
-            "typeClass": "controlledVocabulary"
-          },
-
-          {
-            "typeName": "keyword",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-             {% for keyword in dataset.citation.keyword %}
-
-              {
-                "keywordValue": {
-                  "typeName": "keywordValue",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ keyword.keyword }}"
-                },
-                "keywordTermURI": {
-                  "typeName": "keywordTermURI",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ keyword.keyword_uri }}"
-                },
-                "keywordVocabulary": {
-                  "typeName": "keywordVocabulary",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ keyword.vocabulary }}"
-                },
-                "keywordVocabularyURI": {
-                  "typeName": "keywordVocabularyURI",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ keyword.vocabulary_uri }}"
-                }
-              }
-
-                 {% if not loop.last %},{% endif %}
+              {% for subject in dataset.citation.subject %}
+              "{{ subject }}"{% if not loop.last %},{% endif %}
               {% endfor %}
-
             ]
-          },
-
-          {
-            "typeName": "topicClassification",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for topic in dataset.citation.topic_classification %}
-
-              {
-                "topicClassValue": {
-                  "typeName": "topicClassValue",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ topic.name }}"
-                },
-                "topicClassVocab": {
-                  "typeName": "topicClassVocab",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ topic.vocabulary }}"
-                },
-                "topicClassVocabURI": {
-                  "typeName": "topicClassVocabURI",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ topic.vocabulary_uri }}"
-                }
-              }
-
-                 {% if not loop.last %},{% endif %}
-              {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "publication",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for publication in dataset.citation.publication %}
-                        {
-                        "publicationRelationType" : {
-                          "typeName" : "publicationRelationType",
-                          "multiple" : false,
-                          "typeClass" : "controlledVocabulary",
-                          "value" : "{{ publication.publication_relation_type }}"
-                        },
-                        "publicationCitation": {
-                          "typeName": "publicationCitation",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ publication.citation }}"
-                        },
-                        "publicationIDType": {
-                          "typeName": "publicationIDType",
-                          "multiple": false,
-                          "typeClass": "controlledVocabulary",
-                          "value": "{{ publication.id_type }}"
-                        },
-                        "publicationIDNumber": {
-                          "typeName": "publicationIDNumber",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ publication.id_number }}"
-                        },
-                        "publicationURL": {
-                          "typeName": "publicationURL",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ publication.url }}"
-                        }
-                    }
-
-                {% if not loop.last %},{% endif %}
-              {% endfor %}
-
-            ]
-          },
-
-         {
-            "typeName": "notesText",
-            "multiple": false,
-            "typeClass": "primitive",
-            "value": "{{ dataset.citation.notes_text }}"
           },
 
           {
@@ -312,637 +172,127 @@
             "multiple": true,
             "typeClass": "controlledVocabulary",
             "value": [
-
-                 {% for language in dataset.citation.language %}
-                     "{{ language }}"
-                     {% if not loop.last %},{% endif %}
+              {% for language in dataset.citation.language %}
+              "{{ language }}"{% if not loop.last %},{% endif %}
               {% endfor %}
+            ]
+          }
 
+          {# Add other citation fields here following the same pattern #}
+        ]
+      },
+
+      "computationalworkflow": {
+        "displayName": "Computational Workflow Metadata",
+        "fields": [
+          {
+            "typeName": "workflowType",
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": [
+              {% for item in dataset.computational_workflow.tool_type %}
+              "{{ item }}"{% if not loop.last %},{% endif %}
+              {% endfor %}
             ]
           },
-
-
           {
-            "typeName": "producer",
+            "typeName": "workflowDocumentation",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": []
+          }
+        ]
+      },
+
+      "geospatial": {
+        "displayName": "Geospatial Metadata",
+        "fields": [
+          {
+            "typeName": "geographicUnit",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+              {% for item in dataset.geospatial.geographic_unit %}
+              "{{ item }}"{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          }
+          {% if dataset.geospatial.geographic_bounding_box %}
+          ,{
+            "typeName": "geographicBoundingBox",
             "multiple": true,
             "typeClass": "compound",
             "value": [
-
-              {% for producer in dataset.citation.producer %}
-
               {
-                "producerName": {
-                  "typeName": "producerName",
+                "westLongitude": {
+                  "typeName": "westLongitude",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{ producer.name }}"
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
                 },
-                "producerAffiliation": {
-                  "typeName": "producerAffiliation",
+                "eastLongitude": {
+                  "typeName": "eastLongitude",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{ producer.affiliation }}"
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.east }}"
                 },
-                "producerAbbreviation": {
-                  "typeName": "producerAbbreviation",
+                "northLatitude": {
+                  "typeName": "northLatitude",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{ producer.abbreviation }}"
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
                 },
-                "producerURL": {
-                  "typeName": "producerURL",
+                "southLatitude": {
+                  "typeName": "southLatitude",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{ producer.url }}"
-                },
-                "producerLogoURL": {
-                  "typeName": "producerLogoURL",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ producer.logo_url }}"
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
                 }
               }
+            ]
+          }
+          {% endif %}
+        ]
+      },
 
-              {% if not loop.last %},{% endif %}
+      "customCAFEDataSources": {
+        "displayName": "Metadata About Data Sources",
+        "fields": [
+          {% if dataset.cafe_custom.derived_from_existing_dataset %}
+          {
+            "typeName": "cafeDerivedFromExistingDataset",
+            "multiple": false,
+            "typeClass": "controlledVocabulary",
+            "value": "Yes"
+          },
+          {% endif %}
+          {
+            "typeName": "cafeSourceDataTitle",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.cafe_custom.source_data_title }}"
+          },
+          {
+            "typeName": "cafeSourceDataAuthor",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+              {% for item in dataset.cafe_custom.source_data_author %}
+              "{{ item }}"{% if not loop.last %},{% endif %}
               {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "productionDate",
-            "multiple": false,
-            "value": "{{ dataset.citation.production_date }}",
-            "typeClass": "primitive"
-          },
-
-          {
-            "typeName": "productionPlace",
-            "multiple": true,
-            "typeClass": "primitive",
-            "value": [
-                  {% for place in dataset.citation.production_place %}
-                     "{{ place }}"
-                      {% if not loop.last %},{% endif %}
-                  {% endfor %}
-            ]
-          },
-
-
-          {
-            "typeName": "contributor",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for contributor in dataset.citation.contributor %}
-
-                      {
-                        "contributorType": {
-                          "typeName": "contributorType",
-                          "multiple": false,
-                          "typeClass": "controlledVocabulary",
-                          "value": "{{ contributor.type }}"
-                        },
-                        "contributorName": {
-                          "typeName": "contributorName",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ contributor.name }}"
-                        }
-                      }
-                   {% if not loop.last %},{% endif %}
-                  {% endfor %}
-
-            ]
-          },
-
-
-           {
-            "typeName": "grantNumber",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-              {% for grant in dataset.citation.grant %}
-
-
-              {
-                "grantNumberAgency": {
-                  "typeName": "grantNumberAgency",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ grant.agency }}"
-                },
-                "grantNumberValue": {
-                  "typeName": "grantNumberValue",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ grant.number }}"
-                }
-              }
-
-                 {% if not loop.last %},{% endif %}
-                 {% endfor %}
-
-
-            ]
-          },
-
-
-          {
-            "typeName": "distributor",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for distributor in dataset.citation.distributor %}
-
-
-                      {
-                        "distributorName": {
-                          "typeName": "distributorName",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ distributor.name }}"
-                        },
-                        "distributorAffiliation": {
-                          "typeName": "distributorAffiliation",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ distributor.affiliation }}"
-                        },
-                        "distributorAbbreviation": {
-                          "typeName": "distributorAbbreviation",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ distributor.abbreviation }}"
-                        },
-                        "distributorURL": {
-                          "typeName": "distributorURL",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ distributor.url }}"
-                        },
-                        "distributorLogoURL": {
-                          "typeName": "distributorLogoURL",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ distributor.logo_url }}"
-                        }
-                      }
-
-                {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-          },
-           {
-            "typeName": "distributionDate",
-            "multiple": false,
-            "typeClass": "primitive",
-            "value": "{{ dataset.citation.distribution_date }}"
-          },
-
-          {
-            "typeName": "depositor",
-            "multiple": false,
-            "value": "{{ dataset.citation.depositor }}",
-            "typeClass": "primitive"
-          },
-
-          {
-            "typeName": "dateOfDeposit",
-            "multiple": false,
-            "typeClass": "primitive",
-            "value": "{{ dataset.citation.date_of_deposit }}"
-          },
-
-          {
-            "typeName": "timePeriodCovered",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for period in dataset.citation.time_period %}
-
-                      {
-                        "timePeriodCoveredStart": {
-                          "typeName": "timePeriodCoveredStart",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ period.start }}"
-                        },
-                        "timePeriodCoveredEnd": {
-                          "typeName": "timePeriodCoveredEnd",
-                          "multiple": false,
-                          "typeClass": "primitive",
-                          "value": "{{ period.end }}"
-                        }
-                      }
-
-                {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-            },
-
-            {
-            "typeName": "dateOfCollection",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-            {% for period in dataset.citation.date_of_collection %}
-
-
-              {
-                "dateOfCollectionStart": {
-                  "typeName": "dateOfCollectionStart",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ period.start }}"
-                },
-                "dateOfCollectionEnd": {
-                  "typeName": "dateOfCollectionEnd",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                   "value": "{{ period.end }}"
-                }
-              }
-
-            {% if not loop.last %},{% endif %}
-            {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "kindOfData",
-            "multiple": true,
-            "typeClass": "primitive",
-            "value": [
-                {% for kind in dataset.citation.kind_of_data %}
-                    "{{ kind }}"
-                {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "series",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for series in dataset.citation.series %}
-
-
-                 {
-                  "seriesName": {
-                    "typeName": "seriesName",
-                    "multiple": false,
-                    "typeClass": "primitive",
-                    "value": "{{ series.name }}"
-                  },
-                  "seriesInformation": {
-                    "typeName": "seriesInformation",
-                    "multiple": false,
-                    "typeClass": "primitive",
-                    "value": "{{ series.information }}"
-                  }
-                }
-
-                {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-          },
-
-           {
-            "typeName": "software",
-            "multiple": true,
-            "typeClass": "compound",
-            "value": [
-
-                {% for software in dataset.citation.software %}
-
-
-                  {
-                    "softwareName": {
-                      "typeName": "softwareName",
-                      "multiple": false,
-                      "typeClass": "primitive",
-                      "value": "{{ software.name }}"
-                    },
-                    "softwareVersion": {
-                      "typeName": "softwareVersion",
-                      "multiple": false,
-                      "typeClass": "primitive",
-                      "value": "{{ software.version }}"
-                    }
-                  }
-
-                {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "relatedMaterial",
-            "multiple": true,
-            "typeClass": "primitive",
-            "value": [
-
-                {% for related in dataset.citation.related_material %}
-
-                    "{{ related }}"
-
-                {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "relatedDatasets",
-            "multiple": true,
-            "typeClass": "primitive",
-            "value": [
-               {% for related in dataset.citation.related_datasets %}
-
-                    "{{ related }}"
-
-               {% if not loop.last %},{% endif %}
-              {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "otherReferences",
-            "multiple": true,
-            "typeClass": "primitive",
-            "value": [
-
-              {% for ref in dataset.citation.other_references %}
-
-                    "{{ ref }}"
-
-                    {% if not loop.last %},{% endif %}
-                {% endfor %}
-
-            ]
-          },
-
-          {
-            "typeName": "dataSources",
-            "multiple": true,
-            "typeClass": "primitive",
-            "value": [
-             {% for source in dataset.citation.data_sources %}
-
-                    "{{ source }}"
-
-             {% if not loop.last %},{% endif %}
-             {% endfor %}
-
             ]
           }
         ]
-        },
-
-         "computationalworkflow": {
-                "displayName": "Computational Workflow Metadata",
-                "name": "computationalworkflow",
-                "fields": [
-                    {
-                        "typeName": "workflowType",
-                        "multiple": true,
-                        "typeClass": "controlledVocabulary",
-                        "value": [
-
-                              {% for item in dataset.computational_workflow.tool_type %}
-
-                                    "{{ item }}"
-
-                                    {% if not loop.last %},{% endif %}
-                              {% endfor %}
-                        ]
-                    },
-                    {
-                        "typeName": "workflowDocumentation",
-                        "multiple": true,
-                        "typeClass": "primitive",
-                        "value": [
-                        ]
-                    }
-                ]
-            },
-
-            "geospatial": {
-                "displayName": "Geospatial Metadata",
-                "name": "geospatial",
-                "fields": [
-
-
-                     "geographicUnit": {
-                        "name": "geographicUnit",
-
-                        "type": "TEXT",
-                        "typeClass": "primitive",
-                        "multiple": true,
-                        "value": [
-
-                            {% for item in dataset.geospatial.geographic_unit %}
-
-                                    "{{ item }}"
-
-                                    {% if not loop.last %},{% endif %}
-
-                            {% endfor %}
-
-                        ]
-
-                     }
-
-                    {% if dataset.geospatial.geographic_bounding_box %}
-                        ,
-
-                   {
-                      "typeName": "geographicBoundingBox",
-                      "multiple": true,
-                      "typeClass": "compound",
-                      "value": [
-                        {
-                          "westLongitude": {
-                            "typeName": "westLongitude",
-                            "multiple": false,
-                            "typeClass": "primitive",
-                            "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
-                          },
-                          "eastLongitude": {
-                            "typeName": "eastLongitude",
-                            "multiple": false,
-                            "typeClass": "primitive",
-                            "value": "{{ dataset.geospatial.geographic_bounding_box.east }}"
-                          },
-                          "northLatitude": {
-                            "typeName": "northLatitude",
-                            "multiple": false,
-                            "typeClass": "primitive",
-                            "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
-                          },
-                          "southLatitude": {
-                            "typeName": "southLatitude",
-                            "multiple": false,
-                            "typeClass": "primitive",
-                            "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
-                          }
-                        }
-                        {% endif %}
-
-                      ]
-                    },
-
-
-
-            "customCAFEDataSources": {
-                "displayName": "Metadata About Data Sources",
-                "name": "customCAFEDataSources",
-                "fields": [
-                    {%  if dataset.cafe_custom.derived_from_existing_dataset %}
-                    {
-                        "typeName": "cafeDerivedFromExistingDataset",
-                        "multiple": false,
-                        "typeClass": "controlledVocabulary",
-                        "value": "Yes"
-                    },
-                    {@ endif @}
-                    {
-                        "typeName": "cafeSourceDataTitle",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_title }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataAuthor",
-                        "multiple": true,
-                        "typeClass": "primitive",
-                        "value": [
-
-                            {% for item in dataset.cafe_custom.source_data_author %}
-
-                                    "{{ item }}"
-
-                                    {% if not loop.last %},{% endif %}
-
-                            {% endfor %}
-
-                        ]
-                    },
-                    {
-                        "typeName": "cafeSourceDataInstitution",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_institution }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataVersionNumber",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_version_number }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataDOIOrURL",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_doi_or_url }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataLastModifiedDate",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_last_modified_date }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataDateObtained",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_date_obtained }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataType",
-                        "multiple": false,
-                        "typeClass": "controlledVocabulary",
-                        "value": "{{ dataset.cafe_custom.source_data_type }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataTypeOther",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_type_other }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataTimestep",
-                        "multiple": false,
-                        "typeClass": "controlledVocabulary",
-                        "value": "{{ dataset.cafe_custom.source_data_timestep }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataTimestepOther",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_timestep_other }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataAttribution",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ dataset.cafe_custom.source_data_attribution   }}"
-                    },
-                    {
-                        "typeName": "cafeSourceDataDisclaimer",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "Data use restrictions\nPlease read carefully before using publicly released NCHS data files\n\nThe National Center for Health Statistics (NCHS), Centers for Disease Control and Prevention (CDC), conducts statistical and epidemiological activities under the authority granted by the Public Health Service Act (42 U.S.C. \u00a7 242k). NCHS survey data are protected by federal confidentiality laws including Section 308(d) Public Health Service Act [42 U.S.C. 242m(d)] and the Confidential Information Protection and Statistical Efficiency Act or CIPSEA [44 U.S.C. 3561-3583]. These confidentiality laws state the data collected by NCHS may be used only for statistical reporting and analysis. Any effort to determine the identity of individuals and establishments violates the assurances of confidentiality provided by federal law.\nTerms and conditions\n\nNCHS does all it can to ensure that the identity of individuals and establishments cannot be disclosed. All direct identifiers, as well as any characteristics that might lead to identification, are omitted from the dataset. Any intentional identification or disclosure of an individual or establishment violates the assurances of confidentiality given to the providers of the information.\n\nTherefore, users will\u2014\n\n    Use the data in this dataset for statistical reporting and analysis only.\n    Make no attempt to learn the identity of any person or establishment included in these data.\n    Not link this dataset with individually identifiable data from other NCHS or non-NCHS datasets.\n    Not engage in any efforts to assess disclosure methodologies applied to protect individuals and establishments or any research on methods of re-identification of individuals and establishments.\n\nBy using these data you signify your agreement to comply with the above-stated statutorily based requirements.\nSanctions for violating NCHS Data Use Agreement\n\nWillfully disclosing any information that could identify a person or establishment in any manner to a person or agency not entitled to receive it, shall be guilty of a class E felony and imprisoned for not more than 5 years, or fined not more than $250,000, or both."
-                    }
-                ]
-            }
-        ]
-    }
+      }
+    },
 
     {% if dataset.files|length > 0 %}
-        ,
-        "files": [
-          {% for file in dataset.files %}
-              {
-                "description": "{{ file.description }}",
-                "label": "{{ file.label }}",
-                "restricted": {{ file.restricted | lower }},
-                "version": {{ file.version }},
-                "datasetVersionId": {{ file.dataset_version_id }},
-                "dataFile": {
-                  "id": {{ file.id }},
-                  "filename": "{{ file.filename }}",
-                  "contentType": "{{ file.content_type }}",
-                  "filesize": {{ file.filesize }},
-                  "description": "{{ file.description }}",
-                  "storageIdentifier": "{{ file.storage_identifier }}",
-                  "originalFormatLabel": "{{ file.original_format_label }}",
-                  "rootDataFileId": {{ file.root_data_file_id }},
-                  "checksum": {
-                    "type": "{{ file.checksum_type }}",
-                    "value": "{{ file.checksum_value }}"
-                  }
-                }
-          {% if not loop.last %},{% endif %}
-          {% endfor %}
-        ]
-    {% endif %}
-  }
-
-}
-}
+    "files": [
+      {% for file in dataset.files %}
+      {
+        "description": "{{ file.description }}",
+        "label": "{{ file.label }}",
+        "restricted": {{ file.restricted | lower }},
+        "version": {{ file.version }},
+        "datasetVersionId": {{ file.dataset_version_id }},
+        "
