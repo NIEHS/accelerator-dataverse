@@ -284,15 +284,35 @@
           }
         ]
       }
-    },
+    }
 
     {% if dataset.files|length > 0 %}
-    "files": [
-      {% for file in dataset.files %}
-      {
-        "description": "{{ file.description }}",
-        "label": "{{ file.label }}",
-        "restricted": {{ file.restricted | lower }},
-        "version": {{ file.version }},
-        "datasetVersionId": {{ file.dataset_version_id }},
-        "
+        ,
+        "files": [
+          {% for file in dataset.files %}
+              {
+                "description": "{{ file.description }}",
+                "label": "{{ file.label }}",
+                "restricted": {{ file.restricted | lower }},
+                "version": {{ file.version }},
+                "datasetVersionId": {{ file.dataset_version_id }},
+                "dataFile": {
+                  "id": {{ file.id }},
+                  "filename": "{{ file.filename }}",
+                  "contentType": "{{ file.content_type }}",
+                  "filesize": {{ file.filesize }},
+                  "description": "{{ file.description }}",
+                  "storageIdentifier": "{{ file.storage_identifier }}",
+                  "originalFormatLabel": "{{ file.original_format_label }}",
+                  "rootDataFileId": {{ file.root_data_file_id }},
+                  "checksum": {
+                    "type": "{{ file.checksum_type }}",
+                    "value": "{{ file.checksum_value }}"
+                  }
+                }
+          {% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
+    {% endif %}
+  }
+}

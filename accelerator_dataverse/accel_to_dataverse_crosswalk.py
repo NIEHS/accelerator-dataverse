@@ -62,9 +62,15 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         citation.alternative_url = accel_resource["resource_url"]
         citation.depositor = payload_entry["submission"]["submitter_name"]
 
-        for author in accel_project_data.project_sponsor:
+        for author in accel_project_data["project_sponsor"]:
             citation_author = CitationAuthor()
-            citation_author.author_name = author["sponsor"]
+            citation_author.author_name = author
+            citation.author.append(citation_author)
+            citation.dataset_contact.append(citation_author)
+
+        for author in accel_project_data["project_sponsor_other"]:
+            citation_author = CitationAuthor()
+            citation_author.author_name = author
             citation.author.append(citation_author)
             citation.dataset_contact.append(citation_author)
 
@@ -125,18 +131,16 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             time_period.end = time_end
             citation.time_period.append(time_period)
 
-        for item in accel_data_resource["data_sources"]:
+        for item in accel_data_resource["data_location"]:
 
             text = item["data_location_text"]
             link = item["data_location_link"]
 
             if text:
-                citation.data.append(text)
+                citation.related_datasets.append(text)
 
             if link:
-                citation.related_material.append(link)
-
-
+                citation.related_datasets.append(link)
 
         #license = dataset.license
         #license.name = ""
@@ -145,7 +149,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         dataverse_geospatial_data = GeospatialMetadataBlock()
 
-        if accel_geospatial_data.spatial_bounding_box:
+        if accel_geospatial_data["spatial_bounding_box"]:
             if len(accel_geospatial_data.spatial_bounding_box) != 4:
                 raise Exception("spatial_bounding_box must be a list of 4 floats")
             else:
@@ -175,7 +179,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             citation.publication.append(ds_publication)
 
         citation.notes_text = accel_resource["resource_description"]
-        citation.kind_of_data.append(accel_data_resource["resource_type"])
+        citation.kind_of_data.append(accel_resource["resource_type"])
 
         for item in accel_resource["resource_reference"]:
             text = item["resource_reference_text"]
@@ -188,15 +192,14 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
                 citation.related_material.append(link)
 
 
-
-
         # temporal_data
 
         # <submission
 
         # <technical_metadata
 
-        dataverse_data = json.loads(dataset.render())
+        rendered = dataset.render()
+        dataverse_data = json.loads(rendered)
 
         return_payload = DisseminationPayload(payload.dissemination_descriptor)
         self.report_individual_dissemination(return_payload, "itemid", dataverse_data)
