@@ -64,7 +64,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         for author in accel_project_data["project_sponsor"]:
             citation_author = CitationAuthor()
-            citation_author.author_name = author.name
+            citation_author.author_name = author["name"]
             citation.author.append(citation_author)
             citation.dataset_contact.append(citation_author)
 
