@@ -1,134 +1,326 @@
 {
-  "data": {
-    "data_resource": {
-      "data_formats": [
-        ".gif"
-      ],
-      "data_location": [
+    "data": {
+      "program": {
+        "program_name": "CHORDS",
+        "preferred_label": ""
+      },
+      "project": {
+        "project_url": "",
+        "project_code": "ESDIS-021025",
+        "project_name": "Earth Science Data and Information System (ESDIS)",
+        "project_sponsor": [
+          {
+            "name": "National Aeronautics and Space Administration (NASA)",
+            "type": "",
+            "other_type": false
+          },
+          {
+            "name": "",
+            "type": "Federal Agency",
+            "other_type": false
+          }
+        ],
+        "project_short_name": "ESDIS"
+      },
+      "resource": {
+        "is_static": false,
+        "publication": [],
+        "resource:doi": "",
+        "resource_url": "https://www.earthdata.nasa.gov/",
+        "resource_name": "Gateway to NASA Earth Observation Data",
+        "resource_type": "Data Resource",
+        "resource_domain": [
+          {
+            "name": "Air Quality",
+            "other_type": false
+          },
+          {
+            "name": "Biodiversity",
+            "other_type": false
+          },
+          {
+            "name": "Energy",
+            "other_type": false
+          },
+          {
+            "name": "Greenness",
+            "other_type": false
+          },
+          {
+            "name": "Land Use and Land Cover",
+            "other_type": false
+          },
+          {
+            "name": "Water Quality",
+            "other_type": false
+          },
+          {
+            "name": "Wildfire",
+            "other_type": false
+          }
+        ],
+        "payment_required": false,
+        "resource_license": {
+          "license_uri": "",
+          "license_name": ""
+        },
+        "resource_version": "None",
+        "resource_keywords": [
+          "Earth Science",
+          "Agriculture",
+          "Atmosphere",
+          "Biosphere",
+          "Climate Indicators",
+          "Cryosphere",
+          "Human Dimensions",
+          "Land Surface",
+          "Models",
+          "Ocean",
+          "Solid Earth",
+          "Sun-Earth Interactions",
+          "Terrestrial Hydrosphere",
+          "Tools"
+        ],
+        "resource_reference": [
+          {
+            "resource_reference_link": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+            "resource_reference_text": "Data Use Guidance"
+          }
+        ],
+        "resource_short_name": "GNEOD",
+        "resource_access_type": [
+          "Open"
+        ],
+        "resource_description": "The Earth Science Data and Information Systems (ESDIS) Program provides researchers, decision makers, and the public open access to NASA’s archive of Earth science data. The data and related tools help increase the understanding of environmental changes. Data are accessed from the Gateway to NASA Earth Observation Data (GNEOD) using one of the four search or browse options: the Data Catalog, Data Tools, browse by Platform, or browse by Pathfinder Topic. The Data Catalog can be searched by keywords, data collection platform, dataset name, etc. Search results, or the entire dataset collection, can also be filtered by specific parameters such as topic, observation method, and temporal or spatial parameters, to name a few. Pathfinder Topics guide users to ESDS topic-specific datasets (6 of which are included in the CHORDS Catalog). The 10 topics include: Atmosphere, Land Surface, Biosphere, Ocean, Climate Indicators, Solid Earth, Cryosphere Sun-Earth Interactions, Human Dimensions, and Terrestrial Hydrosphere. Data Tools provide access to a variety of tools for data discovery and visualization. Three tools are featured: 1) Worldview – allows browsing global imagery and downloading underlying data; 2) Vertex - a graphical search interface of synthetic aperture radar land use/cover data; and 3) Giovanni - Geospatial Interactive Online Visualization ANd aNalysis Infrastructure.",
+        "resource_use_agreement": [
+          {
+            "resource_use_agreement_link": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+            "resource_use_agreement_text": "NASA ESDIS content used in a factual manner that does not suggest or imply endorsement may be used without explicit permission. NASA should be acknowledged as the source of the material."
+          }
+        ]
+      },
+      "personnel": [],
+      "data_usage": {
+        "strengths": [],
+        "limitations": [],
+        "intended_use": [],
+        "suggested_audience": []
+      },
+      "data_resource": {
+        "has_api": true,
+        "measures": [
+          {
+            "value": "Air Quality",
+            "other_type": false
+          },
+          {
+            "value": "Biomass",
+            "other_type": false
+          },
+          {
+            "value": "Land Surface",
+            "other_type": false
+          },
+          {
+            "value": "Nightime Imagery",
+            "other_type": false
+          },
+          {
+            "value": "Solar Radiation",
+            "other_type": false
+          },
+          {
+            "value": "Vegetation",
+            "other_type": false
+          },
+          {
+            "value": "Water Quality",
+            "other_type": false
+          },
+          {
+            "value": "Water Bodies",
+            "other_type": false
+          },
+          {
+            "value": "Wildfire Characteristics",
+            "other_type": false
+          },
+          {
+            "value": "Weather",
+            "other_type": false
+          }
+        ],
+        "data_formats": [
+          "ASCII",
+          "CSV",
+          "Geodatabase",
+          "GeoTIFF",
+          "Hierarchical Data Format (HDF)",
+          "ICARTT",
+          "KML",
+          "KMZ",
+          "NetCDF",
+          "PDF",
+          "SHP",
+          "TXT",
+          "WMS",
+          "XLSX"
+        ],
+        "data_location": [
+          {
+            "data_location_link": "https://www.earthdata.nasa.gov/data/catalog",
+            "data_location_text": "Data Catalog"
+          }
+        ],
+        "key_variables": [],
+        "exposure_media": [
+          "Air",
+          "Land",
+          "Water"
+        ],
+        "example_metrics": [],
+        "time_extent_end": "2025",
+        "update_frequency": [
+          "Other"
+        ],
+        "time_extent_start": "1972",
+        "measurement_method": [
+          {
+            "value": "Satellite",
+            "other_type": false
+          },
+          {
+            "value": "Stationary Ground Sensor",
+            "other_type": false
+          }
+        ],
+        "has_visualization_tool": false,
+        "time_available_comment": "The time period included in each dataset may vary within the range 1972 - present",
+        "includes_citizen_collected": false
+      },
+      "temporal_data": {
+        "temporal_resolution": [
+          {
+            "value": "Continuously",
+            "other_type": false
+          },
+          {
+            "value": "Daily",
+            "other_type": false
+          },
+          {
+            "value": "Monthly",
+            "other_type": false
+          },
+          {
+            "value": "Other",
+            "other_type": false
+          },
+          {
+            "value": "Varies by dataset",
+            "other_type": true
+          }
+        ],
+        "temporal_resolution_comment": ""
+      },
+      "geospatial_data": {
+        "geometry_type": [],
+        "model_methods": [],
+        "geometry_source": [],
+        "spatial_coverage": [
+          {
+            "value": "Global",
+            "other_type": false
+          }
+        ],
+        "geographic_feature": [
+          {
+            "value": "General",
+            "other_type": false
+          }
+        ],
+        "spatial_resolution": [
+          {
+            "value": "Other",
+            "other_type": false
+          },
+          {
+            "value": "Varies by dataset",
+            "other_type": true
+          }
+        ],
+        "spatial_bounding_box": [],
+        "spatial_resolution_comment": ""
+      },
+      "population_data": {
+        "individual_level": false,
+        "biospecimens_type": [],
+        "population_studies": [],
+        "linkable_encounters": false,
+        "biospecimens_from_humans": false
+      },
+      "computational_workflow": {
+        "is_open": false,
+        "languages": [],
+        "tool_type": [],
+        "use_tools": [],
+        "example_applications": []
+      }
+    },
+    "submission": {
+      "submitter_name": "Mike Conway",
+      "submitter_email": "mike.conway@nih.gov",
+      "submitter_comment": ""
+    },
+    "technical_metadata": {
+      "created": "2025-08-29T16:05:24.920785",
+      "history": [
         {
-          "data_location_link": "http://location.link.com",
-          "data_location_text": "text"
+          "msg": "accession from accelerator with identifier 8e2a9db1-94f3-4673-a06a-09b7213d94fd in operation CEDAR_Ingest-manual__2025-08-29T16:04:51.971730+00:00",
+          "timestamp": "2025-08-29T16:05:24.920831"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: navigator",
+          "timestamp": "2025-08-29T16:06:03.456391"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: navigator",
+          "timestamp": "2025-08-29T16:30:20.923727"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-15T17:42:11.801786"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-15T19:28:19.628674"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-15T19:31:03.622706"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-16T12:07:42.708655"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-16T12:29:02.062078"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-16T16:49:05.796024"
+        },
+        {
+          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
+          "timestamp": "2025-09-16T17:21:02.256715"
         }
       ],
-      "exposure_media": [
-        "media1"
-      ],
-      "measurement_method": "",
-      "measurement_method_other": "",
-      "measures": [
-        "measure1"
-      ],
-      "measures_other": [
-        "measure2"
-      ],
-      "time_available_comment": "",
-      "time_extent_end": "2015",
-      "time_extent_start": "2014"
-    },
-    "geospatial_data": {
-      "geographic_feature": [],
-      "geographic_feature_other": [],
-      "geometry_source": [],
-      "geometry_source_other": [],
-      "geometry_type": [],
-      "model_methods": [],
-      "model_methods_other": [],
-      "spatial_bounding_box": [],
-      "spatial_coverage": [],
-      "spatial_coverage_other": [],
-      "spatial_resolution": [
-        "1 km"
-      ],
-      "spatial_resolution_all_available": [],
-      "spatial_resolution_comment": "",
-      "spatial_resolution_other": []
-    },
-    "population_data": {
-      "biospecimens_from_humans": false,
-      "biospecimens_type": [],
-      "individual_level": false,
-      "linkable_encounters": false,
-      "population_studies": [
-        "study1"
-      ],
-      "population_studies_other": []
-    },
-    "program": {
-      "preferred_label": "preferred_label",
-      "program_name": "name"
-    },
-    "project": {
-      "project_code": "code",
-      "project_name": "name",
-      "project_short_name": "",
-      "project_sponsor": [
-        "sponsor1"
-      ],
-      "project_sponsor_other": [
-        "sponsor2"
-      ],
-      "project_sponsor_type": [
-        "sponsor_type1"
-      ],
-      "project_sponsor_type_other": [
-        "sponsor_type2"
-      ],
-      "project_url": ""
-    },
-    "resource": {
-      "comments": "",
-      "is_static": false,
-      "publication": [
-        {
-          "citation": "cite",
-          "citation_link": ""
-        }
-      ],
-      "resource_access_type": "",
-      "resource_description": "description",
-      "resource_domain": [],
-      "resource_domain_other": [],
-      "resource_keywords": [
-        "keyword1",
-        "keyword2"
-      ],
-      "resource_name": "rescname",
-      "resource_reference": [
-        {
-          "resource_reference_link": "http://reference.url.com",
-          "resource_reference_text": "text"
-        }
-      ],
-      "resource_short_name": "",
-      "resource_type": "boo",
-      "resource_url": "http://resc.url.com",
-      "resource_use_agreement": [
-        {
-          "resource_use_agreement_link": "",
-          "resource_use_agreement_text": ""
-        }
-      ],
-      "resource_version": ""
-    },
-    "temporal_data": {
-      "temporal_resolution": [
-        "res1"
-      ],
-      "temporal_resolution_all_available": [],
-      "temporal_resolution_comment": "",
-      "temporal_resolution_other": []
+      "modified": "",
+      "verified": "",
+      "original_source": "8e2a9db1-94f3-4673-a06a-09b7213d94fd",
+      "original_source_link": "cedar",
+      "original_source_type": "accelerator",
+      "original_source_identifier": "8e2a9db1-94f3-4673-a06a-09b7213d94fd"
     }
-  },
-  "submission": {
-    "submitter_comment": "submitter@email.com",
-    "submitter_email": "submitter@email.com",
-    "submitter_name": "submitter_name"
-  },
-  "technical_metadata": {
-    "created": "",
-    "history": [],
-    "modified": "",
-    "original_source": "a test",
-    "original_source_link": ""
   }
-}
