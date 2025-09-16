@@ -66,7 +66,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             citation_author = CitationAuthor()
 
             if citation_author.author_name:
-                citation_author.author_name = author["name"]
+                citation_author.author_name = author["sponsor"]
             else:
                 citation_author.author_name = author["type"]
 
