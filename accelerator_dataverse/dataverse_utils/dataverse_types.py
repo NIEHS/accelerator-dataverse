@@ -60,6 +60,9 @@ class CafeCustomMetadata(Serializable):
         # spatial resolution not in jinja rn
         self.source_data_attribution = ""
         self.source_data_disclaimer = ""
+        self.includes_geospatial_file = "No" # will be Yes if geospatial data set type
+        self.spatial_file_type = "" # need to fill in TODO:
+
 
 class GeospatialMetadataBlock(Serializable):
 

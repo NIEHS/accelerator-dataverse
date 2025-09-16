@@ -86,23 +86,6 @@
                   "value": "{{ author.author_affiliation }}"
                 }
 
-                  {% if author.author_identifier_scheme %}
-                      ,
-                    "authorIdentifierScheme": {
-                      "typeName": "authorIdentifierScheme",
-                      "multiple": false,
-                      "typeClass": "controlledVocabulary",
-                      "value": "{{ author.author_identifier_scheme }}"
-                    },
-                    "authorIdentifier": {
-                      "typeName": "authorIdentifier",
-                      "multiple": false,
-                      "typeClass": "primitive",
-                      "value": "{{ author.author_identifier }}"
-                    }
-                  {% endif %}
-
-
               }{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
@@ -126,12 +109,6 @@
                   "multiple": false,
                   "typeClass": "primitive",
                   "value": "{{ contact.contact_affiliation }}"
-                },
-                "datasetContactEmail": {
-                  "typeName": "datasetContactEmail",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ contact.contact_email }}"
                 }
               }{% if not loop.last %},{% endif %}
               {% endfor %}
@@ -289,7 +266,26 @@
             ]
           }
         ]
-      }
+      },
+
+            "name": "customCAFEDataLocation",
+            "fields": {
+                "cafeIncludesGeospatialFile": {
+                    "name": "cafeIncludesGeospatialFile",
+                    "typeClass": "controlledVocabulary",
+                    "value": "{{ dataset.cafe_custom.includes_geospatial_file }}"
+                },
+
+                "cafeSpatialFileTypeOther": {
+                    "name": "cafeSpatialFileTypeOther",
+                    "typeClass": "primitive",
+                    "multiple": false,
+                    "isControlledVocabulary": false,
+                    "isRequired": false,
+                    "value": "{{ dataset.cafe_custom.spatial_file_type }}"
+                }
+            }
+        }
     }
 
     {% if dataset.files|length > 0 %}
@@ -320,5 +316,4 @@
           {% endfor %}
         ]
     {% endif %}
-  }
 }

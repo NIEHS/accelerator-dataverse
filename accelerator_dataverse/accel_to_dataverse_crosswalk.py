@@ -156,6 +156,8 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
 
 
+
+
         # population_data
 
         # program
@@ -185,12 +187,17 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             if link:
                 citation.related_material.append(link)
 
+        # cafe custom metadata items
 
-        # temporal_data
+        # TODO: refine data type in accel core?
 
-        # <submission
+        if accel_resource["resource_type"] == "Data Resource":
+            dataset.cafe_custom.includes_geospatial_file = "Yes"
+        else:
+            dataset.cafe_custom.includes_geospatial_file = "No"
 
-        # <technical_metadata
+
+
 
         rendered = dataset.render()
         dataverse_data = json.loads(rendered)
