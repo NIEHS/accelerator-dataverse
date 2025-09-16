@@ -124,6 +124,7 @@ class CitationAuthor(Serializable):
         self.author_affiliation = ""
         self.author_identifier_scheme = ""
         self.author_identifier = ""
+        self.author_email = "noreply@chordsdata.org"
 
 
 class DatasetContact(Serializable):
