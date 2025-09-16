@@ -84,19 +84,25 @@
                   "multiple": false,
                   "typeClass": "primitive",
                   "value": "{{ author.author_affiliation }}"
-                },
-                "authorIdentifierScheme": {
-                  "typeName": "authorIdentifierScheme",
-                  "multiple": false,
-                  "typeClass": "controlledVocabulary",
-                  "value": "{{ author.author_identifier_scheme }}"
-                },
-                "authorIdentifier": {
-                  "typeName": "authorIdentifier",
-                  "multiple": false,
-                  "typeClass": "primitive",
-                  "value": "{{ author.author_identifier }}"
                 }
+
+                  {% ifauthor.author_identifier_scheme %}
+                      ,
+                    "authorIdentifierScheme": {
+                      "typeName": "authorIdentifierScheme",
+                      "multiple": false,
+                      "typeClass": "controlledVocabulary",
+                      "value": "{{ author.author_identifier_scheme }}"
+                    },
+                    "authorIdentifier": {
+                      "typeName": "authorIdentifier",
+                      "multiple": false,
+                      "typeClass": "primitive",
+                      "value": "{{ author.author_identifier }}"
+                    }
+                  {% endif %}
+
+
               }{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
