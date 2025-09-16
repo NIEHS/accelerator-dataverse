@@ -102,13 +102,13 @@
                   "typeName": "datasetContactName",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{ contact.contact_name }}"
+                  "value": "{{ contact.author_name }}"
                 },
                 "datasetContactAffiliation": {
                   "typeName": "datasetContactAffiliation",
                   "multiple": false,
                   "typeClass": "primitive",
-                  "value": "{{ contact.contact_affiliation }}"
+                  "value": "{{ contact.author_affiliation }}"
                 }
               }{% if not loop.last %},{% endif %}
               {% endfor %}
