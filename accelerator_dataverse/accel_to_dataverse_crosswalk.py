@@ -64,7 +64,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         for author in accel_project_data["project_sponsor"]:
             citation_author = CitationAuthor()
-            citation_author.author_name = author
+            citation_author.author_name = author.name
             citation.author.append(citation_author)
             citation.dataset_contact.append(citation_author)
 
@@ -154,10 +154,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
                 bounding_box.east = accel_geospatial_data.spatial_bounding_box[3]
                 dataverse_geospatial_data.geographic_bounding_box = bounding_box
 
-
-
-
-
         # population_data
 
         # program
@@ -195,8 +191,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             dataset.cafe_custom.includes_geospatial_file = "Yes"
         else:
             dataset.cafe_custom.includes_geospatial_file = "No"
-
-
 
 
         rendered = dataset.render()
