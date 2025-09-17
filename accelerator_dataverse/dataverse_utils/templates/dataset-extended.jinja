@@ -99,15 +99,10 @@
               {% for contact in dataset.citation.dataset_contact %}
               {
                 "datasetContactName": {
-                  "typeName": "datasetContactName",
-                  "multiple": false,
-                  "typeClass": "primitive",
                   "value": "{{ contact.contact_name }}"
                 },
                 "datasetContactEmail": {
-                            "name": "datasetContactEmail",
-                            "typeClass": "primitive",
-                            "isRequired": true,
+                           
                             "value": "{{ contact.contact_email }}"
                   }
               }
