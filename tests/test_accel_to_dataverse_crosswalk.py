@@ -37,6 +37,7 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
             crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
             actual = crosswalk.transform(payload)
             self.assertIsNotNone(actual)
+         
 
 
 if __name__ == '__main__':

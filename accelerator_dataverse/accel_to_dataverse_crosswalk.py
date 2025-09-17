@@ -10,7 +10,7 @@ from accelerator_core.workflow.dissemination_crosswalk import DisseminationCross
 
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset, DatasetKeyword, Publication, \
     Producer, TimePeriod, DatasetDescription, GeospatialMetadataBlock, GeographicBoundingBox, CitationAuthor, \
-    TopicClassification
+    TopicClassification, DatasetContact
 
 logger = setup_logger("accelerator-dataverse")
 
@@ -62,16 +62,27 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         citation.alternative_url = accel_resource["resource_url"]
         citation.depositor = payload_entry["submission"]["submitter_name"]
 
-        for author in accel_project_data["project_sponsor"]:
+        for sponsor in accel_project_data["project_sponsor"]:
             citation_author = CitationAuthor()
 
-            if citation_author.author_name:
-                citation_author.author_name = author["sponsor"]
+            if sponsor["name"]:
+                citation_author.author_name = sponsor["name"]
             else:
-                citation_author.author_name = author["type"]
+                citation_author.author_name = sponsor["type"]
 
             citation.author.append(citation_author)
-            citation.dataset_contact.append(citation_author)
+
+        for sponsor in accel_project_data["project_sponsor"]:
+            dataset_contact = DatasetContact()
+
+            if sponsor["name"]:
+                dataset_contact.contact_name = sponsor["name"]
+            else:
+                dataset_contact.contact_name = sponsor["type"]
+
+            dataset_contact.contact_email = "noreply@chordshealth.org" # TODO: temp shim mc
+
+            citation.dataset_contact.append(dataset_contact)
 
         dataset_description = DatasetDescription()
         dataset_description.description = accel_resource["resource_description"]
