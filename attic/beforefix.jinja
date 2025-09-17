@@ -140,3 +140,83 @@
     {% endif %}
   }
 }
+
+
+
+
+
+
+
+
+
+  "customCAFEDataLocation": {
+          "displayName": "Metadata About Geospatial Files",
+          "fields": [
+            {
+              "typeName": "cafeIncludesGeospatialFile",
+              "multiple": false,
+              "typeClass": "controlledVocabulary",
+              "value": "{{ dataset.cafe_custom.includes_geospatial_file }}"
+            },
+            {
+              "typeName": "cafeSpatialReferenceSystem",
+              "multiple": false,
+              "typeClass": "compound",
+              "value": [
+                {
+                  "cafeSpatialReferenceSystemName": {
+                    "typeName": "cafeSpatialReferenceSystemName",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.cafe_location.spatial_reference_system.name }}"
+                  },
+                  "cafeSpatialReferenceSystemURL": {
+                    "typeName": "cafeSpatialReferenceSystemURL",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.cafe_location.spatial_reference_system.url }}"
+                  }
+                }
+              ]
+            },
+            {
+              "typeName": "cafeSpatialFileType",
+              "multiple": false,
+              "typeClass": "controlledVocabulary",
+              "value": "{{ dataset.cafe_location.spatial_file_type }}"
+            },
+            {
+              "typeName": "cafeSpatialFileTypeOther",
+              "multiple": false,
+              "typeClass": "primitive",
+              "value": "{{ dataset.cafe_location.spatial_file_type_other }}"
+            },
+            {
+              "typeName": "cafeSpatialResolution",
+              "multiple": false,
+              "typeClass": "compound",
+              "value": [
+                {
+                  "cafeSpatialResolutionValue": {
+                    "typeName": "cafeSpatialResolutionValue",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.cafe_location.spatial_resolution.value }}"
+                  },
+                  "cafeSpatialResolutionUnit": {
+                    "typeName": "cafeSpatialResolutionUnit",
+                    "multiple": false,
+                    "typeClass": "controlledVocabulary",
+                    "value": "{{ dataset.cafe_location.spatial_resolution.unit }}"
+                  },
+                  "cafeSpatialResolutionUnitOther": {
+                    "typeName": "cafeSpatialResolutionUnitOther",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.cafe_location.spatial_resolution.unit_other }}"
+                  }
+                }
+              ]
+            }
+    ]
+    },
