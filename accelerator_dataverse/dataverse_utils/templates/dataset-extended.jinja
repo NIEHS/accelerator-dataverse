@@ -12,95 +12,220 @@
       "citation": {
         "displayName": "{{ dataset.citation.display_name }}",
         "fields": [
-            {"title":"{{ dataset.citation.title }}"},
-            {"subtitle":"{{ dataset.citation.subtitle }}"},
-            {"alternativeURL" :"{{ dataset.citation.alternative_url }}"},
-            {"otherId" : [
+          {
+            "typeName": "title",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.title }}"
+          },
+         {% if dataset.citation.subtitle %}
+         {
+            "typeName": "subtitle",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.subtitle }}"
+         },
+         {% endif %}
+          {
+            "typeName": "alternativeURL",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.citation.alternative_url }}"
+          },
+          {
+            "typeName": "otherId",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
               {% for id in dataset.citation.other_id %}
               {
-                "otherIdAgency": "{{ id.agency }}",
-                "otherIdValue": "{{ id.value }}"
-              }{% if not loop.last %},{% endif %}
-              {% endfor %}
-            ]},
-
-            {"author" : [
-              {% for author in dataset.citation.author %}
-                {
-                  "authorName": "{{ author.author_name }}",
-                  "authorAffiliation": "{{ author.author_affiliation }}"
+                "otherIdAgency": {
+                  "typeName": "otherIdAgency",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ id.agency }}"
+                },
+                "otherIdValue": {
+                  "typeName": "otherIdValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ id.value }}"
                 }
-
-              {% if not loop.last %},{% endif %}
+              }{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
           },
-
-          {"datasetContact" : [
-              {% for contact in dataset.citation.dataset_contact %}
-                {
-                    "datasetContactName":"{{ contact.contact_name }}",
-                    "datasetContactEmail":"{{ contact.contact_email }}"
+          {
+            "typeName": "author",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {% for author in dataset.citation.author %}
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ author.author_name }}"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ author.author_affiliation }}"
                 }
-              {% if not loop.last %},{% endif %}
+              }{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
-            },
-
-          {"dsDescription" : [
+          },
+          {
+            "typeName": "datasetContact",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {% for contact in dataset.citation.dataset_contact %}
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ contact.contact_name }}"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ contact.contact_email }}"
+                }
+              }{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          },
+          {
+            "typeName": "dsDescription",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
               {% for desc in dataset.citation.dataset_description %}
               {
-                "dsDescriptionValue": "{{ desc.description }}",
-                "dsDescriptionDate": "{{ desc.description_date }}"
-              }
-              {% if not loop.last %},{% endif %}
+                "dsDescriptionValue": {
+                  "typeName": "dsDescriptionValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ desc.description }}"
+                },
+                "dsDescriptionDate": {
+                  "typeName": "dsDescriptionDate",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ desc.description_date }}"
+                }
+              }{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
-            },
-
-          {"subject": [
+          },
+          {
+            "typeName": "subject",
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": [
               {% for subject in dataset.citation.subject %}
               "{{ subject }}"{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
-            },
-
-          {"language": [
+          },
+          {
+            "typeName": "language",
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": [
               {% for language in dataset.citation.language %}
               "{{ language }}"{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
           }
-
         ]
       },
 
       "geospatial": {
-        "fields": [
-            {"geographicUnit": [
-              {% for item in dataset.geospatial.geographic_unit %}
-              "{{ item }}"{% if not loop.last %},{% endif %}
-              {% endfor %}
-            ]}
-
-          {% if dataset.geospatial.geographic_bounding_box %}
-          ,{"geographicBoundingBox": [
-                {"westLongitude": "{{ dataset.geospatial.geographic_bounding_box.west }}"},
-                {"eastLongitude": "{{ dataset.geospatial.geographic_bounding_box.east }}"},
-                {"northLatitude": "{{ dataset.geospatial.geographic_bounding_box.north }}"},
-                {"southLatitude": "{{ dataset.geospatial.geographic_bounding_box.south }}"}
+          "displayName": "Geospatial Metadata",
+          "fields": [
+            {
+              "typeName": "geographicUnit",
+              "multiple": true,
+              "typeClass": "primitive",
+              "value": [
+                {% for item in dataset.geospatial.geographic_unit %}
+                "{{ item }}"{% if not loop.last %},{% endif %}
+                {% endfor %}
               ]
-           }
-          {% endif %}
-        ]
-      },
+            }
+            {% if dataset.geospatial.geographic_bounding_box %}
+            ,
+            {
+              "typeName": "geographicBoundingBox",
+              "multiple": true,
+              "typeClass": "compound",
+              "value": [
+                {
+                  "westLongitude": {
+                    "typeName": "westLongitude",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
+                  },
+                  "eastLongitude": {
+                    "typeName": "eastLongitude",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.geospatial.geographic_bounding_box.east }}"
+                  },
+                  "northLatitude": {
+                    "typeName": "northLatitude",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
+                  },
+                  "southLatitude": {
+                    "typeName": "southLatitude",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
+                  }
+                }
+              ]
+            }
+            {% endif %}
+            ]
+        },
+
 
       "customCAFEDataSources": {
+        "displayName": "Custom CAFE Data Sources",
         "fields": [
-          {"cafeDerivedFromExistingDataset": "{{ dataset.cafe_custom.derived_from_existing_dataset }}"},
-          {"cafeSourceDataUrl":"{{ dataset.cafe_custom.source_data_url }}"},
-          {"cafeSourceDataTitle":"{{ dataset.cafe_custom.source_data_title }}"},
-          {"cafeSourceDataAuthor":[
+          {
+            "typeName": "cafeDerivedFromExistingDataset",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.cafe_custom.derived_from_existing_dataset }}"
+          },
+          {
+            "typeName": "cafeSourceDataUrl",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.cafe_custom.source_data_url }}"
+          },
+          {
+            "typeName": "cafeSourceDataTitle",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "{{ dataset.cafe_custom.source_data_title }}"
+          },
+          {
+            "typeName": "cafeSourceDataAuthor",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
               {% for item in dataset.cafe_custom.source_data_author %}
               "{{ item }}"{% if not loop.last %},{% endif %}
               {% endfor %}
@@ -111,32 +236,32 @@
     }
 
     {% if dataset.files|length > 0 %}
-        ,
-        "files": [
-          {% for file in dataset.files %}
-              {
-                "description": "{{ file.description }}",
-                "label": "{{ file.label }}",
-                "restricted": {{ file.restricted | lower }},
-                "version": {{ file.version }},
-                "datasetVersionId": {{ file.dataset_version_id }},
-                "dataFile": {
-                  "id": {{ file.id }},
-                  "filename": "{{ file.filename }}",
-                  "contentType": "{{ file.content_type }}",
-                  "filesize": {{ file.filesize }},
-                  "description": "{{ file.description }}",
-                  "storageIdentifier": "{{ file.storage_identifier }}",
-                  "originalFormatLabel": "{{ file.original_format_label }}",
-                  "rootDataFileId": {{ file.root_data_file_id }},
-                  "checksum": {
-                    "type": "{{ file.checksum_type }}",
-                    "value": "{{ file.checksum_value }}"
-                  }
-                }
-          {% if not loop.last %},{% endif %}
-          {% endfor %}
-        ]
+    ,
+    "files": [
+      {% for file in dataset.files %}
+      {
+        "description": "{{ file.description }}",
+        "label": "{{ file.label }}",
+        "restricted": {{ file.restricted | lower }},
+        "version": {{ file.version }},
+        "datasetVersionId": {{ file.dataset_version_id }},
+        "dataFile": {
+          "id": {{ file.id }},
+          "filename": "{{ file.filename }}",
+          "contentType": "{{ file.content_type }}",
+          "filesize": {{ file.filesize }},
+          "description": "{{ file.description }}",
+          "storageIdentifier": "{{ file.storage_identifier }}",
+          "originalFormatLabel": "{{ file.original_format_label }}",
+          "rootDataFileId": {{ file.root_data_file_id }},
+          "checksum": {
+            "type": "{{ file.checksum_type }}",
+            "value": "{{ file.checksum_value }}"
+          }
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
     {% endif %}
   }
 }
