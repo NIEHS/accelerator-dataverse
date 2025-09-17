@@ -102,7 +102,7 @@
                   "value": "{{ contact.contact_name }}"
                 },
                 "datasetContactEmail": {
-                           
+
                             "value": "{{ contact.contact_email }}"
                   }
               }
@@ -160,7 +160,61 @@
 
           {# Add other citation fields here following the same pattern #}
         ]
+      },
+
+      "geospatial": {
+        "displayName": "Geospatial Metadata",
+        "fields": [
+          {
+            "typeName": "geographicUnit",
+            "multiple": true,
+            "typeClass": "primitive",
+            "value": [
+              {% for item in dataset.geospatial.geographic_unit %}
+              "{{ item }}"{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          }
+          {% if dataset.geospatial.geographic_bounding_box %}
+          ,{
+            "typeName": "geographicBoundingBox",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "westLongitude": {
+                  "typeName": "westLongitude",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.west }}"
+                },
+                "eastLongitude": {
+                  "typeName": "eastLongitude",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.east }}"
+                },
+                "northLatitude": {
+                  "typeName": "northLatitude",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.north }}"
+                },
+                "southLatitude": {
+                  "typeName": "southLatitude",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ dataset.geospatial.geographic_bounding_box.south }}"
+                }
+              }
+            ]
+          }
+          {% endif %}
+        ]
       }
+
+
+
     }
     }
 
