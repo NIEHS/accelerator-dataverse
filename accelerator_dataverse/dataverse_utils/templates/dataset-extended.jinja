@@ -124,6 +124,45 @@
               {% endfor %}
             ]
           },
+
+
+
+          {
+            "typeName": "keyword",
+            "multiple": true,
+            "typeClass": "compound",
+             "value": [
+              {% for keyword in dataset.citation.keyword %}
+              {
+                "keywordValue": {
+                  "typeName": "keywordValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ keyword.keyword }}"
+                }
+              }{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          },
+
+           {
+            "typeName": "topicClassification",
+            "multiple": true,
+            "typeClass": "compound",
+             "value": [
+              {% for topic  in dataset.citation.topic_classification %}
+              {
+                "topicClassValue": {
+                  "typeName": "topicClassValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ topic.topic_name }}"
+                }
+              }{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          },
+
           {
             "typeName": "subject",
             "multiple": true,
@@ -134,6 +173,7 @@
               {% endfor %}
             ]
           },
+
           {
             "typeName": "language",
             "multiple": true,
@@ -143,7 +183,41 @@
               "{{ language }}"{% if not loop.last %},{% endif %}
               {% endfor %}
             ]
-          }
+          },
+
+          {
+              "typeName": "publication",
+              "multiple": true,
+              "typeClass": "compound",
+              "value": [
+                {% for pub in dataset.citation.publication %}
+                {
+                  "publicationRelationType": {
+                    "typeName": "publicationRelationType",
+                    "multiple": false,
+                    "typeClass": "controlledVocabulary",
+                    "value": "{{ pub.relation_type }}"
+                  },
+                  "publicationCitation": {
+                    "typeName": "publicationCitation",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ pub.citation }}"
+                  },
+                  "publicationURL": {
+                    "typeName": "publicationURL",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ pub.url }}"
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ]
+            }
+
+
+
+
         ]
       },
 
