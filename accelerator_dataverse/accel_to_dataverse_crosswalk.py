@@ -208,6 +208,8 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         else:
             dataset.cafe_custom.includes_geospatial_file = "No"
 
+        dataset.cafe_custom.derived_from_existing_dataset = "Yes"
+
 
         rendered = dataset.render()
         dataverse_data = json.loads(rendered)
