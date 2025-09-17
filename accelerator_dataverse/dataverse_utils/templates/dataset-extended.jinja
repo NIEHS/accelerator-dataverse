@@ -110,14 +110,15 @@
                   "typeClass": "primitive",
                   "value": "{{ contact.contact_affiliation }}"
                 },
-                  "datasetContactEmail": {
+                "datasetContactEmail": {
                             "name": "datasetContactEmail",
                             "typeClass": "primitive",
                             "isRequired": true,
                             "value": "{{ contact.contact_email }}"
                   }
+              }
 
-              }{% if not loop.last %},{% endif %}
+              {% if not loop.last %},{% endif %}
               {% endfor %}
             ]
           },
