@@ -213,10 +213,14 @@
                 }{% if not loop.last %},{% endif %}
                 {% endfor %}
               ]
+            },
+
+            {
+                "typeName": "notesText",
+                "multiple": false,
+                "typeClass": "primitive",
+                "value": "{{ dataset.citation.notes_text }}"
             }
-
-
-
 
         ]
       },

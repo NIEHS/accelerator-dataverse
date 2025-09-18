@@ -56,6 +56,8 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         accel_project_data = data["project"]
         accel_data_resource = data["data_resource"]
         accel_resource = data["resource"]
+        accel_data_usage = data["data_usage"]
+        accel_computational_workflow = data["computational_workflow"]
 
         citation = dataset.citation
         citation.title = accel_resource["resource_name"]
@@ -127,7 +129,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         for measure in accel_data_resource["measures"]:
             topic = TopicClassification()
-            topic.topic_name = measure
+            topic.topic_name = measure["value"]
             citation.topic_classification.append(topic)
 
         time_start = accel_data_resource["time_extent_start"]
@@ -210,6 +212,33 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         dataset.cafe_custom.derived_from_existing_dataset = "Yes"
 
+        # combine multiple items into the notes field
+        notes_field = ""
+        if accel_data_usage["intended_use"]:
+            notes_field += AccelToDataverseCrosswalk.listit("Intended Use", accel_data_usage["intended_use"])
+            notes_field += "<br/>"
+
+        if accel_data_usage["strengths"]:
+            notes_field += AccelToDataverseCrosswalk.listit("Strengths", accel_data_usage["strengths"])
+            notes_field += "<br/>"
+
+        if accel_data_usage["limitations"]:
+            notes_field += AccelToDataverseCrosswalk.listit("Limitations", accel_data_usage["limitations"])
+            notes_field += "<br/>"
+
+        if accel_data_usage["suggested_audience"]:
+            notes_field += AccelToDataverseCrosswalk.listit("Suggested Audience", accel_data_usage["suggested_audience"])
+            notes_field += "<br/>"
+
+        if accel_computational_workflow["use_tools"]:
+            notes_field += AccelToDataverseCrosswalk.listit("Use Tool", accel_computational_workflow["use_tools"])
+            notes_field += "<br/>"
+
+        if accel_computational_workflow["example_applications"]:
+            notes_field += AccelToDataverseCrosswalk.listit("Example Application", accel_computational_workflow["example_applications"])
+            notes_field += "<br/>"
+
+        citation.notes_text = notes_field
 
         rendered = dataset.render()
         dataverse_data = json.loads(rendered)
@@ -223,6 +252,24 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
 
 
+
+
+    @staticmethod
+    def boldit(val:str) -> str:
+        return f"<b>{val}</b>"
+
+    @staticmethod
+    def listit(heading:str, val:[str]) -> str:
+        ul = "<ul>"
+        ul_end = "</ul>"
+        li = "<li>"
+        li_end = "</li>"
+        retval = AccelToDataverseCrosswalk.boldit(heading)
+        retval += ul
+        for item in val:
+            retval += f"{li}{item}{li_end}"
+        retval += ul_end
+        return retval
 
 
 
