@@ -121,8 +121,8 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         if time_start or time_end:
             time_period = TimePeriod()
-            time_period.start = time_start
-            time_period.end = time_end
+            time_period.start = f"{time_start}-01-01"
+            time_period.end = f"{time_end}-12-31"
             citation.time_period.append(time_period)
 
         # data_resource
@@ -131,17 +131,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             topic = TopicClassification()
             topic.topic_name = measure["value"]
             citation.topic_classification.append(topic)
-
-        time_start = accel_data_resource["time_extent_start"]
-        time_end = accel_data_resource["time_extent_end"]
-
-        logger.info(f"time_start: {time_start}, time_end: {time_end}")
-
-        if time_start or time_end:
-            time_period = TimePeriod()
-            time_period.start = time_start
-            time_period.end = time_end
-            citation.time_period.append(time_period)
 
         for item in accel_data_resource["data_location"]:
 

@@ -251,10 +251,57 @@
                 }{% if not loop.last %},{% endif %}
                 {% endfor %}
               ]
-            }
+            },
 
+            {
+                "typeName": "depositor",
+                "multiple": false,
+                "typeClass": "primitive",
+                "value": "{{ dataset.citation.depositor }}"
+            },
 
+            {
+              "typeName": "timePeriodCovered",
+              "multiple": true,
+              "typeClass": "compound",
+              "value": [
+                {% for item in dataset.citation.time_period %}
+                {
+                  "timePeriodCoveredStart": {
+                    "typeName": "timePeriodCoveredStart",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ item.start }}"
+                  },
+                  "timePeriodCoveredEnd": {
+                    "typeName": "timePeriodCoveredEnd",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ item.end }}"
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ]
 
+            },
+
+            {
+            "typeName": "keyword",
+            "multiple": true,
+            "typeClass": "compound",
+             "value": [
+              {% for keyword in dataset.citation.keyword %}
+              {
+                "keywordValue": {
+                  "typeName": "keywordValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "{{ keyword.keyword }}"
+                }
+              }{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          },
 
 
 
