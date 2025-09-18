@@ -249,11 +249,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         return return_payload
 
-
-
-
-
-
     @staticmethod
     def boldit(val:str) -> str:
         return f"<b>{val}</b>"

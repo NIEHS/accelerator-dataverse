@@ -220,7 +220,43 @@
                 "multiple": false,
                 "typeClass": "primitive",
                 "value": "{{ dataset.citation.notes_text }}"
+            },
+
+
+             {
+              "typeName": "producer",
+              "multiple": true,
+              "typeClass": "compound",
+              "value": [
+                {% for item in dataset.citation.producer %}
+                {
+                  "producerName": {
+                    "typeName": "producerName",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ item.name }}"
+                  },
+                  "producerAffiliation": {
+                    "typeName": "producerAffiliation",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ item.affiliation }}"
+                  },
+                  "producerURL": {
+                    "typeName": "producerURL",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ item.url }}"
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ]
             }
+
+
+
+
+
 
         ]
       },
