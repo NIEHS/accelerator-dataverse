@@ -40,7 +40,7 @@ class DataverseDataset(Serializable):
 class DataverseCafeSourceDataset(Serializable):
     def __init__(self):
         self.title=""
-        self.author= [str]
+        self.author=[]
         self.institution=""
         self.version_number=""
         self.doi_or_url=""
@@ -61,7 +61,7 @@ class CafeCustomMetadata(Serializable):
 
     def __init__(self):
         self.derived_from_existing_dataset = False
-        self.source_data = [DataverseCafeSourceDataset] # DataverseCafeSourceDataset()
+        self.source_data = [] # DataverseCafeSourceDataset()
 
 
 class GeospatialMetadataBlock(Serializable):
