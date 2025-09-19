@@ -372,83 +372,79 @@
             "typeClass": "controlledVocabulary",
             "value": "{{ dataset.cafe_custom.derived_from_existing_dataset }}"
           },
-          { "typeName": "sourceDataSet",
+          {
+              "typeName": "cafeSourceData",
               "multiple": true,
               "typeClass": "compound",
-              "fields": [
+              "value": [
+                {% for src in dataset.source_data %}
                 {
-                  "typeName": "cafeSourceData",
-                  "multiple": true,
-                  "typeClass": "compound",
-                  "value": [
-                    {% for src in dataset.source_data %}
-                    {
-                      "cafeSourceDataTitle": {
-                        "typeName": "cafeSourceDataTitle",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.title }}"
-                      },
-                      "cafeSourceDataAuthor": {
-                        "typeName": "cafeSourceDataAuthor",
-                        "multiple": true,
-                        "typeClass": "primitive",
-                        "value": [
-                          {% for auth in src.authors %}
-                          "{{ auth }}"{% if not loop.last %},{% endif %}
-                          {% endfor %}
-                        ]
-                      },
-                      "cafeSourceDataInstitution": {
-                        "typeName": "cafeSourceDataInstitution",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.institution }}"
-                      },
-                      "cafeSourceDataVersionNumber": {
-                        "typeName": "cafeSourceDataVersionNumber",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.version_number }}"
-                      },
-                      "cafeSourceDataDOIOrURL": {
-                        "typeName": "cafeSourceDataDOIOrURL",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.doi_or_url }}"
-                      },
-                      "cafeSourceDataLastModifiedDate": {
-                        "typeName": "cafeSourceDataLastModifiedDate",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.last_modified_date }}"
-                      },
-                      "cafeSourceDataDateObtained": {
-                        "typeName": "cafeSourceDataDateObtained",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.date_obtained }}"
-                      },
-                      "cafeSourceDataType": {
-                        "typeName": "cafeSourceDataType",
-                        "multiple": false,
-                        "typeClass": "controlledVocabulary",
-                        "value": "{{ src.type }}"
-                      },
-                      "cafeSourceDataTypeOther": {
-                        "typeName": "cafeSourceDataTypeOther",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.type_other }}"
-                      },
-                      "cafeSourceDataDisclaimer": {
-                        "typeName": "cafeSourceDataDisclaimer",
-                        "multiple": false,
-                        "typeClass": "primitive",
-                        "value": "{{ src.disclaimer }}"
-                      }
-                    }{% if not loop.last %},{% endif %}
-                    {% endfor %}
+                  "cafeSourceDataTitle": {
+                    "typeName": "cafeSourceDataTitle",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.title }}"
+                  },
+                  "cafeSourceDataAuthor": {
+                    "typeName": "cafeSourceDataAuthor",
+                    "multiple": true,
+                    "typeClass": "primitive",
+                    "value": [
+                      {% for auth in src.authors %}
+                      "{{ auth }}"{% if not loop.last %},{% endif %}
+                      {% endfor %}
+                    ]
+                  },
+                  "cafeSourceDataInstitution": {
+                    "typeName": "cafeSourceDataInstitution",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.institution }}"
+                  },
+                  "cafeSourceDataVersionNumber": {
+                    "typeName": "cafeSourceDataVersionNumber",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.version_number }}"
+                  },
+                  "cafeSourceDataDOIOrURL": {
+                    "typeName": "cafeSourceDataDOIOrURL",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.doi_or_url }}"
+                  },
+                  "cafeSourceDataLastModifiedDate": {
+                    "typeName": "cafeSourceDataLastModifiedDate",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.last_modified_date }}"
+                  },
+                  "cafeSourceDataDateObtained": {
+                    "typeName": "cafeSourceDataDateObtained",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.date_obtained }}"
+                  },
+                  "cafeSourceDataType": {
+                    "typeName": "cafeSourceDataType",
+                    "multiple": false,
+                    "typeClass": "controlledVocabulary",
+                    "value": "{{ src.type }}"
+                  },
+                  "cafeSourceDataTypeOther": {
+                    "typeName": "cafeSourceDataTypeOther",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.type_other }}"
+                  },
+                  "cafeSourceDataDisclaimer": {
+                    "typeName": "cafeSourceDataDisclaimer",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.disclaimer }}"
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
                   ]
             }
             ]
