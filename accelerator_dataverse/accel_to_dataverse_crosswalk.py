@@ -10,7 +10,7 @@ from accelerator_core.workflow.dissemination_crosswalk import DisseminationCross
 
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset, DatasetKeyword, Publication, \
     Producer, TimePeriod, DatasetDescription, GeospatialMetadataBlock, GeographicBoundingBox, CitationAuthor, \
-    TopicClassification, DatasetContact
+    TopicClassification, DatasetContact, DataverseCafeSourceDataset
 
 logger = setup_logger("accelerator-dataverse")
 
@@ -143,11 +143,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             if link:
                 citation.related_datasets.append(link)
 
-        #license = dataset.license
-        #license.name = ""
-
-        # geospatial_data
-
         dataverse_geospatial_data = GeospatialMetadataBlock()
 
         if accel_geospatial_data["spatial_bounding_box"]:
@@ -160,14 +155,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
                 bounding_box.north = accel_geospatial_data.spatial_bounding_box[2]
                 bounding_box.east = accel_geospatial_data.spatial_bounding_box[3]
                 dataverse_geospatial_data.geographic_bounding_box = bounding_box
-
-        # population_data
-
-        # program
-
-        # project
-
-        # resource
 
         for publication in accel_resource["publication"]:
             ds_publication = Publication()
@@ -201,6 +188,16 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         dataset.cafe_custom.derived_from_existing_dataset = "Yes"
 
+        # CAFE dataset metadata
+
+        for item in accel_data_resource["data_location"]:
+
+            cafe_dataset = DataverseCafeSourceDataset()
+            cafe_dataset.title = item["data_location_text"]
+            cafe_dataset.doi_or_url = item["data_location_link"]
+            cafe_dataset.institution = producer.name
+            dataset.cafe_custom.source_data.append(cafe_dataset)
+
         # combine multiple items into the notes field
         notes_field = ""
         if accel_data_usage["intended_use"]:
@@ -228,6 +225,11 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             notes_field += "<br/>"
 
         citation.notes_text = notes_field
+
+        for data_format in accel_data_resource["data_formats"]:
+            citation.kind_of_data.append(data_format)
+
+
 
         rendered = dataset.render()
         dataverse_data = json.loads(rendered)

@@ -372,9 +372,8 @@
             "typeClass": "controlledVocabulary",
             "value": "{{ dataset.cafe_custom.derived_from_existing_dataset }}"
           },
-           { "typeName": "sourceDataSet",
-              "multiple": true,
-              "typeClass": "compound",
+         "cafeSourceData": {
+          "displayName": "Source Dataset",
           "fields": [
             {
               "typeName": "cafeSourceData",
@@ -441,6 +440,51 @@
                     "typeClass": "primitive",
                     "value": "{{ src.type_other }}"
                   },
+                  "cafeSourceDataSpatialResolution": {
+                    "typeName": "cafeSourceDataSpatialResolution",
+                    "multiple": false,
+                    "typeClass": "compound",
+                    "value": [
+                      {
+                        "cafeSourceDataSpatialValue": {
+                          "typeName": "cafeSourceDataSpatialValue",
+                          "multiple": false,
+                          "typeClass": "primitive",
+                          "value": "{{ src.spatial_resolution.value }}"
+                        }
+                      }
+                    ]
+                  },
+                  "cafeSourceDataSpatialResolutionUnit": {
+                    "typeName": "cafeSourceDataSpatialResolutionUnit",
+                    "multiple": false,
+                    "typeClass": "controlledVocabulary",
+                    "value": "{{ src.spatial_resolution.unit }}"
+                  },
+                  "cafeSourceDataSpatialResolutionUnitOther": {
+                    "typeName": "cafeSourceDataSpatialResolutionUnitOther",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.spatial_resolution.unit_other }}"
+                  },
+                  "cafeSourceDataTimestep": {
+                    "typeName": "cafeSourceDataTimestep",
+                    "multiple": false,
+                    "typeClass": "controlledVocabulary",
+                    "value": "{{ src.timestep }}"
+                  },
+                  "cafeSourceDataTimestepOther": {
+                    "typeName": "cafeSourceDataTimestepOther",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.timestep_other }}"
+                  },
+                  "cafeSourceDataAttribution": {
+                    "typeName": "cafeSourceDataAttribution",
+                    "multiple": false,
+                    "typeClass": "primitive",
+                    "value": "{{ src.attribution }}"
+                  },
                   "cafeSourceDataDisclaimer": {
                     "typeName": "cafeSourceDataDisclaimer",
                     "multiple": false,
@@ -451,8 +495,8 @@
                 {% endfor %}
               ]
             }
-            ]
-            }
+  ]
+}
 
         ]
       }

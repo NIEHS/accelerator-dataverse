@@ -10040,7 +10040,7 @@
             "name": "customCAFEDataSources",
             "displayName": "Metadata About Data Sources",
             "displayOnCreate": true,
-            "fields": {
+                "fields": {
                 "cafeDerivedFromExistingDataset": {
                     "name": "cafeDerivedFromExistingDataset",
                     "displayName": "Derived from Another Dataset",
