@@ -377,7 +377,7 @@
               "multiple": true,
               "typeClass": "compound",
               "value": [
-                {% for src in dataset.source_data %}
+                {% for src in dataset.cafe_custom.source_data %}
                 {
                   "cafeSourceDataTitle": {
                     "typeName": "cafeSourceDataTitle",
@@ -445,11 +445,8 @@
                   }
                 }{% if not loop.last %},{% endif %}
                 {% endfor %}
-                  ]
-            }
-            ]
-            }
-
+              ]
+          }
         ]
       }
     }
