@@ -201,7 +201,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         # combine multiple items into the notes field
         notes_field = ""
         if accel_data_usage["intended_use"]:
-            notes_field += AccelToDataverseCrosswalk.listit("Intended Use", accel_data_usage["intended_use"])
+            notes_field += AccelToDataverseCrosswalk.listit("Intended Use", accel_data_usage["intended_use"]["value"])
             notes_field += "<br/>"
 
         if accel_data_usage["strengths"]:
