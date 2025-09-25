@@ -201,7 +201,12 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         # combine multiple items into the notes field
         notes_field = ""
         if accel_data_usage["intended_use"]:
-            notes_field += AccelToDataverseCrosswalk.listit("Intended Use", accel_data_usage["intended_use"]["value"])
+
+            vals = []
+            for item in accel_data_usage["intended_use"]:
+                vals.append(item["value"])
+
+            notes_field += AccelToDataverseCrosswalk.listit("Intended Use", vals)
             notes_field += "<br/>"
 
         if accel_data_usage["strengths"]:
@@ -229,8 +234,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         for data_format in accel_data_resource["data_formats"]:
             citation.kind_of_data.append(data_format)
 
-
-
         rendered = dataset.render()
         dataverse_data = json.loads(rendered)
 
@@ -245,7 +248,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         return f"<b>{val}</b>"
 
     @staticmethod
-    def listit(heading:str, val:[str]) -> str:
+    def listit(heading:str, val) -> str:
         ul = "<ul>"
         ul_end = "</ul>"
         li = "<li>"
