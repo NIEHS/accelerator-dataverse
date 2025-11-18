@@ -54,6 +54,26 @@ class DataverseListing:
         """Format a persistent identifier for API calls"""
         return "{0}:{1}/{2}".format(self.protocol, self.authority, self.identifier)
 
+class DataverseDisseminationResult:
+    """
+    Information about storing a dataset in a dataverse collection, including the pid of the dataset
+    and any error or reponse information.
+    """
+
+    def __init__(self):
+        self.pid = ""
+        self.success = True
+        self.message = ""
+        self.api_url = ""
+
+    @staticmethod
+    def from_json(json_dict:dict):
+        result = DataverseDisseminationResult()
+        result.pid = json_dict["pid"]
+        result.success = json_dict["success"]
+        result.message = json_dict["message"]
+        result.api_url = json_dict["api_url"]
+        return result
 
 class AbstractDataverseConnector:
     """
