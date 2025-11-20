@@ -17,7 +17,7 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
 
         dissemination_descriptor = DisseminationDescriptor()
         dissemination_descriptor.ingest_type = "accelerator"
-        dissemination_descriptor.schema_version = "1.0.0"
+        dissemination_descriptor.schema_version = "1.0.2"
         dissemination_descriptor.dissemination_type = "dataverse"
         dissemination_descriptor.dissemination_item_id = "foo"
         dissemination_descriptor.use_tempfiles = False
@@ -43,7 +43,7 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
 
         dissemination_descriptor = DisseminationDescriptor()
         dissemination_descriptor.ingest_type = "accelerator"
-        dissemination_descriptor.schema_version = "1.0.0"
+        dissemination_descriptor.schema_version = "1.0.2"
         dissemination_descriptor.dissemination_type = "dataverse"
         dissemination_descriptor.dissemination_item_id = "foo"
         dissemination_descriptor.use_tempfiles = False

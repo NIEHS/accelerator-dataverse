@@ -10,7 +10,6 @@ from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseColle
 
 logger = setup_logger("accelerator-dataverse")
 
-
 class DataverseListing:
     """
     Data structure holding result of a 'list datasets in a dataverse collection'
@@ -30,7 +29,7 @@ class DataverseListing:
 
 
     @staticmethod
-    def from_json(json_data:dict):
+    def from_dict(json_data:dict):
         """
         From a dict representation from the API, return a DataverseListing object.
         :param json_data: dict with entry
@@ -64,16 +63,27 @@ class DataverseDisseminationResult:
         self.pid = ""
         self.success = True
         self.message = ""
+        self.status_code = 0
         self.api_url = ""
 
     @staticmethod
-    def from_json(json_dict:dict):
+    def from_dict(json_dict:dict):
         result = DataverseDisseminationResult()
         result.pid = json_dict["pid"]
         result.success = json_dict["success"]
         result.message = json_dict["message"]
         result.api_url = json_dict["api_url"]
+        result.status_code = json_dict["status_code"]
         return result
+
+    def to_dict(self):
+        return {
+            "pid": self.pid,
+            "success": self.success,
+            "message": self.message,
+            "api_url": self.api_url,
+            "status_code": self.status_code
+        }
 
 class AbstractDataverseConnector:
     """
@@ -176,7 +186,7 @@ class DataverseConnector(AbstractDataverseConnector):
         respdata = json.loads(resp.content)
         listing = []
         for entry in respdata["data"]:
-            listing.append(DataverseListing.from_json(entry))
+            listing.append(DataverseListing.from_dict(entry))
 
         return listing
 
@@ -190,28 +200,40 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info(f"deleting collection {collection_pid}")
         self.api.delete_dataset(collection_pid, is_pid=True)
 
-    def create_dataset(self, dataverse:str, dataverse_dataset:DataverseDataset):
+    def create_dataset(self, dataverse:str, dataverse_dataset:DataverseDataset) -> DataverseDisseminationResult:
         """
         Create a dataverse dataset.
         :param dataverse: dataverse to create collection within
-        :param dataverse_dataset:
-        :return: TODO: determine return type
+        :param dataverse_dataset: DataverseDataset object with representation of the dataset
+        :return: DataverseDisseminationResult
         """
 
         logger.info(f"create dataset: {dataverse_dataset}")
         payload = dataverse_dataset.render()
         resp = self.api.create_dataset(dataverse, payload, publish=False)
         logger.info("response: {}".format(resp))
-        if not resp.is_success:
-            logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
-        return resp.is_success
 
-    def create_dataset_from_dict(self, dataverse: str, dataverse_dataset_as_dict: dict):
+        if not resp.is_success:
+            logger.error("ERROR - Could not create dataverse dataset: {}".format(resp.content))
+            raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
+
+        dataverse_result = DataverseDisseminationResult()
+        resp_txt = json.loads(resp.text)
+        dataverse_result.pid = resp.content
+        dataverse_result.success = resp.is_success
+        dataverse_result.message = resp.text
+        dataverse_result.status_code = resp.status_code
+        dataverse_result.api_url = resp.url
+        dataverse_result.pid = resp_txt["data"]["persistentId"]
+
+        return dataverse_result
+
+    def create_dataset_from_dict(self, dataverse: str, dataverse_dataset_as_dict: dict) -> DataverseDisseminationResult:
         """
         Create a dataverse dataset.
         :param dataverse: dataverse to create collection within
         :param dataverse_dataset_from_dict: dict with representation of the dataset
-        :return: TODO: determine return type
+        :return: DataverseDisseminationResult
         """
 
         logger.info(f"create dataset: {dataverse_dataset_as_dict}")
@@ -219,7 +241,18 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info("response: {}".format(resp))
         if not resp.is_success:
             logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
-        return resp.is_success
+            raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
+
+        dataverse_result = DataverseDisseminationResult()
+        resp_txt = json.loads(resp.text)
+        dataverse_result.pid = resp.content
+        dataverse_result.success = resp.is_success
+        dataverse_result.message = resp.text
+        dataverse_result.status_code = resp.status_code
+        dataverse_result.api_url = f"{resp.url.scheme}://{resp.url.host}{resp.url.path}"
+        dataverse_result.pid = resp_txt["data"]["persistentId"]
+
+        return dataverse_result
 
     def delete_dataset(self, dataset_id:str) -> bool:
         logger.info(f"delete dataset: {dataset_id}")

@@ -1,326 +1,193 @@
 {
-    "data": {
-      "program": {
-        "program_name": "CHORDS",
-        "preferred_label": ""
-      },
-      "project": {
-        "project_url": "",
-        "project_code": "ESDIS-021025",
-        "project_name": "Earth Science Data and Information System (ESDIS)",
-        "project_sponsor": [
-          {
-            "name": "National Aeronautics and Space Administration (NASA)",
-            "type": "",
-            "other_type": false
-          },
-          {
-            "name": "",
-            "type": "Federal Agency",
-            "other_type": false
-          }
-        ],
-        "project_short_name": "ESDIS"
-      },
-      "resource": {
-        "is_static": false,
-        "publication": [],
-        "resource:doi": "",
-        "resource_url": "https://www.earthdata.nasa.gov/",
-        "resource_name": "Gateway to NASA Earth Observation Data",
-        "resource_type": "Data Resource",
-        "resource_domain": [
-          {
-            "name": "Air Quality",
-            "other_type": false
-          },
-          {
-            "name": "Biodiversity",
-            "other_type": false
-          },
-          {
-            "name": "Energy",
-            "other_type": false
-          },
-          {
-            "name": "Greenness",
-            "other_type": false
-          },
-          {
-            "name": "Land Use and Land Cover",
-            "other_type": false
-          },
-          {
-            "name": "Water Quality",
-            "other_type": false
-          },
-          {
-            "name": "Wildfire",
-            "other_type": false
-          }
-        ],
-        "payment_required": false,
-        "resource_license": {
-          "license_uri": "",
-          "license_name": ""
-        },
-        "resource_version": "None",
-        "resource_keywords": [
-          "Earth Science",
-          "Agriculture",
-          "Atmosphere",
-          "Biosphere",
-          "Climate Indicators",
-          "Cryosphere",
-          "Human Dimensions",
-          "Land Surface",
-          "Models",
-          "Ocean",
-          "Solid Earth",
-          "Sun-Earth Interactions",
-          "Terrestrial Hydrosphere",
-          "Tools"
-        ],
-        "resource_reference": [
-          {
-            "resource_reference_link": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
-            "resource_reference_text": "Data Use Guidance"
-          }
-        ],
-        "resource_short_name": "GNEOD",
-        "resource_access_type": [
-          "Open"
-        ],
-        "resource_description": "The Earth Science Data and Information Systems (ESDIS) Program provides researchers, decision makers, and the public open access to NASA’s archive of Earth science data. The data and related tools help increase the understanding of environmental changes. Data are accessed from the Gateway to NASA Earth Observation Data (GNEOD) using one of the four search or browse options: the Data Catalog, Data Tools, browse by Platform, or browse by Pathfinder Topic. The Data Catalog can be searched by keywords, data collection platform, dataset name, etc. Search results, or the entire dataset collection, can also be filtered by specific parameters such as topic, observation method, and temporal or spatial parameters, to name a few. Pathfinder Topics guide users to ESDS topic-specific datasets (6 of which are included in the CHORDS Catalog). The 10 topics include: Atmosphere, Land Surface, Biosphere, Ocean, Climate Indicators, Solid Earth, Cryosphere Sun-Earth Interactions, Human Dimensions, and Terrestrial Hydrosphere. Data Tools provide access to a variety of tools for data discovery and visualization. Three tools are featured: 1) Worldview – allows browsing global imagery and downloading underlying data; 2) Vertex - a graphical search interface of synthetic aperture radar land use/cover data; and 3) Giovanni - Geospatial Interactive Online Visualization ANd aNalysis Infrastructure.",
-        "resource_use_agreement": [
-          {
-            "resource_use_agreement_link": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
-            "resource_use_agreement_text": "NASA ESDIS content used in a factual manner that does not suggest or imply endorsement may be used without explicit permission. NASA should be acknowledged as the source of the material."
-          }
-        ]
-      },
-      "personnel": [],
-      "data_usage": {
-        "strengths": [],
-        "limitations": [],
-        "intended_use": [],
-        "suggested_audience": []
-      },
-      "data_resource": {
-        "has_api": true,
-        "measures": [
-          {
-            "value": "Air Quality",
-            "other_type": false
-          },
-          {
-            "value": "Biomass",
-            "other_type": false
-          },
-          {
-            "value": "Land Surface",
-            "other_type": false
-          },
-          {
-            "value": "Nightime Imagery",
-            "other_type": false
-          },
-          {
-            "value": "Solar Radiation",
-            "other_type": false
-          },
-          {
-            "value": "Vegetation",
-            "other_type": false
-          },
-          {
-            "value": "Water Quality",
-            "other_type": false
-          },
-          {
-            "value": "Water Bodies",
-            "other_type": false
-          },
-          {
-            "value": "Wildfire Characteristics",
-            "other_type": false
-          },
-          {
-            "value": "Weather",
-            "other_type": false
-          }
-        ],
-        "data_formats": [
-          "ASCII",
-          "CSV",
-          "Geodatabase",
-          "GeoTIFF",
-          "Hierarchical Data Format (HDF)",
-          "ICARTT",
-          "KML",
-          "KMZ",
-          "NetCDF",
-          "PDF",
-          "SHP",
-          "TXT",
-          "WMS",
-          "XLSX"
-        ],
-        "data_location": [
-          {
-            "data_location_link": "https://www.earthdata.nasa.gov/data/catalog",
-            "data_location_text": "Data Catalog"
-          }
-        ],
-        "key_variables": [],
-        "exposure_media": [
-          "Air",
-          "Land",
-          "Water"
-        ],
-        "example_metrics": [],
-        "time_extent_end": "2025",
-        "update_frequency": [
-          "Other"
-        ],
-        "time_extent_start": "1972",
-        "measurement_method": [
-          {
-            "value": "Satellite",
-            "other_type": false
-          },
-          {
-            "value": "Stationary Ground Sensor",
-            "other_type": false
-          }
-        ],
-        "has_visualization_tool": false,
-        "time_available_comment": "The time period included in each dataset may vary within the range 1972 - present",
-        "includes_citizen_collected": false
-      },
-      "temporal_data": {
-        "temporal_resolution": [
-          {
-            "value": "Continuously",
-            "other_type": false
-          },
-          {
-            "value": "Daily",
-            "other_type": false
-          },
-          {
-            "value": "Monthly",
-            "other_type": false
-          },
-          {
-            "value": "Other",
-            "other_type": false
-          },
-          {
-            "value": "Varies by dataset",
-            "other_type": true
-          }
-        ],
-        "temporal_resolution_comment": ""
-      },
-      "geospatial_data": {
-        "geometry_type": [],
-        "model_methods": [],
-        "geometry_source": [],
-        "spatial_coverage": [
-          {
-            "value": "Global",
-            "other_type": false
-          }
-        ],
-        "geographic_feature": [
-          {
-            "value": "General",
-            "other_type": false
-          }
-        ],
-        "spatial_resolution": [
-          {
-            "value": "Other",
-            "other_type": false
-          },
-          {
-            "value": "Varies by dataset",
-            "other_type": true
-          }
-        ],
-        "spatial_bounding_box": [],
-        "spatial_resolution_comment": ""
-      },
-      "population_data": {
-        "individual_level": false,
-        "biospecimens_type": [],
-        "population_studies": [],
-        "linkable_encounters": false,
-        "biospecimens_from_humans": false
-      },
-      "computational_workflow": {
-        "is_open": false,
-        "languages": [],
-        "tool_type": [],
-        "use_tools": [],
-        "example_applications": []
-      }
+  "submission" : {
+    "submitter_name" : "submitter name",
+    "submitter_email" : "submitter@email",
+    "submitter_comment" : ""
+  },
+  "data" : {
+    "program" : {
+      "program_name" : "CHORDS",
+      "preferred_label" : ""
     },
-    "submission": {
-      "submitter_name": "Mike Conway",
-      "submitter_email": "mike.conway@nih.gov",
-      "submitter_comment": ""
+    "project" : {
+      "project_code" : "Landslide-090624",
+      "project_name" : "Landslides Data Pathfinder",
+      "project_short_name" : "Landslides-Pathfinder",
+      "project_url" : "",
+      "project_sponsor" : [ {
+        "type" : "",
+        "name" : "National Aeronautics and Space Administration (NASA)",
+        "other_type" : false
+      }, {
+        "type" : "Federal Agency",
+        "name" : "",
+        "other_type" : false
+      } ]
     },
-    "technical_metadata": {
-      "created": "2025-08-29T16:05:24.920785",
-      "history": [
-        {
-          "msg": "accession from accelerator with identifier 8e2a9db1-94f3-4673-a06a-09b7213d94fd in operation CEDAR_Ingest-manual__2025-08-29T16:04:51.971730+00:00",
-          "timestamp": "2025-08-29T16:05:24.920831"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: navigator",
-          "timestamp": "2025-08-29T16:06:03.456391"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: navigator",
-          "timestamp": "2025-08-29T16:30:20.923727"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-15T17:42:11.801786"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-15T19:28:19.628674"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-15T19:31:03.622706"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-16T12:07:42.708655"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-16T12:29:02.062078"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-16T16:49:05.796024"
-        },
-        {
-          "msg": "Disseminating document 68b1cfc41d4697d634a21faa of type accelerator to target: dataverse",
-          "timestamp": "2025-09-16T17:21:02.256715"
-        }
-      ],
-      "modified": "",
-      "verified": "",
-      "original_source": "8e2a9db1-94f3-4673-a06a-09b7213d94fd",
-      "original_source_link": "cedar",
-      "original_source_type": "accelerator",
-      "original_source_identifier": "8e2a9db1-94f3-4673-a06a-09b7213d94fd"
+    "resource" : {
+      "resource_name" : "Landslides Data Pathfinder",
+      "resource_version" : "None",
+      "resource_short_name" : "Landslides-Pathfinder",
+      "resource_type" : "Data Resource",
+      "resource_url" : "https://www.earthdata.nasa.gov/topics/human-dimensions/landslides",
+      "resource:doi" : "",
+      "resource_description" : "The Landslides Data Pathfinde is one of several Data Pathfinders NASA designed to help guide users through the process of selecting and using application-specific datasets from NASA’s Earth science data collections. It is designed for researchers, decision-makers, and the public to help better understand the interaction of complex events that cause landslides. The data, available from the datasets and tools provided, include information about past landslides, erosion, and fluvial processes in sloped areas. It includes data from various agency members of the Committee on Earth Observation Satellites. The information is used to help monitor and mitigate landslide hazards.",
+      "resource_domain" : [ {
+        "name" : "Extreme Weather",
+        "other_type" : false
+      } ],
+      "resource_keywords" : [ "Landslides", "Earthquakes", "Rainfall", "Water Pressure", "Soil Porousness ", "Erosion", "Fluvial Process" ],
+      "resource_access_type" : [ "Open" ],
+      "resource_license" : {
+        "license_name" : "",
+        "license_uri" : ""
+      },
+      "resource_reference" : [ {
+        "resource_reference_text" : "None",
+        "resource_reference_link" : "https://www.earthdata.nasa.gov/learn/use-data/data-use-policy"
+      } ],
+      "resource_use_agreement" : [ {
+        "resource_use_agreement_text" : "None",
+        "resource_use_agreement_link" : "https://www.earthdata.nasa.gov/learn/use-data/data-use-policy"
+      } ],
+      "publication" : [ {
+        "citation" : "None",
+        "citation_link" : "https://www.earthdata.nasa.gov/esds/csda/csda-publications-findings"
+      } ],
+      "is_static" : false,
+      "payment_required" : false
+    },
+    "personnel" : [ ],
+    "data_resource" : {
+      "exposure_media" : [ "Land" ],
+      "measures" : [ {
+        "value" : "Topography",
+        "other_type" : false
+      }, {
+        "value" : "Land Use",
+        "other_type" : false
+      }, {
+        "value" : "Land Cover",
+        "other_type" : false
+      }, {
+        "value" : "Land Surface Characteristics",
+        "other_type" : false
+      }, {
+        "value" : "Soil Moisture",
+        "other_type" : false
+      }, {
+        "value" : "Landslide ",
+        "other_type" : false
+      }, {
+        "value" : "Landslide impacts",
+        "other_type" : true
+      }, {
+        "value" : "Frequency of landslides",
+        "other_type" : true
+      }, {
+        "value" : "Ground Deformation",
+        "other_type" : true
+      }, {
+        "value" : "Topography and Slope",
+        "other_type" : true
+      }, {
+        "value" : "Rainfall intensity",
+        "other_type" : true
+      } ],
+      "measurement_method" : [ {
+        "value" : "Mobile Ground Sensor",
+        "other_type" : false
+      }, {
+        "value" : "Satellite",
+        "other_type" : false
+      } ],
+      "time_extent_start" : "2007",
+      "time_extent_end" : "2025",
+      "time_available_comment" : "None",
+      "update_frequency" : [ "Continuously" ],
+      "key_variables" : [ ],
+      "data_formats" : [ "GeoJSON", "GeoTIFF", "Hierarchical Data Format (HDF)", "NetCDF" ],
+      "example_metrics" : [ ],
+      "data_location" : [ {
+        "data_location_text" : "Landslides Data Access and Tools",
+        "data_location_link" : "https://www.earthdata.nasa.gov/topics/human-dimensions/landslides/data-access-tools"
+      } ],
+      "includes_citizen_collected" : true,
+      "has_api" : true,
+      "has_visualization_tool" : false
+    },
+    "data_usage" : {
+      "intended_use" : [ ],
+      "strengths" : [ ],
+      "limitations" : [ ],
+      "suggested_audience" : [ ]
+    },
+    "temporal_data" : {
+      "temporal_resolution" : [ {
+        "value" : "Hourly",
+        "other_type" : false
+      } ],
+      "temporal_resolution_comment" : ""
+    },
+    "population_data" : {
+      "individual_level" : false,
+      "linkable_encounters" : false,
+      "population_studies" : [ ],
+      "biospecimens_from_humans" : false,
+      "biospecimens_type" : [ ]
+    },
+    "geospatial_data" : {
+      "spatial_resolution" : [ {
+        "value" : "Other",
+        "other_type" : false
+      }, {
+        "value" : "0.25 x 0.25 degrees",
+        "other_type" : true
+      } ],
+      "spatial_resolution_comment" : "",
+      "spatial_coverage" : [ {
+        "value" : "Global",
+        "other_type" : false
+      } ],
+      "spatial_bounding_box" : [ ],
+      "geometry_type" : [ "Grid" ],
+      "geometry_source" : [ {
+        "value" : "US Census",
+        "other_type" : false
+      } ],
+      "model_methods" : [ {
+        "value" : "Other",
+        "other_type" : false
+      }, {
+        "value" : "Predicitive Modeling Techniques",
+        "other_type" : true
+      } ],
+      "geographic_feature" : [ {
+        "value" : "General",
+        "other_type" : false
+      }, {
+        "value" : "Mountain",
+        "other_type" : false
+      } ]
+    },
+    "computational_workflow" : {
+      "tool_type" : [ ],
+      "is_open" : false,
+      "languages" : [ ],
+      "use_tools" : [ ],
+      "example_applications" : [ ]
     }
+  },
+  "technical_metadata" : {
+    "created" : "None",
+    "modified" : "",
+    "verified" : "",
+    "target_schema_version" : "",
+    "target_schema_type" : "",
+    "original_source_type" : "None",
+    "original_source_identifier" : "test_crosswalk_geo_spatial_item",
+    "original_source_link" : "",
+    "history" : [ ],
+    "dissemination_endpoints" : [ ]
   }
+}

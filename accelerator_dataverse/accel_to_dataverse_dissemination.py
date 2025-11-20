@@ -59,9 +59,10 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         # TODO: make result share any error msgs (make a structure) and pass back in descriptor
         result = dataverse_connector.create_dataset_from_dict(dataverse_config.dataverse, payload_doc)
         logger.info(f"result:{result}")
-        dissemination_payload.dissemination_successful = result
-        if not result:
-            raise Exception("dissemination failed, see log for errors")
+        dissemination_payload.dissemination_successful = True
+        dissemination_payload.payload_inline = True
+        dissemination_payload.payload = []
+        dissemination_payload.payload.append(result.to_dict())
 
         return dissemination_payload
 

@@ -1,244 +1,192 @@
 {
-  "data": {
-    "program": {
-      "program_name": "CHORDS",
-      "preferred_label": ""
+  "submission" : {
+    "submitter_name" : "submitter name",
+    "submitter_email" : "submitter@email",
+    "submitter_comment" : ""
+  },
+  "data" : {
+    "program" : {
+      "program_name" : "CHORDS",
+      "preferred_label" : ""
     },
-    "project": {
-      "project_url": "",
-      "project_code": "NASA-AQS-NO2-071924",
-      "project_name": "NASA- Air Quality Daily and Annual NO2 Concentrations",
-      "project_sponsor": [
-        {
-          "name": "Environmental Protection Agency (EPA)",
-          "type": "",
-          "other_type": false
-        },
-        {
-          "name": "National Aeronautics and Space Administration (NASA)",
-          "type": "",
-          "other_type": false
-        },
-        {
-          "name": "",
-          "type": "Federal Agency",
-          "other_type": false
-        }
-      ],
-      "project_short_name": "NASA-AQS-NO2"
+    "project" : {
+      "project_code" : "PM2.5-ACAG-07102024-NA",
+      "project_name" : "Satellite-Derived PM2.5",
+      "project_short_name" : "PM2.5-ACAG-NA",
+      "project_url" : "",
+      "project_sponsor" : [ {
+        "type" : "",
+        "name" : "Other",
+        "other_type" : false
+      }, {
+        "type" : "",
+        "name" : "Washington University in St. Louis",
+        "other_type" : true
+      }, {
+        "type" : "",
+        "name" : "Atmospheric Composition Analysis Group (ACAG)",
+        "other_type" : true
+      }, {
+        "type" : "Academic Institution",
+        "name" : "",
+        "other_type" : false
+      } ]
     },
-    "resource": {
-      "is_static": true,
-      "publication": [
-        {
-          "citation": "Di, Q., Amini, H., Shi, L., Kloog, I., Silvern, R., Kelly, J., ... & Schwartz, J. (2019). Assessing NO2 concentration and model uncertainty with high spatiotemporal resolution across the contiguous United States using ensemble model averaging. Environmental science & technology, 54(3), 1372-1384.",
-          "citation_link": "https://doi.org/10.1021/acs.est.9b03358"
-        }
-      ],
-      "resource:doi": "",
-      "resource_url": "https://www.earthdata.nasa.gov/data/catalog/sedac-ciesin-sedac-aqdh-dano2-us-1km-1.10-1.10",
-      "resource_name": "Di et al. (2020) Daily and Annual NO2 Concentrations for the Contiguous United States, 1-km Grids, v1.10 (2000\u200a–\u200a2016)",
-      "resource_type": "Data Resource",
-      "resource_domain": [
-        {
-          "name": "Air Quality",
-          "other_type": false
-        }
-      ],
-      "payment_required": false,
-      "resource_license": {
-        "license_uri": "",
-        "license_name": ""
+    "resource" : {
+      "resource_name" : "Atmospheric Composition Analysis Group (ACAG) North American Regional Estimates with Composition",
+      "resource_version" : "V4.NA.03",
+      "resource_short_name" : "ACAG North American Regional Estimates with Composition V4.NA.03",
+      "resource_type" : "Data Resource",
+      "resource_url" : "https://sites.wustl.edu/acag/datasets/surface-pm2-5-archive/#V4.NA.03",
+      "resource:doi" : "",
+      "resource_description" : "The Atmospheric Composition Analysis Group (ACAG) North American Regional Estimates with Composition (V4.NA.03) dataset presents estimated annual average fine particulate matter (PM2.5) air pollution total and compositional mass concentrations. This dataset covers North America with 0.01 degree (~1 km) spatial resolution during 2000 to 2018. Concentrations are estimated using satellite-based air pollution observations combined with a chemical transport model and subsequent calibration to ground-based air pollution observations using geographically weighted regression. This dataset covers total PM2.5 and the following PM2.5 components: black carbon (BC), ammonium (NH4), nitrate (NO3), sulfate (SO4), organic matter, mineral dust, and sea salt. This dataset is intended for use in large-scale, long-term epidemiological studies and health impact assessments.",
+      "resource_domain" : [ {
+        "name" : "Air Quality",
+        "other_type" : false
+      } ],
+      "resource_keywords" : [ "Modeled Data", "Air Pollution", "PM2.5", "Criteria Air Pollutants", "Air Pollution Composition", "Air Pollution Mixtures", "Chemical Transport Model", "Remote Sensing", "Concentration Prediction", "Annual Average", "Geographically Weighted Regression", "North America" ],
+      "resource_access_type" : [ "Open" ],
+      "resource_license" : {
+        "license_name" : "",
+        "license_uri" : ""
       },
-      "resource_version": "v1.10",
-      "resource_keywords": [
-        "Modeled Data",
-        "Ensemble Model",
-        "Generalized Additive Model",
-        "Chemical Transport Model",
-        "Remote Sensing",
-        "Machine Learning",
-        "Air Pollution",
-        "NO2",
-        "Concentration Prediction",
-        "Annual Average",
-        "Daily Average",
-        "CONUS"
-      ],
-      "resource_reference": [
-        {
-          "resource_reference_link": "https://doi.org/10.7927/RZ28-P167",
-          "resource_reference_text": "Di, Q., Wei, Y., Shtein, A., Xing, X., Amini, H., Hultquist, C., Shi, L., Kloog, I., Silvern, R., Kelly, J., Sabath, M. B., Choirat, C., Koutrakis, P., Lyapustin, A., Wang, Y., Mickley, L. J., Daouk, Y., & Schwartz, J. (2024). Daily and Annual NO2 Concentrations for the Contiguous United States, 1-km Grids, Version 1.10 (2000 - 2016) (Version 1.10) [Data set]. Palisades, NY: NASA Socioeconomic Data and Applications Center (SEDAC)."
-        }
-      ],
-      "resource_short_name": "NO2 Concentrations for CONUS",
-      "resource_access_type": [
-        "Open"
-      ],
-      "resource_description": "The Daily and Annual NO2 Concentrations for the Contiguous United States, 1-km Grids, Version 1.10 (2000-2016) dataset contains nitrogen dioxide (NO2) air pollution concentration estimates. NO2 concentrations are estimated using an ensemble modeling approach with three machine learning models (neural network, random forest, and gradient boosting) and a generalized additive model. The approach incorporates satellite-based observations of NO2 column concentrations, land use and meteorological variables, chemical transport models, and other data sources. This dataset provides daily and annual average NO2 concentration estimates during 2000 to 2016 for the contiguous United States with 1 km spatial resolution.",
-      "resource_use_agreement": [
-        {
-          "resource_use_agreement_link": "http://nolink",
-          "resource_use_agreement_text": "None"
-        }
-      ]
+      "resource_reference" : [ {
+        "resource_reference_text" : "This is a resoure reference",
+        "resource_reference_link" : "https://resource.reference.org/a_link"
+      } ],
+      "resource_use_agreement" : [ {
+        "resource_use_agreement_text" : "Users are asked to familiarize themselves with corresponding publications and contact principle researchers (as provided within subsequent sections) to ensure the most up-to-date and appropriate use of information.",
+        "resource_use_agreement_link" : "https://sites.wustl.edu/acag/datasets/"
+      } ],
+      "publication" : [ {
+        "citation" : "Van Donkelaar, A., Martin, R. V., Li, C., & Burnett, R. T. (2019). Regional estimates of chemical composition of fine particulate matter using a combined geoscience-statistical method with information from satellites, models, and monitors. Environmental Science & Technology, 53(5), 2595-2611 dot: 10.1021/acs.est.8b06392.",
+        "citation_link" : "https://doi.org/10.1021/acs.est.8b06392"
+      }, {
+        "citation" : "Hammer, M. S., van Donkelaar, A., Li, C., Lyapustin, A., Sayer, A. M., Hsu, N. C., Levy, R. C., Garay, M. J., Kalashnikova, O. V., Kahn, R. A., Brauer, M., Apte, J. S., Henze, D. K., Zhang, L., Zhang, Q., Ford, B., Pierce, J. R., & Martin, R. V. (2020). Global estimates and long-term trends of fine particulate matter concentrations (1998-2018). Environmental Science & Technology, doi: 10.1021/acs.est.0c01764.",
+        "citation_link" : "https://doi.org/10.1021/acs.est.0c01764"
+      } ],
+      "is_static" : true,
+      "payment_required" : false
     },
-    "personnel": [],
-    "data_usage": {
-      "strengths": [
-        "Dataset supports analysis of shorter-term and longer-term exposure to NO2 air pollution across the contiguous US using consistent methods",
-        "Dataset incorporates imputation of missing values to provide high coverage (completeness) of predictions within the spatial and temporal extent"
-      ],
-      "limitations": [
-        "Dataset does not include model estimates of uncertainty (e.g., confidence intervals for predictions)",
-        "Dataset cannot be used to compare exposures within the same grid cell or at different times of day",
-        "Dataset does not include model estimates of uncertainty (e.g., confidence intervals for predictions)",
-        "Dataset cannot be used to compare exposures within the same grid cell or at different times of day"
-      ],
-      "intended_use": [
-        {
-          "value": "Geospatial exposure assessment for studies on shorter-term health outcomes (e.g., acute conditions) or longer-term health outcomes (e.g., chronic conditions)",
-          "other_type": false
-        },
-        {
-          "value": "Geospatial exposure assessment at the individual-level or population-level",
-          "other_type": false
-        },
-        {
-          "value": "Environmental justice analyses",
-          "other_type": false
-        },
-        {
-          "value": "Long-term studies",
-          "other_type": false
-        },
-        {
-          "value": "Large-scale studies",
-          "other_type": false
-        },
-        {
-          "value": "Longitudinal studies",
-          "other_type": false
-        },
-        {
-          "value": "Cross-sectional studies",
-          "other_type": false
-        }
-      ],
-      "suggested_audience": [
-        "Researcher"
-      ]
+    "personnel" : [ ],
+    "data_resource" : {
+      "exposure_media" : [ "Air" ],
+      "measures" : [ {
+        "value" : "PM2.5",
+        "other_type" : false
+      }, {
+        "value" : "Black Carbon",
+        "other_type" : false
+      }, {
+        "value" : "Dust",
+        "other_type" : false
+      } ],
+      "measurement_method" : [ ],
+      "time_extent_start" : "2000",
+      "time_extent_end" : "2018",
+      "time_available_comment" : "None",
+      "update_frequency" : [ "Static" ],
+      "key_variables" : [ "PM2.5 Concentration", "PM2.5 Concentration Percentage Black Carbon (BC)", "PM2.5 Concentration Percentage Ammonium (NH4)", "PM2.5 Concentration Percentage Nitrate (NO3)", "PM2.5 Concentration Percentage Sulfate (SO4)", "PM2.5 Concentration Percentage Organic Matter", "PM2.5 Concentration Percentage Mineral Dust", "PM2.5 Concentration Percentage Sea Salt" ],
+      "data_formats" : [ "NetCDF", "ASCII" ],
+      "example_metrics" : [ "Annual average air pollution concentration for grid cell containing geocoded address" ],
+      "data_location" : [ {
+        "data_location_text" : "",
+        "data_location_link" : "https://sites.wustl.edu/acag/datasets/surface-pm2-5-archive/#V4.NA.03"
+      } ],
+      "includes_citizen_collected" : false,
+      "has_api" : false,
+      "has_visualization_tool" : false
     },
-    "data_resource": {
-      "has_api": false,
-      "measures": [
-        {
-          "value": "Nitrogen Dioxide (NO2)",
-          "other_type": false
-        }
-      ],
-      "data_formats": [
-        "GeoTIFF",
-        "RDS"
-      ],
-      "data_location": [
-        {
-          "data_location_link": "https://www.earthdata.nasa.gov/data/catalog/sedac-ciesin-sedac-aqdh-dano2-us-1km-1.10-1.10",
-          "data_location_text": ""
-        }
-      ],
-      "key_variables": [
-        "NO2 air pollution estimated concentrations"
-      ],
-      "exposure_media": [],
-      "example_metrics": [
-        "Daily average NO2 air pollution concentration for grid cell containing geocoded address"
-      ],
-      "time_extent_end": "2016",
-      "update_frequency": [
-        "Static"
-      ],
-      "time_extent_start": "2000",
-      "measurement_method": [],
-      "has_visualization_tool": false,
-      "time_available_comment": "None",
-      "includes_citizen_collected": false
+    "data_usage" : {
+      "intended_use" : [ {
+        "value" : "Geospatial exposure assessment for studies on longer-term health outcomes (e.g., chronic conditions)",
+        "other_type" : false
+      }, {
+        "value" : "Geospatial exposure assessment at the individual-level or population-level",
+        "other_type" : false
+      }, {
+        "value" : "Long-term studies",
+        "other_type" : false
+      }, {
+        "value" : "Large-scale studies",
+        "other_type" : false
+      }, {
+        "value" : "Longitudinal studies",
+        "other_type" : false
+      }, {
+        "value" : "Cross-sectional studies",
+        "other_type" : false
+      }, {
+        "value" : "Studies of multi-pollutant mixtures",
+        "other_type" : false
+      } ],
+      "strengths" : [ "Dataset supports analysis of differences in composition of PM2.5 air pollution concentration across North America over multiple decades using consistent methods" ],
+      "limitations" : [ "Dataset does not include estimates of model uncertainty for each prediction", "Dataset cannot be used to compare exposures within the same grid cell or at different times within the same year", "Data intended for use in long-term, large-scale studies (increased uncertainties expected for use at finer spatial and temporal resolutions)", "Finest available gridded estimates do not fully resolve spatial gradients in air pollution due to the influence of input data sources with coarser spatial resolution", "Dataset does not include estimates of model uncertainty for each prediction", "Dataset cannot be used to compare exposures within the same grid cell or at different times within the same year", "Data intended for use in long-term, large-scale studies (increased uncertainties expected for use at finer spatial and temporal resolutions)", "Finest available gridded estimates do not fully resolve spatial gradients in air pollution due to the influence of input data sources with coarser spatial resolution" ],
+      "suggested_audience" : [ "Researcher" ]
     },
-    "temporal_data": {
-      "temporal_resolution": [
-        {
-          "value": "Daily",
-          "other_type": false
-        }
-      ],
-      "temporal_resolution_comment": ""
+    "temporal_data" : {
+      "temporal_resolution" : [ {
+        "value" : "Annually",
+        "other_type" : false
+      } ],
+      "temporal_resolution_comment" : ""
     },
-    "geospatial_data": {
-      "geometry_type": [
-        "Grid"
-      ],
-      "model_methods": [],
-      "geometry_source": [],
-      "spatial_coverage": [
-        {
-          "value": "Contiguous United States",
-          "other_type": false
-        }
-      ],
-      "geographic_feature": [],
-      "spatial_resolution": [
-        {
-          "value": "["
-          Grid
-          "]",
-          "other_type": false
-        },
-        {
-          "value": "1 km",
-          "other_type": true
-        }
-      ],
-      "spatial_bounding_box": [],
-      "spatial_resolution_comment": "None"
+    "population_data" : {
+      "individual_level" : false,
+      "linkable_encounters" : false,
+      "population_studies" : [ ],
+      "biospecimens_from_humans" : false,
+      "biospecimens_type" : [ ]
     },
-    "population_data": {
-      "individual_level": false,
-      "biospecimens_type": [],
-      "population_studies": [],
-      "linkable_encounters": false,
-      "biospecimens_from_humans": false
+    "geospatial_data" : {
+      "spatial_resolution" : [ {
+        "value" : "Grid",
+        "other_type" : false
+      }, {
+        "value" : "0.01 Degrees",
+        "other_type" : true
+      } ],
+      "spatial_resolution_comment" : "None",
+      "spatial_coverage" : [ {
+        "value" : "North America",
+        "other_type" : false
+      } ],
+      "spatial_bounding_box" : [ ],
+      "geometry_type" : [ "Grid" ],
+      "geometry_source" : [ ],
+      "model_methods" : [ {
+        "value" : "Other",
+        "other_type" : false
+      }, {
+        "value" : "Geographically Weighted Regression",
+        "other_type" : true
+      }, {
+        "value" : "Chemical Transport Model",
+        "other_type" : true
+      } ],
+      "geographic_feature" : [ {
+        "value" : "General",
+        "other_type" : false
+      } ]
     },
-    "computational_workflow": {
-      "is_open": false,
-      "languages": [],
-      "tool_type": [],
-      "use_tools": [],
-      "example_applications": []
+    "computational_workflow" : {
+      "tool_type" : [ ],
+      "is_open" : false,
+      "languages" : [ ],
+      "use_tools" : [ ],
+      "example_applications" : [ ]
     }
   },
-  "submission": {
-    "submitter_name": "Mike Conway",
-    "submitter_email": "mike.conway@nih.gov",
-    "submitter_comment": ""
-  },
-  "technical_metadata": {
-    "created": "2025-08-29T17:42:10.639448",
-    "history": [
-      {
-        "msg": "accession from accelerator with identifier 25655186-6e90-40e2-9ac1-64cd47ca6261 in operation CEDAR_Ingest-manual__2025-08-29T17:41:36.146255+00:00",
-        "timestamp": "2025-08-29T17:42:10.639479"
-      },
-      {
-        "msg": "Disseminating document 68b1e6724e290a41f9e49ce6 of type accelerator to target: dataverse",
-        "timestamp": "2025-08-29T17:47:27.835212"
-      }
-    ],
-    "modified": "",
-    "verified": "",
-    "original_source": "25655186-6e90-40e2-9ac1-64cd47ca6261",
-    "original_source_link": "cedar",
-    "original_source_type": "accelerator",
-    "original_source_identifier": "25655186-6e90-40e2-9ac1-64cd47ca6261"
+  "technical_metadata" : {
+    "created" : "None",
+    "modified" : "",
+    "verified" : "",
+    "target_schema_version" : "",
+    "target_schema_type" : "",
+    "original_source_type" : "None",
+    "original_source_identifier" : "test_crosswalk_key_dataset_item",
+    "original_source_link" : "",
+    "history" : [ ],
+    "dissemination_endpoints" : [ ]
   }
 }
-  
