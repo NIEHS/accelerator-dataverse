@@ -238,7 +238,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         dataverse_data = json.loads(rendered)
 
         return_payload = DisseminationPayload(payload.dissemination_descriptor)
-        self.report_individual_dissemination(return_payload, "itemid", dataverse_data)
+        self.report_individual_dissemination(return_payload, return_payload.dissemination_descriptor.dissemination_identifier, dataverse_data)
         logger.debug(f"return payload from crosswalk: {return_payload}")
 
         return return_payload
