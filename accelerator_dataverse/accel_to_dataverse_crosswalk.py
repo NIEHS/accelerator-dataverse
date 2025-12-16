@@ -107,7 +107,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             ds_publication.id_type = "url"
             citation.publication.append(ds_publication)
 
-            citation.notes_text = accel_resource["resource_description"]
+        #citation.notes_text = accel_resource["resource_description"]
 
         producer = Producer()
         producer.name = accel_project_data["project_name"]
@@ -156,15 +156,6 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
                 bounding_box.east = accel_geospatial_data.spatial_bounding_box[3]
                 dataverse_geospatial_data.geographic_bounding_box = bounding_box
 
-        for publication in accel_resource["publication"]:
-            ds_publication = Publication()
-            ds_publication.publication_relation_type = "Cites"
-            ds_publication.citation = publication["citation"]
-            ds_publication.url = publication["citation_link"]
-            ds_publication.id_type = "url"
-            citation.publication.append(ds_publication)
-
-        citation.notes_text = accel_resource["resource_description"]
         citation.kind_of_data.append(accel_resource["resource_type"])
 
         for item in accel_resource["resource_reference"]:
@@ -232,7 +223,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         citation.notes_text = notes_field
 
         for data_format in accel_data_resource["data_formats"]:
-            citation.kind_of_data.append(data_format)
+           citation.kind_of_data.append(data_format)
 
         rendered = dataset.render()
         dataverse_data = json.loads(rendered)
