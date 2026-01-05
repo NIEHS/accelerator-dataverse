@@ -104,9 +104,11 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             ds_publication = Publication()
             ds_publication.publication_relation_type = "Cites"
             ds_publication.citation = publication["citation"]
-            ds_publication.url = publication["citation_link"]
-            ds_publication.id_type = "url"
-            citation.publication.append(ds_publication)
+
+            if AccelToDataverseCrosswalk.is_link(publication["citation_link"]):
+                ds_publication.url = publication["citation_link"]
+                ds_publication.id_type = "url"
+                citation.publication.append(ds_publication)
 
         #citation.notes_text = accel_resource["resource_description"]
 
@@ -141,7 +143,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             if text:
                 citation.related_datasets.append(text)
 
-            if link:
+            if AccelToDataverseCrosswalk.is_link(link):
                 citation.related_datasets.append(link)
 
         dataverse_geospatial_data = GeospatialMetadataBlock()
@@ -166,7 +168,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
             if text:
                 citation.related_material.append(text)
 
-            if link:
+            if AccelToDataverseCrosswalk.is_link(link):
                 citation.related_material.append(link)
 
         # cafe custom metadata items
@@ -186,7 +188,10 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
             cafe_dataset = DataverseCafeSourceDataset()
             cafe_dataset.title = item["data_location_text"]
-            cafe_dataset.doi_or_url = item["data_location_link"]
+
+            if AccelToDataverseCrosswalk.is_link(item["data_location_link"]):
+                cafe_dataset.doi_or_url = item["data_location_link"]
+
             cafe_dataset.institution = producer.name
             dataset.cafe_custom.source_data.append(cafe_dataset)
 
@@ -253,7 +258,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         return retval
 
     @staticmethod
-    def isDoi(value: str) -> bool:
+    def is_doi(value: str) -> bool:
         """
         Check if a string matches DOI pattern
         :param value: string to check
@@ -261,3 +266,20 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         """
         doi_pattern = r'(?:https?://doi\.org/)?10\.\d{4,}/[-._;()/:\w]+$'
         return bool(re.match(doi_pattern, value))
+
+    @staticmethod
+    def is_link(value: str) -> bool:
+        """
+        Check if a string is a link (is present and is not the http://nolink format)
+        :param value: string to check
+        :return: True if is a link of some kind of link
+        """
+
+        if len(str(value)) == 0:
+            return False
+
+        try:
+            if value.index("nolink") >= 0:
+                return False
+        except ValueError:
+            return True

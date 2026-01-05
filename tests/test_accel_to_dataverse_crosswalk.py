@@ -92,8 +92,24 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
         xcom_props_resolver = DirectXcomPropsResolver(False, None)
         crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
         doi = "https://doi.org/10.5067/WMT31RKEXK8I"
-        actual = AccelToDataverseCrosswalk.isDoi(doi)
+        actual = AccelToDataverseCrosswalk.is_doi(doi)
         self.assertTrue(actual)
+
+    def test_is_link(self):
+        xcom_props_resolver = DirectXcomPropsResolver(False, None)
+        crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
+        val = "http://nolink"
+        actual = AccelToDataverseCrosswalk.is_link(val)
+        self.assertFalse(actual)
+
+
+    def test_is_link_blank(self):
+        xcom_props_resolver = DirectXcomPropsResolver(False, None)
+        crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
+        val = ""
+        actual = AccelToDataverseCrosswalk.is_link(val)
+        self.assertFalse(actual)
+
 
 
 
