@@ -38,6 +38,29 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
             actual = crosswalk.transform(payload)
             self.assertIsNotNone(actual)
 
+    def test_crosswalk_spatial_bounding_box_issue(self):
+
+        dissemination_descriptor = DisseminationDescriptor()
+        dissemination_descriptor.ingest_type = "accelerator"
+        dissemination_descriptor.schema_version = "1.0.2"
+        dissemination_descriptor.dissemination_type = "dataverse"
+        dissemination_descriptor.dissemination_item_id = "foo"
+        dissemination_descriptor.use_tempfiles = False
+        dissemination_descriptor.dissemination_identifier = "runid1"
+
+        payload = DisseminationPayload(dissemination_descriptor)
+
+        filename = "./test_resources/spatial_bounding_box_issue.json"
+        xcom_props_resolver = DirectXcomPropsResolver(False, None)
+
+        with open(filename) as json_data:
+            d = json.load(json_data)
+            payload.payload.append(d)
+            payload.payload_inline = True
+            crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
+            actual = crosswalk.transform(payload)
+            self.assertIsNotNone(actual)
+
 
     def test_crosswalk2(self):
 
@@ -63,6 +86,15 @@ class TestAccelToDataverseCrosswalk(unittest.TestCase):
             crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
             actual = crosswalk.transform(payload)
             self.assertIsNotNone(actual)
+
+    def test_is_doi(self):
+
+        xcom_props_resolver = DirectXcomPropsResolver(False, None)
+        crosswalk = AccelToDataverseCrosswalk(xcom_props_resolver)
+        doi = "https://doi.org/10.5067/WMT31RKEXK8I"
+        actual = AccelToDataverseCrosswalk.isDoi(doi)
+        self.assertTrue(actual)
+
 
 
 

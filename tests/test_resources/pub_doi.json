@@ -1,0 +1,236 @@
+[{
+  "_id": {
+    "$oid": "6942e29227ff18ba1a78bbc7"
+  },
+  "submission": {
+    "submitter_name": "Mike Conway",
+    "submitter_email": "mike.conway@nih.gov",
+    "submitter_comment": ""
+  },
+  "data": {
+    "program": {
+      "program_name": "CHORDS",
+      "preferred_label": ""
+    },
+    "project": {
+      "project_code": "M2TMNXCHM-071224",
+      "project_name": "Modern-Era Retrospective analysis for Research and Applications Version 2 (MERRA-2)",
+      "project_short_name": "M2TMNXCHM",
+      "project_url": "",
+      "project_sponsor": [
+        {
+          "type": "",
+          "name": "National Aeronautics and Space Administration (NASA)",
+          "other_type": false
+        },
+        {
+          "type": "Federal Agency",
+          "name": "",
+          "other_type": false
+        }
+      ]
+    },
+    "resource": {
+      "resource_name": "US National Aeronautics and Space Administration (NASA) Global Modeling and Assimilation Office (GMAO) Modern-Era Retrospective analysis for Research and Applications Version 2 (MERRA-2) tavgM_2d_chm_Nx: 2-dimensional, Monthly mean, Time-Averaged, Single-Level, Assimilation, Carbon Monoxide and Ozone Diagnostics (M2TMNXCHM), Version 5.12.4",
+      "resource_version": "v5.12.4",
+      "resource_short_name": "M2TMNXCHM",
+      "resource_type": "Data Resource",
+      "resource_url": "https://disc.gsfc.nasa.gov/datasets/M2TMNXCHM_5.12.4/summary",
+      "resource:doi": "",
+      "resource_description": "A monthly time-averaged 2-dimensional data collection of atmospheric carbon monoxide and ozone parameters is presented in the Modern-Era Retrospective analysis for Research and Applications version 2 (MERRA-2). It provides global model and data assimilation results that incorporate satellite-based observations to predict monthly carbon monoxide and ozone parameters, such as properties of carbon monoxide (column burden, emission, chemical production, and surface concentration), and total column ozone.",
+      "resource_domain": [
+        {
+          "name": "Air Quality",
+          "other_type": false
+        }
+      ],
+      "resource_keywords": [
+        "Atmosphere",
+        "Carbon Monoxide",
+        "Ozone",
+        "Surface-Level",
+        "Production",
+        "Emissions",
+        "Column Burden",
+        "Concentration",
+        "Monthly Prediction",
+        "Global"
+      ],
+      "resource_access_type": [
+        "Open"
+      ],
+      "resource_license": {
+        "license_name": "",
+        "license_uri": ""
+      },
+      "resource_reference": [
+        {
+          "resource_reference_text": "None",
+          "resource_reference_link": "http://nolink"
+        }
+      ],
+      "resource_use_agreement": [
+        {
+          "resource_use_agreement_text": "None",
+          "resource_use_agreement_link": "http://nolink"
+        }
+      ],
+      "publication": [
+        {
+          "citation": "Global Modeling and Assimilation Office (GMAO) (2015), MERRA-2 tavgM_2d_chm_Nx: 2d, Monthly mean, Time-Averaged, Single-Level, Assimilation, Carbon Monoxide and Ozone Diagnostics V5.12.4, Greenbelt, MD, USA, Goddard Earth Sciences Data and Information Services Center (GES DISC)",
+          "citation_link": "https://doi.org10.5067/WMT31RKEXK8I"
+        },
+        {
+          "citation": "Gelaro, R., McCarty, W., Suárez, M. J., Todling, R., Molod, A., Takacs, L., ... & Zhao, B. (2017). The modern-era retrospective analysis for research and applications, version 2 (MERRA-2). Journal of climate, 30(14), 5419-5454.",
+          "citation_link": "https://doi.org/10.1175/JCLI-D-16-0758.1"
+        }
+      ],
+      "is_static": false,
+      "payment_required": false
+    },
+    "personnel": [],
+    "data_resource": {
+      "exposure_media": [
+        "Air",
+        "Land",
+        "Water"
+      ],
+      "measures": [
+        {
+          "value": "Carbon Monoxide (CO)",
+          "other_type": false
+        }
+      ],
+      "measurement_method": [],
+      "time_extent_start": "1980",
+      "time_extent_end": "2025",
+      "time_available_comment": "None",
+      "update_frequency": [
+        "Monthly"
+      ],
+      "key_variables": [
+        "Surface-level concentration and column burden of carbon monoxide"
+      ],
+      "data_formats": [
+        "NetCDF"
+      ],
+      "example_metrics": [
+        "Surface-level air pollutant concentration estimates for grid cell containing geocoded address"
+      ],
+      "data_location": [
+        {
+          "data_location_text": "",
+          "data_location_link": "https://disc.gsfc.nasa.gov/datasets/M2TMNXCHM_5.12.4/summary"
+        }
+      ],
+      "includes_citizen_collected": false,
+      "has_api": false,
+      "has_visualization_tool": false
+    },
+    "data_usage": {
+      "intended_use": [
+        {
+          "value": "Geospatial exposure assessment for public health studies on shorter-term or longer-term outcomes",
+          "other_type": false
+        },
+        {
+          "value": "Geospatial exposure assessment at the individual-level or population-level",
+          "other_type": false
+        },
+        {
+          "value": "Long-term (multi-decade) health cohort studies",
+          "other_type": false
+        },
+        {
+          "value": "Geospatial exposure model development",
+          "other_type": false
+        }
+      ],
+      "strengths": [
+        "Dataset supports analysis of monthly differences in exposure to air pollution over multiple decades across global locations"
+      ],
+      "limitations": [
+        "Dataset cannot be used to analyze patterns of spatial variability within ~50 km grid resolution grid cells (i.e., within the same city in some cases)",
+        "Dataset cannot be used to analyze patterns of spatial variability within ~50 km grid resolution grid cells (i.e., within the same city in some cases)"
+      ],
+      "suggested_audience": [
+        "Researcher"
+      ]
+    },
+    "temporal_data": {
+      "temporal_resolution": [
+        {
+          "value": "Monthly",
+          "other_type": false
+        }
+      ],
+      "temporal_resolution_comment": ""
+    },
+    "population_data": {
+      "individual_level": false,
+      "linkable_encounters": false,
+      "population_studies": [],
+      "biospecimens_from_humans": false,
+      "biospecimens_type": []
+    },
+    "geospatial_data": {
+      "spatial_resolution": [
+        {
+          "value": "Grid",
+          "other_type": false
+        },
+        {
+          "value": "0.5 x 0.625 degree",
+          "other_type": true
+        }
+      ],
+      "spatial_resolution_comment": "None",
+      "spatial_coverage": [
+        {
+          "value": "Global",
+          "other_type": false
+        }
+      ],
+      "spatial_bounding_box": [],
+      "geometry_type": [
+        "Grid"
+      ],
+      "geometry_source": [],
+      "model_methods": [],
+      "geographic_feature": [
+        {
+          "value": "General",
+          "other_type": false
+        }
+      ]
+    },
+    "computational_workflow": {
+      "tool_type": [],
+      "is_open": false,
+      "languages": [],
+      "use_tools": [],
+      "example_applications": []
+    }
+  },
+  "technical_metadata": {
+    "created": "2025-12-17T17:04:18.230585",
+    "modified": "",
+    "verified": "",
+    "target_schema_version": "",
+    "target_schema_type": "",
+    "original_source_type": "accelerator",
+    "original_source_identifier": "4ae4619b-2049-40ac-b92e-d78b48a64c9b",
+    "original_source_link": "cedar",
+    "history": [
+      {
+        "timestamp": "2025-12-17T17:04:18.230610",
+        "msg": "accession from accelerator with identifier 4ae4619b-2049-40ac-b92e-d78b48a64c9b in operation CEDAR_Ingest-manual__2025-12-17T17:03:48.485562+00:00"
+      },
+      {
+        "timestamp": "2025-12-17T17:04:52.532185",
+        "msg": "Disseminating document  original source: cedar and document identifier: 4ae4619b-2049-40ac-b92e-d78b48a64c9b as doc_id: 6942e29227ff18ba1a78bbc7 of type accelerator to target: cafe"
+      }
+    ],
+    "dissemination_endpoints": []
+  }
+}]

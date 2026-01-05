@@ -1,4 +1,5 @@
 import json
+import re
 
 from accelerator_core.schema.models.accel_model import AccelDataResourceModel
 from accelerator_core.utils.logger import setup_logger
@@ -251,9 +252,12 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         retval += ul_end
         return retval
 
-
-
-
-
-
-
+    @staticmethod
+    def isDoi(value: str) -> bool:
+        """
+        Check if a string matches DOI pattern
+        :param value: string to check
+        :return: True if string matches DOI pattern, False otherwise
+        """
+        doi_pattern = r'(?:https?://doi\.org/)?10\.\d{4,}/[-._;()/:\w]+$'
+        return bool(re.match(doi_pattern, value))
