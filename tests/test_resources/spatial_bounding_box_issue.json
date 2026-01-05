@@ -1,6 +1,6 @@
 {
   "_id": {
-    "$oid": "6942ebb9b45196947fbeda6b"
+    "$oid": "695c0567c28b4d2d9ed595a4"
   },
   "submission": {
     "submitter_name": "Mike Conway",
@@ -86,7 +86,7 @@
       ],
       "measurement_method": [],
       "time_extent_start": "2003",
-      "time_extent_end": "2025",
+      "time_extent_end": "2026",
       "time_available_comment": "None",
       "update_frequency": [
         "Daily"
@@ -196,7 +196,10 @@
         }
       ],
       "spatial_bounding_box": [
-        "50 Degrees West, 14.6 Degrees North, 170 Degrees West, 72 Degrees North"
+        "50 Degrees West",
+        "14.6 Degrees North",
+        "170 Degrees West",
+        "72 Degrees North"
       ],
       "geometry_type": [
         "Polygon"
@@ -219,7 +222,7 @@
     }
   },
   "technical_metadata": {
-    "created": "2025-12-17T17:43:21.356193",
+    "created": "2026-01-05T18:39:35.057468",
     "modified": "",
     "verified": "",
     "target_schema_version": "",
@@ -229,12 +232,8 @@
     "original_source_link": "cedar",
     "history": [
       {
-        "timestamp": "2025-12-17T17:43:21.356220",
-        "msg": "accession from accelerator with identifier 68504421-3b3c-496b-8528-1a023356f98f in operation CEDAR_Ingest-manual__2025-12-17T17:42:52.854154+00:00"
-      },
-      {
-        "timestamp": "2025-12-17T17:43:48.731206",
-        "msg": "Disseminating document  original source: cedar and document identifier: 68504421-3b3c-496b-8528-1a023356f98f as doc_id: 6942ebb9b45196947fbeda6b of type accelerator to target: cafe"
+        "timestamp": "2026-01-05T18:39:35.057498",
+        "msg": "accession from accelerator with identifier 68504421-3b3c-496b-8528-1a023356f98f in operation CEDAR_Ingest-manual__2026-01-05T18:39:04.141253+00:00"
       }
     ],
     "dissemination_endpoints": []

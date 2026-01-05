@@ -147,14 +147,14 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         dataverse_geospatial_data = GeospatialMetadataBlock()
 
         if accel_geospatial_data["spatial_bounding_box"]:
-            if len(accel_geospatial_data.spatial_bounding_box) != 4:
+            if len(accel_geospatial_data["spatial_bounding_box"]) != 4:
                 raise Exception("spatial_bounding_box must be a list of 4 floats")
             else:
                 bounding_box = GeographicBoundingBox()
-                bounding_box.south = accel_geospatial_data.spatial_bounding_box[0]
-                bounding_box.west = accel_geospatial_data.spatial_bounding_box[1]
-                bounding_box.north = accel_geospatial_data.spatial_bounding_box[2]
-                bounding_box.east = accel_geospatial_data.spatial_bounding_box[3]
+                bounding_box.south = accel_geospatial_data["spatial_bounding_box"][0]
+                bounding_box.west = accel_geospatial_data["spatial_bounding_box"][1]
+                bounding_box.north = accel_geospatial_data["spatial_bounding_box"][2]
+                bounding_box.east = accel_geospatial_data["spatial_bounding_box"][3]
                 dataverse_geospatial_data.geographic_bounding_box = bounding_box
 
         citation.kind_of_data.append(accel_resource["resource_type"])
