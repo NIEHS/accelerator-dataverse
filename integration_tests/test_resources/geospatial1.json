@@ -1,0 +1,193 @@
+{
+  "submission" : {
+    "submitter_name" : "submitter name",
+    "submitter_email" : "submitter@email",
+    "submitter_comment" : ""
+  },
+  "data" : {
+    "program" : {
+      "program_name" : "CHORDS",
+      "preferred_label" : ""
+    },
+    "project" : {
+      "project_code" : "Landslide-090624",
+      "project_name" : "Landslides Data Pathfinder",
+      "project_short_name" : "Landslides-Pathfinder",
+      "project_url" : "",
+      "project_sponsor" : [ {
+        "type" : "",
+        "name" : "National Aeronautics and Space Administration (NASA)",
+        "other_type" : false
+      }, {
+        "type" : "Federal Agency",
+        "name" : "",
+        "other_type" : false
+      } ]
+    },
+    "resource" : {
+      "resource_name" : "Landslides Data Pathfinder",
+      "resource_version" : "None",
+      "resource_short_name" : "Landslides-Pathfinder",
+      "resource_type" : "Data Resource",
+      "resource_url" : "https://www.earthdata.nasa.gov/topics/human-dimensions/landslides",
+      "resource:doi" : "",
+      "resource_description" : "The Landslides Data Pathfinde is one of several Data Pathfinders NASA designed to help guide users through the process of selecting and using application-specific datasets from NASA’s Earth science data collections. It is designed for researchers, decision-makers, and the public to help better understand the interaction of complex events that cause landslides. The data, available from the datasets and tools provided, include information about past landslides, erosion, and fluvial processes in sloped areas. It includes data from various agency members of the Committee on Earth Observation Satellites. The information is used to help monitor and mitigate landslide hazards.",
+      "resource_domain" : [ {
+        "name" : "Extreme Weather",
+        "other_type" : false
+      } ],
+      "resource_keywords" : [ "Landslides", "Earthquakes", "Rainfall", "Water Pressure", "Soil Porousness ", "Erosion", "Fluvial Process" ],
+      "resource_access_type" : [ "Open" ],
+      "resource_license" : {
+        "license_name" : "",
+        "license_uri" : ""
+      },
+      "resource_reference" : [ {
+        "resource_reference_text" : "None",
+        "resource_reference_link" : "https://www.earthdata.nasa.gov/learn/use-data/data-use-policy"
+      } ],
+      "resource_use_agreement" : [ {
+        "resource_use_agreement_text" : "None",
+        "resource_use_agreement_link" : "https://www.earthdata.nasa.gov/learn/use-data/data-use-policy"
+      } ],
+      "publication" : [ {
+        "citation" : "None",
+        "citation_link" : "https://www.earthdata.nasa.gov/esds/csda/csda-publications-findings"
+      } ],
+      "is_static" : false,
+      "payment_required" : false
+    },
+    "personnel" : [ ],
+    "data_resource" : {
+      "exposure_media" : [ "Land" ],
+      "measures" : [ {
+        "value" : "Topography",
+        "other_type" : false
+      }, {
+        "value" : "Land Use",
+        "other_type" : false
+      }, {
+        "value" : "Land Cover",
+        "other_type" : false
+      }, {
+        "value" : "Land Surface Characteristics",
+        "other_type" : false
+      }, {
+        "value" : "Soil Moisture",
+        "other_type" : false
+      }, {
+        "value" : "Landslide ",
+        "other_type" : false
+      }, {
+        "value" : "Landslide impacts",
+        "other_type" : true
+      }, {
+        "value" : "Frequency of landslides",
+        "other_type" : true
+      }, {
+        "value" : "Ground Deformation",
+        "other_type" : true
+      }, {
+        "value" : "Topography and Slope",
+        "other_type" : true
+      }, {
+        "value" : "Rainfall intensity",
+        "other_type" : true
+      } ],
+      "measurement_method" : [ {
+        "value" : "Mobile Ground Sensor",
+        "other_type" : false
+      }, {
+        "value" : "Satellite",
+        "other_type" : false
+      } ],
+      "time_extent_start" : "2007",
+      "time_extent_end" : "2025",
+      "time_available_comment" : "None",
+      "update_frequency" : [ "Continuously" ],
+      "key_variables" : [ ],
+      "data_formats" : [ "GeoJSON", "GeoTIFF", "Hierarchical Data Format (HDF)", "NetCDF" ],
+      "example_metrics" : [ ],
+      "data_location" : [ {
+        "data_location_text" : "Landslides Data Access and Tools",
+        "data_location_link" : "https://www.earthdata.nasa.gov/topics/human-dimensions/landslides/data-access-tools"
+      } ],
+      "includes_citizen_collected" : true,
+      "has_api" : true,
+      "has_visualization_tool" : false
+    },
+    "data_usage" : {
+      "intended_use" : [ ],
+      "strengths" : [ ],
+      "limitations" : [ ],
+      "suggested_audience" : [ ]
+    },
+    "temporal_data" : {
+      "temporal_resolution" : [ {
+        "value" : "Hourly",
+        "other_type" : false
+      } ],
+      "temporal_resolution_comment" : ""
+    },
+    "population_data" : {
+      "individual_level" : false,
+      "linkable_encounters" : false,
+      "population_studies" : [ ],
+      "biospecimens_from_humans" : false,
+      "biospecimens_type" : [ ]
+    },
+    "geospatial_data" : {
+      "spatial_resolution" : [ {
+        "value" : "Other",
+        "other_type" : false
+      }, {
+        "value" : "0.25 x 0.25 degrees",
+        "other_type" : true
+      } ],
+      "spatial_resolution_comment" : "",
+      "spatial_coverage" : [ {
+        "value" : "Global",
+        "other_type" : false
+      } ],
+      "spatial_bounding_box" : [ ],
+      "geometry_type" : [ "Grid" ],
+      "geometry_source" : [ {
+        "value" : "US Census",
+        "other_type" : false
+      } ],
+      "model_methods" : [ {
+        "value" : "Other",
+        "other_type" : false
+      }, {
+        "value" : "Predicitive Modeling Techniques",
+        "other_type" : true
+      } ],
+      "geographic_feature" : [ {
+        "value" : "General",
+        "other_type" : false
+      }, {
+        "value" : "Mountain",
+        "other_type" : false
+      } ]
+    },
+    "computational_workflow" : {
+      "tool_type" : [ ],
+      "is_open" : false,
+      "languages" : [ ],
+      "use_tools" : [ ],
+      "example_applications" : [ ]
+    }
+  },
+  "technical_metadata" : {
+    "created" : "None",
+    "modified" : "",
+    "verified" : "",
+    "target_schema_version" : "",
+    "target_schema_type" : "",
+    "original_source_type" : "None",
+    "original_source_identifier" : "test_crosswalk_geo_spatial_item",
+    "original_source_link" : "",
+    "history" : [ ],
+    "dissemination_endpoints" : [ ]
+  }
+}

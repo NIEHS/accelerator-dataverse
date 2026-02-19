@@ -1,0 +1,261 @@
+import unittest
+
+from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
+from accelerator_dataverse.dataverse_utils.dataverse_connector import DataverseConnector
+from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection, DataverseDataset, \
+    CitationMetadataBlock, CitationAuthor, DatasetContact, DatasetDescription, DatasetKeyword, TopicClassification, \
+    Publication, OtherId
+
+
+class TestDataverseConnector(unittest.TestCase):
+
+    def test_add_dataverse(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_collection = DataverseCollection()
+        dataverse_collection.collection_name = "test_add_dataverse"
+        dataverse_collection.dataverse_contacts.append("test@test.com")
+        dataverse_collection.collection_alias = "test_add_dataverse"
+        dataverse_collection.affiliation = "NIEHS"
+        dataverse_collection.description = "Test Dataverse"
+        dataverse_collection.collection_parent = "Root"
+
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias, clear_datasets=True)
+        dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
+
+    def test_verify_dataverse(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_present = dataverse_connector.verify_target_dataverse("Root")
+        self.assertTrue(dataverse_present)
+
+    def test_get_version(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        version = dataverse_connector.get_version()
+        self.assertIsNotNone(version)
+
+    def test_create_dataset(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_collection = DataverseCollection()
+        dataverse_collection.collection_name = "test_create_dataset"
+        dataverse_collection.dataverse_contacts.append("testid@nih.gov")
+        dataverse_collection.collection_alias = "test_create_dataset"
+        dataverse_collection.affiliation = "NIEHS"
+        dataverse_collection.description = "Test Dataverse"
+        dataverse_collection.collection_parent = "Root"
+
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias, clear_datasets=True)
+        dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
+
+        # create a new dataset underneath this collection
+
+        dataset = DataverseDataset()
+        dataset.protocol = "protocol"
+        dataset.authority = "authority"
+        dataset.identifier = "test_create_dataset"
+
+        #dataset.license.name = "Custom Dataset Terms"
+        dataset.license.name = "CC0 1.0"
+        dataset.license.url = "http://creativecommons.org/licenses/by/2.0/"
+
+        citation_block = CitationMetadataBlock()
+        citation_block.title = "title"
+        citation_block.subtitle = "subtitle"
+        citation_block.alternative_url = "https://xxx.com"
+
+        author = CitationAuthor()
+        author.author_name = "author_name"
+        author.author_affiliation = "author_affiliation"
+        author.author_identifier_scheme = "ORCID"
+        author.author_identifier = "author_identifier"
+
+        citation_block.author.append(author)
+
+        contact = DatasetContact()
+        contact.contact_name = "contact_name"
+        contact.contact_affiliation = "contact_affiliation"
+        contact.contact_email = "contact_email@mail.com"
+
+        citation_block.dataset_contact.append(contact)
+
+        dataset_description = DatasetDescription()
+        dataset_description.description = "dataset_description"
+        dataset_description.description_text = "dataset_description_date"
+
+        citation_block.dataset_description.append(dataset_description)
+
+        citation_block.subject = ["Chemistry"]
+
+        keyword = DatasetKeyword()
+        keyword.keyword = "keyword"
+        keyword.keyword_uri = "https://xxx.com"
+        keyword.vocabulary = "vocabulary"
+        keyword.vocabulary_uri = "https://xxx.com"
+
+        citation_block.keyword.append(keyword)
+
+        topic = TopicClassification()
+        topic.topic_name = "topic_name"
+        topic.vocabulary_uri = "https://xxx.com"
+        topic.vocabulary = "vocabulary"
+
+        citation_block.topic_classification.append(topic)
+
+        publication = Publication()
+        publication.publication_relation_type = "Cites"
+        publication.citation = "publication_citation"
+        publication.id_type = "doi"
+        publication.id_number = "publication_id_number"
+        publication.url = "https://xxx.com"
+
+        citation_block.publication.append(publication)
+
+        citation_block.notes_text = "notes_text"
+
+        dataset.citation = citation_block
+
+        actual = dataverse_connector.create_dataset(dataverse_collection.collection_alias, dataverse_dataset=dataset)
+
+        self.assertTrue(actual)
+
+    def test_delete_dataset(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_collection = DataverseCollection()
+        dataverse_collection.collection_name = "test_delete_dataset"
+        dataverse_collection.dataverse_contacts.append("testid@nih.gov")
+        dataverse_collection.collection_alias = "test_delete_dataset"
+        dataverse_collection.affiliation = "NIEHS"
+        dataverse_collection.description = "Test Dataverse"
+        dataverse_collection.collection_parent = "Root"
+
+        dataverse_connector.delete_dataverse(dataverse_collection.collection_alias, clear_datasets=True)
+        dataverse_connector.add_dataverse(dataverse_collection=dataverse_collection)
+
+        # create a new dataset underneath this collection
+
+        dataset = DataverseDataset()
+        dataset.protocol = "protocol"
+        dataset.authority = "authority"
+        dataset.identifier = "test_delete_dataset"
+
+        dataset.license.name = "CC0 1.0"
+        dataset.license.url = "http://creativecommons.org/licenses/by/2.0/"
+
+        citation_block = CitationMetadataBlock()
+        citation_block.title = "title"
+        citation_block.subtitle = "subtitle"
+        citation_block.alternative_url = "https://xxx.com"
+
+        author = CitationAuthor()
+        author.author_name = "author_name"
+        author.author_affiliation = "author_affiliation"
+        author.author_identifier_scheme = "ORCID"
+        author.author_identifier = "author_identifier"
+
+        citation_block.author.append(author)
+
+        contact = DatasetContact()
+        contact.contact_name = "contact_name"
+        contact.contact_affiliation = "contact_affiliation"
+        contact.contact_email = "contact_email@mail.com"
+
+        citation_block.dataset_contact.append(contact)
+
+        dataset_description = DatasetDescription()
+        dataset_description.description = "dataset_description"
+        dataset_description.description_text = "dataset_description_date"
+
+        citation_block.dataset_description.append(dataset_description)
+
+        citation_block.subject = ["Chemistry"]
+
+        keyword = DatasetKeyword()
+        keyword.keyword = "keyword"
+        keyword.keyword_uri = "https://xxx.com"
+        keyword.vocabulary = "vocabulary"
+        keyword.vocabulary_uri = "https://xxx.com"
+
+        citation_block.keyword.append(keyword)
+
+        topic = TopicClassification()
+        topic.topic_name = "topic_name"
+        topic.vocabulary_uri = "https://xxx.com"
+        topic.vocabulary = "vocabulary"
+
+        citation_block.topic_classification.append(topic)
+
+        publication = Publication()
+        publication.publication_relation_type = "Cites"
+        publication.citation = "publication_citation"
+        publication.id_type = "doi"
+        publication.id_number = "publication_id_number"
+        publication.url = "https://xxx.com"
+
+        citation_block.publication.append(publication)
+
+        citation_block.notes_text = "notes_text"
+
+        dataset.citation = citation_block
+
+        created = dataverse_connector.create_dataset(dataverse_collection.collection_alias, dataverse_dataset=dataset)
+        self.assertTrue(created)
+
+        # now delete, I need the identifier of the dataset I just added
+        listing = dataverse_connector.list_dataverse_contents(dataverse_collection.collection_alias)
+        self.assertEqual(1, len(listing))
+        pid = listing[0].format_pid()
+
+        deleted = dataverse_connector.delete_dataset(pid)
+        self.assertTrue(deleted)
+        listing = dataverse_connector.list_dataverse_contents(dataverse_collection.collection_alias)
+        self.assertEqual(0, len(listing))
+
+
+    def test_list_dataverse_contents(self):
+        """
+        list the contents of a dataverse
+        :return: TBD
+        """
+
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_collection = DataverseCollection()
+        dataverse_collection.collection_name = "test_list_dataverse_contents"
+        dataverse_collection.dataverse_contacts.append("testid@nih.gov")
+        dataverse_collection.collection_alias = "test_list_dataverse_contents"
+        dataverse_collection.affiliation = "NIEHS"
+        dataverse_collection.description = "Test Dataverse"
+        dataverse_collection.collection_parent = "Root"
+
+        # add a dataverse
+
+        # add a dataset
+
+        # list it
+
+        listing = dataverse_connector.list_dataverse_contents(dataverse_collection.collection_alias)
+
+        self.assertIsNotNone(listing)
+
+
+    def test_delete_dataverse_not_exists(self):
+        dataverse_config = DataverseConfig.from_env()
+        dataverse_connector = DataverseConnector(dataverse_config=dataverse_config)
+        dataverse_collection = DataverseCollection()
+        dataverse_collection.collection_name = "test_delete_dataverse_not_exists"
+        dataverse_collection.dataverse_contacts.append("testid@nih.gov")
+        dataverse_collection.collection_alias = "test_delete_dataverse_not_exists_alias"
+        dataverse_collection.affiliation = "NIEHS"
+        dataverse_collection.description = "Test Dataverse"
+        dataverse_collection.collection_parent = "Root"
+
+        resp = dataverse_connector.delete_dataverse(dataverse_collection.collection_alias, clear_datasets=True)
+        self.assertFalse(resp)
+
+
+
+if __name__ == '__main__':
+    unittest.main()

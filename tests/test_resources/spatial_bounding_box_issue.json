@@ -1,0 +1,241 @@
+{
+  "_id": {
+    "$oid": "695c0567c28b4d2d9ed595a4"
+  },
+  "submission": {
+    "submitter_name": "Mike Conway",
+    "submitter_email": "mike.conway@nih.gov",
+    "submitter_comment": ""
+  },
+  "data": {
+    "program": {
+      "program_name": "CHORDS",
+      "preferred_label": ""
+    },
+    "project": {
+      "project_code": "HMS-071224",
+      "project_name": "Hazard Mapping System",
+      "project_short_name": "HMS",
+      "project_url": "",
+      "project_sponsor": [
+        {
+          "type": "",
+          "name": "National Oceanic and Atmospheric Administration (NOAA)",
+          "other_type": false
+        },
+        {
+          "type": "Federal Agency",
+          "name": "",
+          "other_type": false
+        }
+      ]
+    },
+    "resource": {
+      "resource_name": "Hazard Mapping System (HMS) Smoke Product",
+      "resource_version": "",
+      "resource_short_name": "HMS Smoke",
+      "resource_type": "Data Resource",
+      "resource_url": "https://www.ospo.noaa.gov/products/land/hms.html#data",
+      "resource:doi": "",
+      "resource_description": "The National Oceanic and Atmospheric Administration (NOAA) Hazard Mapping System (HMS) Smoke Product provides the locations of smoke plumes associated with active fires in North America in near real-time. Smoke plume locations are identified through expert visual analysis of satellite-based imagery during daylight. Additionally, smoke plumes are classified by their density as heavy, medium, or light. The HMS smoke plume data is available on a daily basis from 2003 to the present.",
+      "resource_domain": [
+        {
+          "name": "Air Quality",
+          "other_type": false
+        },
+        {
+          "name": "Wildfire",
+          "other_type": false
+        }
+      ],
+      "resource_keywords": [
+        "Smoke Plumes",
+        "Near Real-Time",
+        "North America",
+        "Smoke Density",
+        "Remote Sensing"
+      ],
+      "resource_access_type": [
+        "Open"
+      ],
+      "resource_license": {
+        "license_name": "",
+        "license_uri": ""
+      },
+      "resource_reference": [],
+      "resource_use_agreement": [],
+      "publication": [
+        {
+          "citation": "US National Oceanic and Atmospheric Administration (NOAA). Hazard Mapping System (HMS) Fire and Smoke Product. Smoke Product.",
+          "citation_link": "https://www.ospo.noaa.gov/Products/land/hms.html#data"
+        }
+      ],
+      "is_static": false,
+      "payment_required": false
+    },
+    "personnel": [],
+    "data_resource": {
+      "exposure_media": [
+        "Air"
+      ],
+      "measures": [
+        {
+          "value": "Fire Smoke",
+          "other_type": false
+        }
+      ],
+      "measurement_method": [],
+      "time_extent_start": "2003",
+      "time_extent_end": "2026",
+      "time_available_comment": "None",
+      "update_frequency": [
+        "Daily"
+      ],
+      "key_variables": [
+        "Smoke Plume Location",
+        "Smoke Plume Density Classification (Heavy, Medium, Light)"
+      ],
+      "data_formats": [
+        "SHP",
+        "KML"
+      ],
+      "example_metrics": [
+        "Number of days with heavy density smoke plume polygons overlapping geocoded address"
+      ],
+      "data_location": [
+        {
+          "data_location_text": "",
+          "data_location_link": "https://www.ospo.noaa.gov/Products/land/hms.html#data"
+        }
+      ],
+      "includes_citizen_collected": false,
+      "has_api": false,
+      "has_visualization_tool": false
+    },
+    "data_usage": {
+      "intended_use": [
+        {
+          "value": "Geospatial exposure assessment for studies on shorter-term health outcomes (e.g., acute conditions) or longer-term health outcomes (e.g., chronic conditions)",
+          "other_type": false
+        },
+        {
+          "value": "Geospatial exposure assessment at the individual-level or population-level",
+          "other_type": false
+        },
+        {
+          "value": "Geospatial exposure model development",
+          "other_type": false
+        },
+        {
+          "value": "Longitudinal studies (with restrictions)",
+          "other_type": false
+        },
+        {
+          "value": "Long-term studies",
+          "other_type": false
+        },
+        {
+          "value": "Large-scale studies",
+          "other_type": false
+        },
+        {
+          "value": "Public health emergency/disaster planning and preparedness",
+          "other_type": false
+        }
+      ],
+      "strengths": [
+        "Dataset supports analysis of daily variation in smoke plume exposure across North America for multiple decades"
+      ],
+      "limitations": [
+        "Data quality varies due to differences in cloud cover, background air pollution, terrain, and other factors that impact ability to detect smoke plumes visually from satellite-based imagery",
+        "Smoke plume detection limited to daylight hours",
+        "Dataset does not include information about vertical location of smoke plumes (i.e., smoke plumes may not be located at surface-level)",
+        "Data quality may vary over time due to changes in the underlying satellite-based datasets used to identify smoke plumes",
+        "Data quality varies due to differences in cloud cover, background air pollution, terrain, and other factors that impact ability to detect smoke plumes visually from satellite-based imagery",
+        "Smoke plume detection limited to daylight hours",
+        "Dataset does not include information about vertical location of smoke plumes (i.e., smoke plumes may not be located at surface-level)",
+        "Data quality may vary over time due to changes in the underlying satellite-based datasets used to identify smoke plumes"
+      ],
+      "suggested_audience": [
+        "Researcher",
+        "General Public"
+      ]
+    },
+    "temporal_data": {
+      "temporal_resolution": [
+        {
+          "value": "Daily",
+          "other_type": false
+        }
+      ],
+      "temporal_resolution_comment": ""
+    },
+    "population_data": {
+      "individual_level": false,
+      "linkable_encounters": false,
+      "population_studies": [],
+      "biospecimens_from_humans": false,
+      "biospecimens_type": []
+    },
+    "geospatial_data": {
+      "spatial_resolution": [
+        {
+          "value": "Other",
+          "other_type": false
+        },
+        {
+          "value": "Variable",
+          "other_type": true
+        }
+      ],
+      "spatial_resolution_comment": "None",
+      "spatial_coverage": [
+        {
+          "value": "North America",
+          "other_type": false
+        }
+      ],
+      "spatial_bounding_box": [
+        "50 Degrees West",
+        "14.6 Degrees North",
+        "170 Degrees West",
+        "72 Degrees North"
+      ],
+      "geometry_type": [
+        "Polygon"
+      ],
+      "geometry_source": [],
+      "model_methods": [],
+      "geographic_feature": [
+        {
+          "value": "General",
+          "other_type": false
+        }
+      ]
+    },
+    "computational_workflow": {
+      "tool_type": [],
+      "is_open": false,
+      "languages": [],
+      "use_tools": [],
+      "example_applications": []
+    }
+  },
+  "technical_metadata": {
+    "created": "2026-01-05T18:39:35.057468",
+    "modified": "",
+    "verified": "",
+    "target_schema_version": "",
+    "target_schema_type": "",
+    "original_source_type": "accelerator",
+    "original_source_identifier": "68504421-3b3c-496b-8528-1a023356f98f",
+    "original_source_link": "cedar",
+    "history": [
+      {
+        "timestamp": "2026-01-05T18:39:35.057498",
+        "msg": "accession from accelerator with identifier 68504421-3b3c-496b-8528-1a023356f98f in operation CEDAR_Ingest-manual__2026-01-05T18:39:04.141253+00:00"
+      }
+    ],
+    "dissemination_endpoints": []
+  }
+}
