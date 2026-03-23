@@ -5,7 +5,6 @@ import logging
 from jinja2 import Environment, FileSystemLoader, Template
 logger = logging.getLogger(__name__)
 
-
 class TemplateProcessor:
     """
     Library for jinja templates for data models
