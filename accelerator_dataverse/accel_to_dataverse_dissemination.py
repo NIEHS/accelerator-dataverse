@@ -1,13 +1,13 @@
-from accelerator_core.utils.logger import setup_logger
+import logging
+
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import DisseminationPayload
 from accelerator_core.workflow.accel_target_dissemination import AccelDisseminationComponent
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
 from accelerator_dataverse.dataverse_utils.dataverse_connector import DataverseConnector
-from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset
 
-logger = setup_logger("accelerator")
+logger = logging.getLogger(__name__)
 
 
 class AccelDataverseDissemination(AccelDisseminationComponent):
@@ -19,7 +19,7 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         super().__init__(xcom_props_resolver)
 
     def disseminate(
-        self, dissemination_payload: DisseminationPayload, additional_parameters: dict
+        self, dissemination_payload: DisseminationPayload, additional_parameters=None
     ) -> DisseminationPayload:
         """
         Disseminate the incoming payload out to Dataverse
@@ -34,7 +34,14 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         dataverse: Dataverse collection
         api_key: Dataverse API key
 
+        optional additional parameters:
+
+        accel_data_file: string with the absolute path to a sidecar file containing the accelerator data model, if
+        present this will be uploaded to the dataverse
+
         """
+        if additional_parameters is None:
+            additional_parameters = {}
         logger.info(f"disseminate with descriptor {dissemination_payload.dissemination_descriptor}")
         dataverse_config = DataverseConfig(dataverse_host=additional_parameters["dataverse_host"],
                                            api_key=additional_parameters["api_key"],
@@ -59,10 +66,25 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         # TODO: make result share any error msgs (make a structure) and pass back in descriptor
         result = dataverse_connector.create_dataset_from_dict(dataverse_config.dataverse, payload_doc)
         logger.info(f"result:{result}")
+
+        doi = result.pid
+        logger.info(f"doi: {doi}")
+
+        if additional_parameters:
+            accel_data_file = additional_parameters.get("accel_data_file")
+
+            if accel_data_file:
+                logger.info(f"uploading acceldata file {accel_data_file} to dataverse")
+                dataverse_connector.add_file_to_dataverse(doi, accel_data_file)
+
+
         dissemination_payload.dissemination_successful = True
         dissemination_payload.payload_inline = True
         dissemination_payload.payload = []
         dissemination_payload.payload.append(result.to_dict())
+
+        if additional_parameters.get("accel_data_model"):
+            logger.info(f"storing accel data model in dataverse")
 
         return dissemination_payload
 
