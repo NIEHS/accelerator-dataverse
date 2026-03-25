@@ -1,6 +1,7 @@
 import json
+import os
 
-from accelerator_core.utils.logger import setup_logger
+import logging
 from pyDataverse.api import NativeApi
 from pyDataverse.exceptions import DataverseNotFoundError, DataverseNotEmptyError
 from pyDataverse.models import Dataverse
@@ -8,7 +9,7 @@ from pyDataverse.models import Dataverse
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection, DataverseDataset
 
-logger = setup_logger("accelerator-dataverse")
+logger = logging.getLogger(__name__)
 
 class DataverseListing:
     """
@@ -200,34 +201,6 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info(f"deleting collection {collection_pid}")
         self.api.delete_dataset(collection_pid, is_pid=True)
 
-    def create_dataset(self, dataverse:str, dataverse_dataset:DataverseDataset) -> DataverseDisseminationResult:
-        """
-        Create a dataverse dataset.
-        :param dataverse: dataverse to create collection within
-        :param dataverse_dataset: DataverseDataset object with representation of the dataset
-        :return: DataverseDisseminationResult
-        """
-
-        logger.info(f"create dataset: {dataverse_dataset}")
-        payload = dataverse_dataset.render()
-        resp = self.api.create_dataset(dataverse, payload, publish=False)
-        logger.info("response: {}".format(resp))
-
-        if not resp.is_success:
-            logger.error("ERROR - Could not create dataverse dataset: {}".format(resp.content))
-            raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
-
-        dataverse_result = DataverseDisseminationResult()
-        resp_txt = json.loads(resp.text)
-        dataverse_result.pid = resp.content
-        dataverse_result.success = resp.is_success
-        dataverse_result.message = resp.text
-        dataverse_result.status_code = resp.status_code
-        dataverse_result.api_url = resp.url
-        dataverse_result.pid = resp_txt["data"]["persistentId"]
-
-        return dataverse_result
-
     def create_dataset_from_dict(self, dataverse: str, dataverse_dataset_as_dict: dict) -> DataverseDisseminationResult:
         """
         Create a dataverse dataset.
@@ -237,7 +210,7 @@ class DataverseConnector(AbstractDataverseConnector):
         """
 
         logger.info(f"create dataset: {dataverse_dataset_as_dict}")
-        resp = self.api.create_dataset(dataverse, dataverse_dataset_as_dict, publish=False)
+        resp = self.api.create_dataset(dataverse, json.dumps(dataverse_dataset_as_dict), publish=False)
         logger.info("response: {}".format(resp))
         if not resp.is_success:
             logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
@@ -253,6 +226,26 @@ class DataverseConnector(AbstractDataverseConnector):
         dataverse_result.pid = resp_txt["data"]["persistentId"]
 
         return dataverse_result
+
+
+    def add_file_to_dataverse(self, dataset_pid:str, file_path:str):
+        """
+        Add the given data to a dataverse dataset as a child file
+        :param dataset_pid: the doi of the dataset to add the file to
+        :param file_name: the name to give the file on dataverse
+        :param file_path: the path to the file in storage that will be uploaded
+        :return: None
+        """
+
+        logger.info(f"add file to dataverse:  {dataset_pid}, {file_path}")
+        resp = self.api.upload_datafile(dataset_pid, file_path)
+        logger.info(f"response: {resp}")
+        if not resp.is_success:
+            logger.warning(f"ERROR - Could not add file to dataverse: {resp}")
+            raise Exception(f"ERROR - Could not add file to dataverse: {resp}")
+
+        # go ahead and delete the file
+        os.remove(file_path)
 
     def delete_dataset(self, dataset_id:str) -> bool:
         logger.info(f"delete dataset: {dataset_id}")

@@ -30,12 +30,17 @@ class DataverseDataset(Serializable):
         self.computational_workflow = ComputationalWorkflow()
         self.cafe_custom = CafeCustomMetadata()
         self.license = License()
-        self.files = []
 
     def render(self):
         template_processor = TemplateProcessor()
         template = template_processor.retrieve_template("dataset-extended")
         return template.render(dataset=self)
+
+class DataverseDatasetFile(Serializable):
+    """ Represents a file in a dataverse dataset."""
+    def __init__(self):
+        self.file_name = "" # the name of the file as it appears in the dataverse
+        self.file_source_path = None # absolute path to the file on the local filesystem, will be uploaded from this path
 
 class DataverseCafeSourceDataset(Serializable):
     def __init__(self):

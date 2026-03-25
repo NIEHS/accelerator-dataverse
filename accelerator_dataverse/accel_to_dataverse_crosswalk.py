@@ -1,8 +1,8 @@
 import json
 import re
+import logging
 
 from accelerator_core.schema.models.accel_model import AccelDataResourceModel
-from accelerator_core.utils.logger import setup_logger
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import IngestPayload, DisseminationPayload
 from accelerator_core.workflow.crosswalk import Crosswalk
@@ -13,7 +13,8 @@ from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDatas
     Producer, TimePeriod, DatasetDescription, GeospatialMetadataBlock, GeographicBoundingBox, CitationAuthor, \
     TopicClassification, DatasetContact, DataverseCafeSourceDataset
 
-logger = setup_logger("accelerator-dataverse")
+logger = logging.getLogger(__name__)
+
 
 class AccelToDataverseCrosswalk(DisseminationCrosswalk):
     """
