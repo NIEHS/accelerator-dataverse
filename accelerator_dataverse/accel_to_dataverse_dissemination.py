@@ -1,14 +1,13 @@
-from accelerator_core.utils.logger import setup_logger
+import logging
+
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import DisseminationPayload
 from accelerator_core.workflow.accel_target_dissemination import AccelDisseminationComponent
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
 from accelerator_dataverse.dataverse_utils.dataverse_connector import DataverseConnector
-from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset
 
-logger = setup_logger("accelerator")
-
+logger = logging.getLogger(__name__)
 
 class AccelDataverseDissemination(AccelDisseminationComponent):
     """
