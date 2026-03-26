@@ -1,14 +1,13 @@
 import json
 
-from accelerator_core.utils.logger import setup_logger
 from pyDataverse.api import NativeApi
 from pyDataverse.exceptions import DataverseNotFoundError, DataverseNotEmptyError
 from pyDataverse.models import Dataverse
 
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseCollection, DataverseDataset
-
-logger = setup_logger("accelerator-dataverse")
+import logging
+logger = logging.getLogger(__name__)
 
 class DataverseListing:
     """
