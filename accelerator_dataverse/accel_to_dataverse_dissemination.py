@@ -9,7 +9,6 @@ from accelerator_dataverse.dataverse_utils.dataverse_connector import DataverseC
 
 logger = logging.getLogger(__name__)
 
-
 class AccelDataverseDissemination(AccelDisseminationComponent):
     """
     Disseminator of accelerator data to dataverse
