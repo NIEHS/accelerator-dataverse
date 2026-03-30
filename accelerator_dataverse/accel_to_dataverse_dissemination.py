@@ -44,7 +44,7 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         logger.info(f"disseminate with descriptor {dissemination_payload.dissemination_descriptor}")
         dataverse_config = DataverseConfig(dataverse_host=additional_parameters["dataverse_host"],
                                            api_key=additional_parameters["api_key"],
-                                           dataverse=additional_parameters["dataverse"])
+                                           dataverse=additional_parameters["dataverse"],)
 
         dataverse_connector = DataverseConnector(dataverse_config)
 
