@@ -151,7 +151,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
 
         if accel_geospatial_data["spatial_bounding_box"]:
             if len(accel_geospatial_data["spatial_bounding_box"]) != 4:
-                raise Exception("spatial_bounding_box must be a list of 4 floats")
+                logger.error("spatial_bounding_box must be a list of 4 floats, ignoring")
             else:
                 bounding_box = GeographicBoundingBox()
                 bounding_box.south = accel_geospatial_data["spatial_bounding_box"][0]
