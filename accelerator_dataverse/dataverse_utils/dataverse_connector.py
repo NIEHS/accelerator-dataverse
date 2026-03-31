@@ -210,28 +210,35 @@ class DataverseConnector(AbstractDataverseConnector):
         """
 
         logger.info(f"create dataset: {dataverse_dataset_as_dict}")
-        resp = self.api.create_dataset(dataverse, json.dumps(dataverse_dataset_as_dict), publish=False)
-        logger.info("response: {}".format(resp))
-        logger.info(f"success? {resp.is_success}")
-        if not resp.is_success:
-            logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
-            raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
 
-        dataverse_result = DataverseDisseminationResult()
-        logger.info(f"formatting dissem result from: {resp.text}")
+        try:
 
-        resp_txt = json.loads(resp.text)
-        logger.info(f"resp_txt loaded")
-        dataverse_result.pid = resp.content
-        dataverse_result.success = resp.is_success
-        dataverse_result.message = resp.text
-        dataverse_result.status_code = resp.status_code
-        dataverse_result.api_url = f"{resp.url.scheme}://{resp.url.host}{resp.url.path}"
-        dataverse_result.pid = resp_txt["data"]["persistentId"]
+            resp = self.api.create_dataset(dataverse, json.dumps(dataverse_dataset_as_dict), publish=False)
+            logger.info("response: {}".format(resp))
+            logger.info(f"success? {resp.is_success}")
+            if not resp.is_success:
+                logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
+                raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
 
-        logger.info(f"returning dissem result: {dataverse_result}")
+            dataverse_result = DataverseDisseminationResult()
+            logger.info(f"formatting dissem result from: {resp.text}")
 
-        return dataverse_result
+            resp_txt = json.loads(resp.text)
+            logger.info(f"resp_txt loaded")
+            dataverse_result.pid = resp.content
+            dataverse_result.success = resp.is_success
+            dataverse_result.message = resp.text
+            dataverse_result.status_code = resp.status_code
+            dataverse_result.api_url = f"{resp.url.scheme}://{resp.url.host}{resp.url.path}"
+            dataverse_result.pid = resp_txt["data"]["persistentId"]
+
+            logger.info(f"returning dissem result: {dataverse_result}")
+
+            return dataverse_result
+
+        except Exception as e:
+            logger.error(f"ERROR - Could not create dataverse dataset: {e}")
+            raise Exception(f"ERROR - Could not create dataverse dataset: {e}")
 
 
     def add_file_to_dataverse(self, dataset_pid:str, file_path:str):
