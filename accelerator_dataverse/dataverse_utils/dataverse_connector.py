@@ -212,18 +212,22 @@ class DataverseConnector(AbstractDataverseConnector):
         logger.info(f"create dataset: {dataverse_dataset_as_dict}")
         resp = self.api.create_dataset(dataverse, json.dumps(dataverse_dataset_as_dict), publish=False)
         logger.info("response: {}".format(resp))
+        logger.info(f"success? {resp.is_success}")
         if not resp.is_success:
             logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
             raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
 
         dataverse_result = DataverseDisseminationResult()
         resp_txt = json.loads(resp.text)
+        logger.info(f"formatting dissem result from: {resp_txt}")
         dataverse_result.pid = resp.content
         dataverse_result.success = resp.is_success
         dataverse_result.message = resp.text
         dataverse_result.status_code = resp.status_code
         dataverse_result.api_url = f"{resp.url.scheme}://{resp.url.host}{resp.url.path}"
         dataverse_result.pid = resp_txt["data"]["persistentId"]
+
+        logger.info(f"returning dissem result: {dataverse_result}")
 
         return dataverse_result
 

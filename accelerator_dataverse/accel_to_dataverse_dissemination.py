@@ -64,10 +64,12 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
 
         # TODO: make result share any error msgs (make a structure) and pass back in descriptor
         result = dataverse_connector.create_dataset_from_dict(dataverse_config.dataverse, payload_doc)
-        logger.info(f"result:{result}")
+        logger.info(f"created dataset from dict - result:{result}")
 
         doi = result.pid
         logger.info(f"doi: {doi}")
+
+        logger.info("looking for additional files to upload to dataverse")
 
         if additional_parameters:
             accel_data_file = additional_parameters.get("accel_data_file")
