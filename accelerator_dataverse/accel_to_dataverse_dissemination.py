@@ -62,31 +62,40 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
         payload_doc = self.payload_resolve(dissemination_payload, 0)
         logger.debug(f"payload doc {payload_doc}")
 
-        # TODO: make result share any error msgs (make a structure) and pass back in descriptor
-        result = dataverse_connector.create_dataset_from_dict(dataverse_config.dataverse, payload_doc)
-        logger.info(f"created dataset from dict - result:{result}")
+        try:
 
-        doi = result.pid
-        logger.info(f"doi: {doi}")
+            # TODO: make result share any error msgs (make a structure) and pass back in descriptor
+            result = dataverse_connector.create_dataset_from_dict(dataverse_config.dataverse, payload_doc)
+            logger.info(f"created dataset from dict - result:{result}")
 
-        logger.info("looking for additional files to upload to dataverse")
+            doi = result.pid
+            logger.info(f"doi: {doi}")
 
-        if additional_parameters:
-            accel_data_file = additional_parameters.get("accel_data_file")
+            logger.info("looking for additional files to upload to dataverse")
 
-            if accel_data_file:
-                logger.info(f"uploading acceldata file {accel_data_file} to dataverse")
-                dataverse_connector.add_file_to_dataverse(doi, accel_data_file)
+            if additional_parameters:
+                accel_data_file = additional_parameters.get("accel_data_file")
+
+                if accel_data_file:
+                    logger.info(f"uploading acceldata file {accel_data_file} to dataverse")
+                    dataverse_connector.add_file_to_dataverse(doi, accel_data_file)
 
 
-        dissemination_payload.dissemination_successful = True
-        dissemination_payload.payload_inline = True
-        dissemination_payload.payload = []
-        dissemination_payload.payload.append(result.to_dict())
+            dissemination_payload.dissemination_successful = True
+            dissemination_payload.payload_inline = True
+            dissemination_payload.payload = []
+            dissemination_payload.payload.append(result.to_dict())
 
-        if additional_parameters.get("accel_data_model"):
-            logger.info(f"storing accel data model in dataverse")
+            if additional_parameters.get("accel_data_model"):
+                logger.info(f"storing accel data model in dataverse")
 
-        return dissemination_payload
+            return dissemination_payload
+        except Exception as e:
+            logger.error(f"error disseminating payload: {e}")
+            dissemination_payload.dissemination_successful = False
+            dissemination_payload.dissemination_error_message = str(e)
+            dissemination_payload.payload_inline = True
+            dissemination_payload.payload = []
+
 
 
