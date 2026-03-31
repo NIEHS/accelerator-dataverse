@@ -218,8 +218,10 @@ class DataverseConnector(AbstractDataverseConnector):
             raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
 
         dataverse_result = DataverseDisseminationResult()
-        resp_txt = json.loads(resp.text)
         logger.info(f"formatting dissem result from: {resp_txt}")
+
+        resp_txt = json.loads(resp.text)
+        logger.info(f"resp_txt loaded")
         dataverse_result.pid = resp.content
         dataverse_result.success = resp.is_success
         dataverse_result.message = resp.text
