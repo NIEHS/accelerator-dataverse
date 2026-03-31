@@ -96,6 +96,8 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
             dissemination_payload.dissemination_error_message = str(e)
             dissemination_payload.payload_inline = True
             dissemination_payload.payload = []
+            return dissemination_payload
+
 
 
 
