@@ -217,8 +217,8 @@ class DataverseConnector(AbstractDataverseConnector):
             logger.info("response: {}".format(resp))
             logger.info(f"success? {resp.is_success}")
             if not resp.is_success:
-                logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.content))
-                raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.content))
+                logger.warning("ERROR - Could not create dataverse dataset: {}".format(resp.text))
+                raise Exception("ERROR - Could not create dataverse dataset: {}".format(resp.text))
 
             dataverse_result = DataverseDisseminationResult()
             logger.info(f"formatting dissem result from: {resp.text}")
