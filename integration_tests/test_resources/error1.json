@@ -1,0 +1,223 @@
+{
+  "submission": {
+    "submitter_name": "Mike Conway",
+    "submitter_email": "mike.conway@nih.gov",
+    "submitter_comment": ""
+  },
+  "data": {
+    "program": {
+      "program_name": "CHORDS",
+      "preferred_label": ""
+    },
+    "project": {
+      "project_code": "GSUHI-071124",
+      "project_name": "Global Surface Urban Heat Island (GSUHI)",
+      "project_short_name": "GSUHI",
+      "project_url": "",
+      "project_sponsor": [
+        {
+          "type": "",
+          "name": "Other",
+          "other_type": false
+        },
+        {
+          "type": "",
+          "name": "Yale Center for Earth Observation (YCEO)",
+          "other_type": true
+        },
+        {
+          "type": "Academic Institution",
+          "name": "",
+          "other_type": false
+        }
+      ]
+    },
+    "resource": {
+      "resource_name": "Yale Center for Earth Observation (YCEO) Global Surface Urban Heat Island (GSUHI) Data, Pixel-Level Composites, Version 5",
+      "resource_version": "v5",
+      "resource_short_name": "GSUHI-v5",
+      "resource_type": "Data Resource",
+      "resource_url": "https://yceo.users.earthengine.app/view/uhimap",
+      "resource:doi": "",
+      "resource_description": "The Global Surface Urban Heat Island (GSUHI) displays composite data for surface urban heat islands on a global interactive map based on the intensity of urban clusters. The data, observed from 2003 to 2020, are obtained from satellite-based land surface temperature observations (MODIS) at 300 m resolution, the Landscan urban extent database, and other land cover and elevation data sources.",
+      "resource_domain": [
+        {
+          "name": "Longterm Weather",
+          "other_type": false
+        },
+        {
+          "name": "Extreme Weather",
+          "other_type": false
+        }
+      ],
+      "resource_keywords": [
+        "Temperature",
+        "Surface-Level",
+        "Intensity",
+        "Heat-Island Intensity",
+        "Urban Cluster",
+        "Daytime",
+        "Nighttime",
+        "Daily Prediction",
+        "Global"
+      ],
+      "resource_access_type": [
+        "Open"
+      ],
+      "resource_license": {
+        "license_name": "",
+        "license_uri": ""
+      },
+      "resource_reference": [
+        {
+          "resource_reference_text": "None",
+          "resource_reference_link": "http://nolink"
+        }
+      ],
+      "resource_use_agreement": [
+        {
+          "resource_use_agreement_text": "None",
+          "resource_use_agreement_link": "http://nolink"
+        }
+      ],
+      "publication": [
+        {
+          "citation": "Chakraborty, T., & Lee, X. (2019). A simplified urban-extent algorithm to characterize surface urban heat islands on a global scale and examine vegetation control on their spatiotemporal variability. International Journal of Applied Earth Observation and Geoinformation, 74, 269-280.",
+          "citation_link": "https://doi.org/10.1016/j.jag.2018.09.015"
+        }
+      ],
+      "is_static": true,
+      "payment_required": false
+    },
+    "personnel": [],
+    "data_resource": {
+      "exposure_media": [],
+      "measures": [
+        {
+          "value": "Other",
+          "other_type": false
+        },
+        {
+          "value": "Urban Heat Islands",
+          "other_type": true
+        }
+      ],
+      "measurement_method": [],
+      "time_extent_start": "2003",
+      "time_extent_end": "2020",
+      "time_available_comment": "None",
+      "update_frequency": [
+        "Static"
+      ],
+      "key_variables": [
+        "Daytime and nighttime Urban Heat-Island (UHI) intensity"
+      ],
+      "data_formats": [
+        "GeoTIFF"
+      ],
+      "example_metrics": [
+        "Summertime daytime and nighttime Urban Heat Island intensity for grid cell containing geocoded address"
+      ],
+      "data_location": [
+        {
+          "data_location_text": "",
+          "data_location_link": "https://yceo.users.earthengine.app/view/uhimap"
+        }
+      ],
+      "includes_citizen_collected": false,
+      "has_api": false,
+      "has_visualization_tool": false
+    },
+    "data_usage": {
+      "intended_use": [
+        {
+          "value": "",
+          "other_type": false
+        }
+      ],
+      "strengths": [
+        "Dataset supports analysis of variation in annual and seasonal average daytime and nighttime mean Urban Heat Island intensity across global urban locations and multiple years in a consistent way"
+      ],
+      "limitations": [
+        "Dataset derived from urban extent data for 2001 and 2002 that does not reflect patterns of urbanization after 2002",
+        "Data not available for areas outside urban clusters",
+        "Dataset derived from satellite-based observations which may vary in quality due to cloud cover, air quality, and other factors",
+        "Dataset derived from urban extent data for 2001 and 2002 that does not reflect patterns of urbanization after 2002",
+        "Data not available for areas outside urban clusters",
+        "Dataset derived from satellite-based observations which may vary in quality due to cloud cover, air quality, and other factors"
+      ],
+      "suggested_audience": []
+    },
+    "temporal_data": {
+      "temporal_resolution": [
+        {
+          "value": "Custom",
+          "other_type": false
+        }
+      ],
+      "temporal_resolution_comment": ""
+    },
+    "population_data": {
+      "individual_level": false,
+      "linkable_encounters": false,
+      "population_studies": [],
+      "biospecimens_from_humans": false,
+      "biospecimens_type": []
+    },
+    "geospatial_data": {
+      "spatial_resolution": [
+        {
+          "value": "Grid",
+          "other_type": false
+        },
+        {
+          "value": "300 m",
+          "other_type": true
+        }
+      ],
+      "spatial_resolution_comment": "None",
+      "spatial_coverage": [
+        {
+          "value": "Global Urban Clusters",
+          "other_type": false
+        }
+      ],
+      "spatial_bounding_box": [],
+      "geometry_type": [
+        "Grid"
+      ],
+      "geometry_source": [],
+      "model_methods": [],
+      "geographic_feature": []
+    },
+    "computational_workflow": {
+      "tool_type": [],
+      "is_open": false,
+      "languages": [],
+      "use_tools": [],
+      "example_applications": []
+    }
+  },
+  "technical_metadata": {
+    "created": "2025-12-17T18:32:47.140679",
+    "modified": "2026-03-31T17:06:24.098281",
+    "verified": "2026-03-31T17:06:24.098281",
+    "target_schema_version": "",
+    "target_schema_type": "",
+    "original_source_type": "accelerator",
+    "original_source_identifier": "f6f2fba3-be1a-4d68-addf-eda6ecff030f",
+    "original_source_link": "cedar",
+    "history": [
+      {
+        "timestamp": "2025-12-17T18:32:47.140703",
+        "msg": "accession from accelerator with identifier f6f2fba3-be1a-4d68-addf-eda6ecff030f in operation CEDAR_Ingest-manual__2025-12-17T18:32:18.179017+00:00"
+      },
+      {
+        "timestamp": "2026-03-31T17:06:24.098281",
+        "msg": "updated checksum None to 037714151a12d20f7efc2063de23c077571525f29d6fccc3fadb47dc8de7a20d and updating document from upstream source"
+      }
+    ],
+    "dissemination_endpoints": [],
+    "data_checksum": "037714151a12d20f7efc2063de23c077571525f29d6fccc3fadb47dc8de7a20d"
+  }
+}
