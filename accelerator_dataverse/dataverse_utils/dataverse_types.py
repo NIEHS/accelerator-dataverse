@@ -54,7 +54,9 @@ class DataverseCafeSourceDataset(Serializable):
         self.data_type="Other (specify)" # default to cv value
         self.data_type_other=""
         self.disclaimer=""
-        # defer spatial resolution until next round
+        self.spatial_resolution = ""
+        self.timestep = ""
+        self.attribution = ""
 
 
 class DataverseDatasetLicense(Serializable):
@@ -72,8 +74,16 @@ class CafeCustomMetadata(Serializable):
 class GeospatialMetadataBlock(Serializable):
 
     def __init__(self):
+        self.geographic_coverage = []
         self.geographic_unit = []
         self.geographic_bounding_box = None # GeographicBoundingBox() if present
+
+class GeographicCoverage(Serializable):
+    def __init__(self):
+        self.country = ""
+        self.state = ""
+        self.city = ""
+        self.other = ""
 
 
 class GeographicBoundingBox(Serializable):
@@ -230,7 +240,9 @@ class License(Serializable):
 
 class ComputationalWorkflow(Serializable):
     def __init__(self):
-        self.tool_type = []
+        self.workflow_type = []
+        self.workflow_code_repository = []
+        self.workflow_documentation = []
 
 class DatasetFile(Serializable):
     def __init__(self):

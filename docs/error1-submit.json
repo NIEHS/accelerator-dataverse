@@ -1,0 +1,431 @@
+{
+  "datasetVersion" : {
+    "license" : {
+      "name" : "CC0 1.0",
+      "uri" : ""
+    },
+    "protocol" : "",
+    "authority" : "",
+    "identifier" : "",
+    "metadataBlocks" : {
+      "citation" : {
+        "displayName" : "Citation Metadata",
+        "fields" : [ {
+          "typeName" : "title",
+          "multiple" : false,
+          "typeClass" : "primitive",
+          "value" : "Yale Center for Earth Observation (YCEO) Global Surface Urban Heat Island (GSUHI) Data, Pixel-Level Composites, Version 5"
+        }, {
+          "typeName" : "alternativeURL",
+          "multiple" : false,
+          "typeClass" : "primitive",
+          "value" : "https://yceo.users.earthengine.app/view/uhimap"
+        }, {
+          "typeName" : "otherId",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ ]
+        }, {
+          "typeName" : "author",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "authorName" : {
+              "typeName" : "authorName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Other"
+            },
+            "authorAffiliation" : {
+              "typeName" : "authorAffiliation",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            }
+          }, {
+            "authorName" : {
+              "typeName" : "authorName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Yale Center for Earth Observation (YCEO)"
+            },
+            "authorAffiliation" : {
+              "typeName" : "authorAffiliation",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            }
+          }, {
+            "authorName" : {
+              "typeName" : "authorName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Academic Institution"
+            },
+            "authorAffiliation" : {
+              "typeName" : "authorAffiliation",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            }
+          } ]
+        }, {
+          "typeName" : "datasetContact",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "datasetContactName" : {
+              "typeName" : "datasetContactName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Other"
+            },
+            "datasetContactEmail" : {
+              "typeName" : "datasetContactEmail",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "noreply@chordshealth.org"
+            }
+          }, {
+            "datasetContactName" : {
+              "typeName" : "datasetContactName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Yale Center for Earth Observation (YCEO)"
+            },
+            "datasetContactEmail" : {
+              "typeName" : "datasetContactEmail",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "noreply@chordshealth.org"
+            }
+          }, {
+            "datasetContactName" : {
+              "typeName" : "datasetContactName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Academic Institution"
+            },
+            "datasetContactEmail" : {
+              "typeName" : "datasetContactEmail",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "noreply@chordshealth.org"
+            }
+          } ]
+        }, {
+          "typeName" : "dsDescription",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "dsDescriptionValue" : {
+              "typeName" : "dsDescriptionValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "The Global Surface Urban Heat Island (GSUHI) displays composite data for surface urban heat islands on a global interactive map based on the intensity of urban clusters. The data, observed from 2003 to 2020, are obtained from satellite-based land surface temperature observations (MODIS) at 300 m resolution, the Landscan urban extent database, and other land cover and elevation data sources."
+            }
+          } ]
+        }, {
+          "typeName" : "keyword",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Temperature"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Surface-Level"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Intensity"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Heat-Island Intensity"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Urban Cluster"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Daytime"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Nighttime"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Daily Prediction"
+            }
+          }, {
+            "keywordValue" : {
+              "typeName" : "keywordValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Global"
+            }
+          } ]
+        }, {
+          "typeName" : "topicClassification",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "topicClassValue" : {
+              "typeName" : "topicClassValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Other"
+            }
+          }, {
+            "topicClassValue" : {
+              "typeName" : "topicClassValue",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Urban Heat Islands"
+            }
+          } ]
+        }, {
+          "typeName" : "subject",
+          "multiple" : true,
+          "typeClass" : "controlledVocabulary",
+          "value" : [ "Medicine, Health and Life Sciences", "Earth and Environmental Sciences" ]
+        }, {
+          "typeName" : "language",
+          "multiple" : true,
+          "typeClass" : "controlledVocabulary",
+          "value" : [ ]
+        }, {
+          "typeName" : "publication",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "publicationRelationType" : {
+              "typeName" : "publicationRelationType",
+              "multiple" : false,
+              "typeClass" : "controlledVocabulary",
+              "value" : "Cites"
+            },
+            "publicationCitation" : {
+              "typeName" : "publicationCitation",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Chakraborty, T., & Lee, X. (2019). A simplified urban-extent algorithm to characterize surface urban heat islands on a global scale and examine vegetation control on their spatiotemporal variability. International Journal of Applied Earth Observation and Geoinformation, 74, 269-280."
+            },
+            "publicationIDType" : {
+              "typeName" : "publicationIDType",
+              "multiple" : false,
+              "typeClass" : "controlledVocabulary",
+              "value" : "url"
+            },
+            "publicationURL" : {
+              "typeName" : "publicationURL",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "https://doi.org/10.1016/j.jag.2018.09.015"
+            }
+          } ]
+        }, {
+          "typeName" : "notesText",
+          "multiple" : false,
+          "typeClass" : "primitive",
+          "value" : "<b>Intended Use</b><ul><li></li></ul><br/><b>Strengths</b><ul><li>Dataset supports analysis of variation in annual and seasonal average daytime and nighttime mean Urban Heat Island intensity across global urban locations and multiple years in a consistent way</li></ul><br/><b>Limitations</b><ul><li>Dataset derived from urban extent data for 2001 and 2002 that does not reflect patterns of urbanization after 2002</li><li>Data not available for areas outside urban clusters</li><li>Dataset derived from satellite-based observations which may vary in quality due to cloud cover, air quality, and other factors</li><li>Dataset derived from urban extent data for 2001 and 2002 that does not reflect patterns of urbanization after 2002</li><li>Data not available for areas outside urban clusters</li><li>Dataset derived from satellite-based observations which may vary in quality due to cloud cover, air quality, and other factors</li></ul><br/>"
+        }, {
+          "typeName" : "producer",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "producerName" : {
+              "typeName" : "producerName",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Global Surface Urban Heat Island (GSUHI)"
+            },
+            "producerAffiliation" : {
+              "typeName" : "producerAffiliation",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            },
+            "producerAbbreviation" : {
+              "typeName" : "producerAbbreviation",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "GSUHI"
+            },
+            "producerURL" : {
+              "typeName" : "producerURL",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            }
+          } ]
+        }, {
+          "typeName" : "depositor",
+          "multiple" : false,
+          "typeClass" : "primitive",
+          "value" : "Mike Conway"
+        }, {
+          "typeName" : "timePeriodCovered",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "timePeriodCoveredStart" : {
+              "typeName" : "timePeriodCoveredStart",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "2003-01-01"
+            },
+            "timePeriodCoveredEnd" : {
+              "typeName" : "timePeriodCoveredEnd",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "2020-12-31"
+            }
+          } ]
+        }, {
+          "typeName" : "kindOfData",
+          "multiple" : true,
+          "typeClass" : "primitive",
+          "value" : [ "Data Resource", "GeoTIFF" ]
+        } ]
+      },
+      "geospatial" : {
+        "displayName" : "Geospatial Metadata",
+        "fields" : [ {
+          "typeName" : "geographicCoverage",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "country" : {
+              "typeName" : "country",
+              "multiple" : false,
+              "typeClass" : "controlledVocabulary",
+              "value" : "United States"
+            }
+          } ]
+        }, {
+          "typeName" : "geographicUnit",
+          "multiple" : true,
+          "typeClass" : "primitive",
+          "value" : [ ]
+        } ]
+      },
+      "computationalworkflow" : {
+        "displayName" : "Computational Workflow Metadata",
+        "fields" : [ ]
+      },
+      "customCAFEDataLocation" : {
+        "displayName" : "Metadata About Geospatial Files",
+        "fields" : [ {
+          "typeName" : "cafeIncludesGeospatialFile",
+          "multiple" : false,
+          "typeClass" : "controlledVocabulary",
+          "value" : "Yes"
+        } ]
+      },
+      "customCAFEDataSources" : {
+        "displayName" : "Metadata About Data Sources",
+        "fields" : [ {
+          "typeName" : "cafeDerivedFromExistingDataset",
+          "multiple" : false,
+          "typeClass" : "controlledVocabulary",
+          "value" : "Yes"
+        }, {
+          "typeName" : "cafeSourceData",
+          "multiple" : true,
+          "typeClass" : "compound",
+          "value" : [ {
+            "cafeSourceDataTitle" : {
+              "typeName" : "cafeSourceDataTitle",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            },
+            "cafeSourceDataAuthor" : {
+              "typeName" : "cafeSourceDataAuthor",
+              "multiple" : true,
+              "typeClass" : "primitive",
+              "value" : [ ]
+            },
+            "cafeSourceDataInstitution" : {
+              "typeName" : "cafeSourceDataInstitution",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "Global Surface Urban Heat Island (GSUHI)"
+            },
+            "cafeSourceDataVersionNumber" : {
+              "typeName" : "cafeSourceDataVersionNumber",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            },
+            "cafeSourceDataDOIOrURL" : {
+              "typeName" : "cafeSourceDataDOIOrURL",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : "https://yceo.users.earthengine.app/view/uhimap"
+            },
+            "cafeSourceDataLastModifiedDate" : {
+              "typeName" : "cafeSourceDataLastModifiedDate",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            },
+            "cafeSourceDataDateObtained" : {
+              "typeName" : "cafeSourceDataDateObtained",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            },
+            "cafeSourceDataType" : {
+              "typeName" : "cafeSourceDataType",
+              "multiple" : false,
+              "typeClass" : "controlledVocabulary",
+              "value" : "Other (specify)"
+            },
+            "cafeSourceDataTypeOther" : {
+              "typeName" : "cafeSourceDataTypeOther",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            },
+            "cafeSourceDataDisclaimer" : {
+              "typeName" : "cafeSourceDataDisclaimer",
+              "multiple" : false,
+              "typeClass" : "primitive",
+              "value" : ""
+            }
+          } ]
+        } ]
+      }
+    }
+  }
+}

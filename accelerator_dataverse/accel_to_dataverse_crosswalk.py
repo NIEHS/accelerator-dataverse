@@ -11,7 +11,7 @@ from accelerator_core.workflow.dissemination_crosswalk import DisseminationCross
 
 from accelerator_dataverse.dataverse_utils.dataverse_types import DataverseDataset, DatasetKeyword, Publication, \
     Producer, TimePeriod, DatasetDescription, GeospatialMetadataBlock, GeographicBoundingBox, CitationAuthor, \
-    TopicClassification, DatasetContact, DataverseCafeSourceDataset
+    TopicClassification, DatasetContact, DataverseCafeSourceDataset, GeographicCoverage
 
 logger = logging.getLogger(__name__)
 
@@ -160,6 +160,13 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
                 bounding_box.east = accel_geospatial_data["spatial_bounding_box"][3]
                 dataverse_geospatial_data.geographic_bounding_box = bounding_box
 
+        # Geographic Coverage shim
+        geographic_coverage = GeographicCoverage()
+        geographic_coverage.country = "United States"
+        dataverse_geospatial_data.geographic_coverage.append(geographic_coverage)
+
+        dataset.geospatial = dataverse_geospatial_data
+
         citation.kind_of_data.append(accel_resource["resource_type"])
 
         for item in accel_resource["resource_reference"]:
@@ -222,10 +229,14 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
         if accel_computational_workflow["use_tools"]:
             notes_field += AccelToDataverseCrosswalk.listit("Use Tool", accel_computational_workflow["use_tools"])
             notes_field += "<br/>"
+            for tool in accel_computational_workflow["use_tools"]:
+                dataset.computational_workflow.workflow_type.append(tool)
 
         if accel_computational_workflow["example_applications"]:
             notes_field += AccelToDataverseCrosswalk.listit("Example Application", accel_computational_workflow["example_applications"])
             notes_field += "<br/>"
+            for app in accel_computational_workflow["example_applications"]:
+                dataset.computational_workflow.workflow_documentation.append(app)
 
         citation.notes_text = notes_field
 
@@ -233,6 +244,7 @@ class AccelToDataverseCrosswalk(DisseminationCrosswalk):
            citation.kind_of_data.append(data_format)
 
         rendered = dataset.render()
+        logger.info(rendered)
         dataverse_data = json.loads(rendered)
 
         return_payload = DisseminationPayload(payload.dissemination_descriptor)

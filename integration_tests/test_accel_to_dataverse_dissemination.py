@@ -104,7 +104,8 @@ class TestAccelToDataverseDissemination(unittest.TestCase):
 
         payload = DisseminationPayload(dissemination_descriptor)
 
-        filename = "./test_resources/geospatial1.json"
+        #filename = "./test_resources/geospatial1.json"
+        filename = Path(__file__).parent / "test_resources" / "geospatial1.json"
 
 
         xcom_props_resolver = DirectXcomPropsResolver(True, self.__class__.temp_dir)
