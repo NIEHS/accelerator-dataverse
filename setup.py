@@ -19,6 +19,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
-    package_data={"accelerator_dataverse": ["dataverse_utils/templates/*.jinja"]},
+    package_data={"accelerator_dataverse": ["dataverse_utils/templates/*.*"]},
     include_package_data=True,
 )
