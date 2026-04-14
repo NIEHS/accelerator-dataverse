@@ -4,6 +4,7 @@ from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import DisseminationPayload
 from accelerator_core.workflow.accel_target_dissemination import AccelDisseminationComponent
 
+from accelerator_dataverse.dataverse_utils.brand_file_utils import determine_brand_file_path
 from accelerator_dataverse.dataverse_utils.dataverse_config import DataverseConfig
 from accelerator_dataverse.dataverse_utils.dataverse_connector import DataverseConnector
 
@@ -80,6 +81,10 @@ class AccelDataverseDissemination(AccelDisseminationComponent):
                     logger.info(f"uploading acceldata file {accel_data_file} to dataverse")
                     dataverse_connector.add_file_to_dataverse(doi, accel_data_file)
 
+            # add the branding README.md file. In actuality this is to get around a CAFE imposed
+            # minimum of two files before it can be published
+
+            dataverse_connector.add_file_to_dataverse(doi, determine_brand_file_path())
 
             dissemination_payload.dissemination_successful = True
             dissemination_payload.payload_inline = True
